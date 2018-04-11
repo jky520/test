@@ -13,6 +13,10 @@
   .contentBox{
     overflow-y: scroll;
   }
+  .content{
+    overflow: hidden;
+    height: 7rem;
+  }
   .address{
     display: inline-block;
     color: #fff;
@@ -51,7 +55,7 @@
   .banner{
     height: 5rem;
     width: 10rem;
-    background-image: url(../styles/images/icon_banner.png);
+    background-image: url(../styles/images/icon_banner.jpg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     background-size: cover;
@@ -62,6 +66,12 @@
     text-indent: 0.2rem;
     height: 0.33rem;
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
+    display: inline-block;
+  }
+  .more{
+    display: inline-block;
+    margin-left: 4.5rem;
+    color: #7b7b7b;
   }
   .line{
     height: 0.13rem;
@@ -85,9 +95,14 @@
     margin: 0 auto;
     width: 1.25rem;
     height: 1.25rem;
-    background: url("../styles/images/icon_type.png") no-repeat center center;
+    background: url("../styles/images/icon_search1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
     -webkit-background-size: 1.25rem 1.25rem;
     background-size: 1.25rem 1.25rem;
+  }
+  .search2{
+
   }
   .typeTitle{
     line-height: 0.55rem;
@@ -98,6 +113,19 @@
     height: 1.3rem;
     background-color: black;
     color: #666666;
+  }
+  .list span{
+    display: inline-block;
+  }
+  .listIcon{
+    margin-left: 0.468rem;
+    margin-right: 0.32rem;
+    width: 0.1rem;
+    height: 0.07rem;
+    background: #c33f3e;
+  }
+  .listText{
+    width: 8rem;
   }
 </style>
 
@@ -152,25 +180,40 @@
       </div>
       <div class="content">
         <div class="title font-t2">新闻推荐</div>
+        <div class="more font-t2">更多新闻></div>
         <div class="line"></div>
+        <div class="para">
+          <div class="list">
+            <span class="listIcon"></span><span class="listText font-t3">教育部：近五年已有约231万留学生学成归国</span>
+          </div>
+          <div class="list">
+            <span class="listIcon"></span><span class="listText font-t3">清华大学自主招生为何那么“重体育”</span>
+          </div>
+          <div class="list">
+            <span class="listIcon"></span><span class="listText font-t3">转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</span>
+          </div>
+          <div class="list">
+            <span class="listIcon"></span><span class="listText font-t3">最新调查显示：这拨大学生不到两成想当科学家</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footer" ref="foot">
       <div class="menuBox">
         <div class="menuIcon"></div>
-        <div class="menuTitle">首页</div>
+        <div class="menuTitle font-t3">首页</div>
       </div>
       <div class="menuBox">
         <div class="menuIcon"></div>
-        <div class="menuTitle">新闻</div>
+        <div class="menuTitle font-t3">新闻</div>
       </div>
       <div class="menuBox">
         <div class="menuIcon"></div>
-        <div class="menuTitle">智能择校</div>
+        <div class="menuTitle font-t3">智能择校</div>
       </div>
       <div class="menuBox">
         <div class="menuIcon"></div>
-        <div class="menuTitle">我的</div>
+        <div class="menuTitle font-t3">我的</div>
       </div>
     </div>
   </div>
