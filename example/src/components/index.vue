@@ -95,24 +95,46 @@
     margin: 0 auto;
     width: 1.25rem;
     height: 1.25rem;
-    background: url("../styles/images/icon_search1.png");
+    background-image: url("../styles/images/icon_search1.png");
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: 1.25rem 1.25rem;
     background-size: 1.25rem 1.25rem;
   }
   .search2{
-
+    background-image: url("../styles/images/icon_search2.png");
+  }
+  .search3{
+    background-image: url("../styles/images/icon_search3.png");
+  }
+  .search4{
+    background-image: url("../styles/images/icon_search4.png");
+  }
+  .search5{
+    background-image: url("../styles/images/icon_search5.png");
+  }
+  .search6{
+    background-image: url("../styles/images/icon_search6.png");
+  }
+  .search7{
+    background-image: url("../styles/images/icon_search7.png");
+  }
+  .search8{
+    background-image: url("../styles/images/icon_search8.png");
   }
   .typeTitle{
     line-height: 0.55rem;
     height: 0.55rem;
     text-align: center;
+    margin-top:0.24rem;
   }
   .footer{
     height: 1.3rem;
     background-color: black;
     color: #666666;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
   }
   .list span{
     display: inline-block;
@@ -126,6 +148,18 @@
   }
   .listText{
     width: 8rem;
+  }
+  .menuBox{
+    width:25%;
+    text-align: center;
+  }
+  .menuIcon{
+    background-image: url(../styles/images/icon_home_red.png);
+    background-repeat:no-repeat;
+    background-position: center center;
+    -webkit-background-size:.46rem;
+    background-size:.46rem;
+    height:0.84rem;
   }
 </style>
 
@@ -147,33 +181,33 @@
             <div class="typeTitle font-t3">找学校</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search2"></div>
             <div class="typeTitle font-t3">找专业</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search3"></div>
             <div class="typeTitle font-t3">试题库</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search4"></div>
             <div class="typeTitle font-t3">去留学</div>
           </div>
         </div>
         <div class="flexBox">
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search5"></div>
             <div class="typeTitle font-t3">技术培训</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search6"></div>
             <div class="typeTitle font-t3">学生就业</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search7"></div>
             <div class="typeTitle font-t3">各种考试</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon"></div>
+            <div class="typeIcon search8"></div>
             <div class="typeTitle font-t3">减压空间</div>
           </div>
         </div>
