@@ -161,6 +161,15 @@
     background-size:.46rem;
     height:0.84rem;
   }
+  .news_w{
+    background-image: url(../styles/images/icon_news_w.png);
+  }
+  .school_w{
+    background-image: url(../styles/images/icon_school_w.png);
+  }
+  .mine_w{
+    background-image: url(../styles/images/icon_mine_w.png);
+  }
 </style>
 
 <template>
@@ -238,15 +247,15 @@
         <div class="menuTitle font-t3">首页</div>
       </div>
       <div class="menuBox">
-        <div class="menuIcon"></div>
+        <div class="menuIcon news_w"></div>
         <div class="menuTitle font-t3">新闻</div>
       </div>
       <div class="menuBox">
-        <div class="menuIcon"></div>
+        <div class="menuIcon school_w"></div>
         <div class="menuTitle font-t3">智能择校</div>
       </div>
       <div class="menuBox">
-        <div class="menuIcon"></div>
+        <div class="menuIcon mine_w"></div>
         <div class="menuTitle font-t3">我的</div>
       </div>
     </div>
