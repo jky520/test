@@ -72,7 +72,7 @@
     border-top: 1px solid #d4d4d4;
   }
   .leftMenu{
-    width: 2.46rem;
+    width: 2.5rem;
     background: #ececec;
   }
   .menu2li{
@@ -114,61 +114,65 @@
   }
 </style>
 <template>
-    <div class="view">
-      <div ref="top" class="topBox">
-        <div class="back"></div>
-        <div class="title font-h3">试题库</div>
+  <div class="view">
+    <div ref="top" class="topBox">
+      <div class="back" v-on:click="goBack"></div>
+      <div class="title font-h3">技能培训</div>
+    </div>
+    <div class="banner" ref="ban"></div>
+    <div class="menu1" ref="menu">
+      <div class="font-t2 on">精选</div>
+      <div class="font-t2">最新</div>
+      <div class="font-t2">热门</div>
+    </div>
+    <div class="contentBox" ref="content">
+      <div class="leftMenu">
+        <div class="menu2li font-t4">资格考试</div>
+        <div class="menu2li font-t4 on">学历考试</div>
+        <div class="menu2li font-t4">工程考试</div>
+        <div class="menu2li font-t4">计算机考试</div>
+        <div class="menu2li font-t4">外语类考试</div>
       </div>
-      <div class="banner" ref="ban"></div>
-      <div class="menu1" ref="menu">
-        <div class="font-t2 on">精选</div>
-        <div class="font-t2">最新</div>
-        <div class="font-t2">热门</div>
-      </div>
-      <div class="contentBox" ref="content">
-        <div class="leftMenu">
-          <div class="menu2li font-t3">资格考试</div>
-          <div class="menu2li font-t3 on">学历考试</div>
-          <div class="menu2li font-t3">工程考试</div>
-          <div class="menu2li font-t3">计算机考试</div>
-          <div class="menu2li font-t3">外语类考试</div>
+      <div class="rightContent">
+        <div class="items">
+          <img src="../styles/images/icon_question.jpg">
+          <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
+          <div class="price font-t2">免费</div>
         </div>
-        <div class="rightContent">
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
-            <div class="price font-t2">免费</div>
-          </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
-            <div class="price font-t2">免费</div>
-          </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
-            <div class="price font-t2">免费</div>
-          </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
-            <div class="price font-t2">免费</div>
-          </div>
+        <div class="items">
+          <img src="../styles/images/icon_question.jpg">
+          <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
+          <div class="price font-t2">免费</div>
+        </div>
+        <div class="items">
+          <img src="../styles/images/icon_question.jpg">
+          <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
+          <div class="price font-t2">免费</div>
+        </div>
+        <div class="items">
+          <img src="../styles/images/icon_question.jpg">
+          <span class="font-t2">国学经典题库全套 入门全民阅读精选经典54套</span>
+          <div class="price font-t2">免费</div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-    import URL from '../lib/api';
-    export default {
-        data() {
-            return {}
-        },
-        mounted() {
-          this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.clientHeight -this.$refs.menu.clientHeight + 'px';
-        },
-        methods: {}
+  import URL from '../lib/api';
+  export default {
+    data() {
+      return {}
+    },
+    mounted() {
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.clientHeight -this.$refs.menu.clientHeight + 'px';
+    },
+    methods: {
+      goBack(){
+        history.back();
+      }
     }
+  }
 </script>
 

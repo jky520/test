@@ -193,7 +193,7 @@
             <div class="typeIcon search2"></div>
             <div class="typeTitle font-t3">找专业</div>
           </div>
-          <div class="typeBox">
+          <div class="typeBox" v-on:click="toOtherPage('item')">
             <div class="typeIcon search3"></div>
             <div class="typeTitle font-t3">试题库</div>
           </div>
@@ -203,7 +203,7 @@
           </div>
         </div>
         <div class="flexBox">
-          <div class="typeBox">
+          <div class="typeBox" v-on:click="toOtherPage('skill')">
             <div class="typeIcon search5"></div>
             <div class="typeTitle font-t3">技术培训</div>
           </div>
@@ -271,7 +271,14 @@
     },
     mounted() {
       this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
+      console.log(this.$store.state.cityName);
     },
-    methods: {}
+    methods: {
+      toOtherPage(pageName){
+        this.$router.push({
+          name:pageName
+        });
+      }
+    }
   }
 </script>
