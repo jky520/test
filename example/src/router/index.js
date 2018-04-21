@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import index from '@/components/index';
 import item from '@/components/item';
 import skill from '@/components/skill';
+import school from '@/components/school';
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ export default new Router({
       path:'/skill',
       name:'skill',
       component:skill
+    },
+    {
+      path:'/school',
+      name:'school',
+      component:school
     }
   ]
 })

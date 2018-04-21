@@ -17,28 +17,16 @@
     overflow: hidden;
     height: 7rem;
   }
-  .address{
-    display: inline-block;
-    color: #fff;
-    text-indent: 0.42rem;
-    line-height: 1.46rem;
-  }
-  .arrow{
-    display: inline-block;
-    background-image: url(../styles/images/icon_arrow.png);
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 0.3rem;
-    height: 0.3rem;
-    margin-left: 0.2rem;
-  }
-  .searchInput{
-    margin-left: 0.3rem;
+  .inputBox{
+    margin: 0.325rem auto;
     width: 5.78rem;
     height: 0.81rem;
-    vertical-align: middle;
+  }
+  .searchInput{
+    padding: 0;
+    margin: 0;
+    width: 5.78rem;
+    height: 0.81rem;
     -webkit-border-radius: 0.5rem;
     -moz-border-radius: 0.5rem;
     border-radius: 0.5rem;
@@ -175,7 +163,7 @@
 <template>
   <div class="view">
     <div ref="top" class="topBox">
-      <div class="address font-t3">{{address}}<span class="arrow"></span>
+      <div class="inputBox">
         <input type="text" class="searchInput font-t1" placeholder="搜索">
       </div>
     </div>
@@ -185,7 +173,7 @@
         <div class="title font-t2">精准·高校·院校搜索</div>
         <div class="line"></div>
         <div class="flexBox">
-          <div class="typeBox">
+          <div class="typeBox" v-on:click="toOtherPage('school')">
             <div class="typeIcon"></div>
             <div class="typeTitle font-t3">找学校</div>
           </div>
@@ -266,12 +254,11 @@
   export default {
     data() {
       return {
-        address:'贵阳市'
+
       }
     },
     mounted() {
       this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
-      console.log(this.$store.state.cityName);
     },
     methods: {
       toOtherPage(pageName){

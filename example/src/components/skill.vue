@@ -132,9 +132,7 @@
       </div>
       <div class="banner" ref="ban"></div>
       <div class="menu1" ref="menu">
-        <div class="address font-t1">贵阳市</div>
-        <div class="addInfo font-t3">切换城市</div>
-        <div class="arrow"></div>
+
       </div>
       <div class="contentBox" ref="content">
         <div class="leftMenu">
