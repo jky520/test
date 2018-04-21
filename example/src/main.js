@@ -5,6 +5,7 @@ import 'amfe-flexible';
 import './styles/reset.css';
 import './styles/variety.css';
 import store from './lib/store';
+import './lib/polyfill';
 
 import $ from 'jquery';
 window.$ = $;

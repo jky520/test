@@ -4,7 +4,9 @@ import index from '@/components/index';
 import item from '@/components/item';
 import skill from '@/components/skill';
 import school from '@/components/school';
-
+import major from '@/components/major';
+import overseas from '@/components/overseas';
+import news from '@/components/news';
 Vue.use(Router);
 
 export default new Router({
@@ -32,6 +34,21 @@ export default new Router({
       path:'/school',
       name:'school',
       component:school
+    },
+    {
+      path:'/major',
+      name:'major',
+      component:major
+    },
+    {
+      path:'/overseas',
+      name:'overseas',
+      component:overseas
+    },
+    {
+      path:'/news',
+      name:'news',
+      component:news
     }
   ]
 })

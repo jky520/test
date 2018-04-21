@@ -52,7 +52,7 @@
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
     text-indent: 0.2rem;
-    height: 0.33rem;
+    height: 0.37rem;
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
   }
@@ -68,7 +68,6 @@
   }
   .flexBox{
     width: 8.2rem;
-    height: 1.8rem;
     margin: 0.45rem auto 0 auto;
     display: flex;
     display: -webkit-flex; /* Safari */
@@ -177,7 +176,7 @@
             <div class="typeIcon"></div>
             <div class="typeTitle font-t3">找学校</div>
           </div>
-          <div class="typeBox">
+          <div class="typeBox" v-on:click="toOtherPage('major')">
             <div class="typeIcon search2"></div>
             <div class="typeTitle font-t3">找专业</div>
           </div>
@@ -186,7 +185,7 @@
             <div class="typeTitle font-t3">试题库</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon search4"></div>
+            <div class="typeIcon search4" v-on:click="toOtherPage('overseas')"></div>
             <div class="typeTitle font-t3">去留学</div>
           </div>
         </div>

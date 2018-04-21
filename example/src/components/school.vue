@@ -44,9 +44,9 @@
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
     text-indent: 0.2rem;
-    height: 0.33rem;
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
+    height: 0.37rem;
   }
   .listBox{
     width: 10rem;
@@ -102,6 +102,15 @@
     margin-top: 0.2rem;
     line-height: 0.6rem;
     color: #555;
+  }
+  .lxBanner{
+    width: 9.4rem;
+    height: 5rem;
+    margin: 0.3rem auto 0 auto;
+  }
+  .lxBanner img{
+    width: 100%;
+    height: 100%;
   }
 </style>
 <template>
@@ -171,6 +180,9 @@
       </div>
       <div class="title2 font-t2">培训</div>
       <div class="px">
+        <div class="lxBanner">
+          <img src="../styles/images/icon_banner.jpg">
+        </div>
         <div class="lxBox">
           <div class="lxImg">
             <img src="../styles/images/icon_banner.jpg">

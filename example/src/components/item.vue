@@ -117,7 +117,7 @@
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-on:click="goBack"></div>
-      <div class="title font-h3">技能培训</div>
+      <div class="title font-h3">试题库</div>
     </div>
     <div class="banner" ref="ban"></div>
     <div class="menu1" ref="menu">
