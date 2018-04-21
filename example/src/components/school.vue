@@ -8,6 +8,13 @@
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .content{
+    overflow-y: scroll;
   }
   .topBox{
     height: 1.46rem;
@@ -116,74 +123,83 @@
 <template>
     <div class="view">
       <div ref="top" class="topBox">
-        <div class="back" v-on:click="goBack"></div>
+        <div class="back" v-tap="{methods:goBack}"></div>
         <div class="title font-h3">找学校</div>
       </div>
-      <div class="bannerBox">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
-      <div class="title2 font-t2">国内院校</div>
-      <div class="listBox">
-        <div class="list font-t4" v-for="item in schoolType">{{item}}</div>
-      </div>
-      <div class="listBox">
-        <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
-      </div>
-      <div class="title2 font-t2">海外院校</div>
-      <div class="listBox">
-        <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
-        <div class="list2 font-t3">查看更多></div>
-      </div>
-      <div class="title2 font-t2">留学</div>
-      <div class="lx">
-        <div class="lxBox">
-          <div class="lxImg">
+      <div class="content" ref="content">
+        <div class="bannerBox">
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="slide in swiperSlides" :key="slide">
+              <img src="../styles/images/icon_banner.jpg" >
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
+        <div class="title2 font-t2">国内院校</div>
+        <div class="listBox">
+          <div class="list font-t4" v-for="item in schoolType">{{item}}</div>
+        </div>
+        <div class="listBox">
+          <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
+        </div>
+        <div class="title2 font-t2">海外院校</div>
+        <div class="listBox">
+          <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
+          <div class="list2 font-t3">查看更多></div>
+        </div>
+        <div class="title2 font-t2">留学</div>
+        <div class="lx">
+          <div class="lxBox">
+            <div class="lxImg">
+              <img src="../styles/images/icon_banner.jpg">
+            </div>
+            <div class="lxIntro">
+              <div class="lxTitle font-h3">美国留学</div>
+              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            </div>
+          </div>
+          <div class="lxBox">
+            <div class="lxImg">
+              <img src="../styles/images/icon_banner.jpg">
+            </div>
+            <div class="lxIntro">
+              <div class="lxTitle font-h3">美国留学</div>
+              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            </div>
+          </div>
+          <div class="lxBox">
+            <div class="lxImg">
+              <img src="../styles/images/icon_banner.jpg">
+            </div>
+            <div class="lxIntro">
+              <div class="lxTitle font-h3">美国留学</div>
+              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            </div>
+          </div>
+          <div class="lxBox">
+            <div class="lxImg">
+              <img src="../styles/images/icon_banner.jpg">
+            </div>
+            <div class="lxIntro">
+              <div class="lxTitle font-h3">美国留学</div>
+              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            </div>
+          </div>
+        </div>
+        <div class="title2 font-t2">培训</div>
+        <div class="px">
+          <div class="lxBanner">
             <img src="../styles/images/icon_banner.jpg">
           </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-      </div>
-      <div class="title2 font-t2">培训</div>
-      <div class="px">
-        <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
-        </div>
-        <div class="lxBox">
+          <div class="lxBox">
+            <div class="lxImg">
+              <img src="../styles/images/icon_banner.jpg">
+            </div>
+            <div class="lxIntro">
+              <div class="lxTitle font-h3">美国留学</div>
+              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            </div>
+          </div><div class="lxBox">
           <div class="lxImg">
             <img src="../styles/images/icon_banner.jpg">
           </div>
@@ -192,22 +208,15 @@
             <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
           </div>
         </div><div class="lxBox">
-        <div class="lxImg">
-          <img src="../styles/images/icon_banner.jpg">
+          <div class="lxImg">
+            <img src="../styles/images/icon_banner.jpg">
+          </div>
+          <div class="lxIntro">
+            <div class="lxTitle font-h3">美国留学</div>
+            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+          </div>
         </div>
-        <div class="lxIntro">
-          <div class="lxTitle font-h3">美国留学</div>
-          <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
         </div>
-      </div><div class="lxBox">
-        <div class="lxImg">
-          <img src="../styles/images/icon_banner.jpg">
-        </div>
-        <div class="lxIntro">
-          <div class="lxTitle font-h3">美国留学</div>
-          <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-        </div>
-      </div>
       </div>
     </div>
 </template>
@@ -239,7 +248,7 @@
             }
         },
         mounted() {
-
+          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
         },
         methods: {
           goBack(){

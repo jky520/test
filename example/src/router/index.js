@@ -7,6 +7,11 @@ import school from '@/components/school';
 import major from '@/components/major';
 import overseas from '@/components/overseas';
 import news from '@/components/news';
+import job from '@/components/job';
+import exam from '@/components/job';
+import pressure from '@/components/pressure';
+import mine from '@/components/mine';
+
 Vue.use(Router);
 
 export default new Router({
@@ -49,6 +54,26 @@ export default new Router({
       path:'/news',
       name:'news',
       component:news
+    },
+    {
+      path:'/job',
+      name:'job',
+      component:job
+    },
+    {
+      path:'/exam',
+      name:'exam',
+      component:exam
+    },
+    {
+      path:'/pressure',
+      name:'pressure',
+      component:pressure
+    },
+    {
+      path:'/mine',
+      name:'mine',
+      component:mine
     }
   ]
 })

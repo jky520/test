@@ -6,6 +6,8 @@ import './styles/reset.css';
 import './styles/variety.css';
 import store from './lib/store';
 import './lib/polyfill';
+import vueTap from 'v-tap';
+Vue.use(vueTap);
 
 import $ from 'jquery';
 window.$ = $;

@@ -1,6 +1,13 @@
-<style scoped="scoped">
+<style scoped>
   .view{
     background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -8,46 +15,6 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .bannerBox{
-    height: 5rem;
-    width: 10rem;
-  }
-  .bannerBox img{
-    width: 100%;
-    height: 100%;
-  }
-  .footer{
-    height: 1.3rem;
-    background-color: black;
-    color: #666666;
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-  }
-  .list span{
-    display: inline-block;
-  }
-  .menuBox{
-    width:25%;
-    text-align: center;
-  }
-  .menuIcon{
-    background-image: url(../styles/images/icon_home_red.png);
-    background-repeat:no-repeat;
-    background-position: center center;
-    -webkit-background-size:.46rem;
-    background-size:.46rem;
-    height:0.84rem;
-  }
-  .news_w{
-    background-image: url(../styles/images/icon_news_w.png);
-  }
-  .school_w{
-    background-image: url(../styles/images/icon_school_w.png);
-  }
-  .mine_w{
-    background-image: url(../styles/images/icon_mine_w.png);
   }
   .topBox{
     height: 1.46rem;
@@ -72,6 +39,14 @@
     line-height: 1.46rem;
     text-align: center;
   }
+  .bannerBox{
+    height: 5rem;
+    width: 10rem;
+  }
+  .bannerBox img{
+    width: 100%;
+    height: 100%;
+  }
   .title2{
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
@@ -79,6 +54,32 @@
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
     height: 0.37rem;
+  }
+  .listBox{
+    width: 9rem;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+  }
+  .listBox:after{
+    content: ' ';
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: block;
+    clear: both;
+  }
+  .list2{
+    background: #f4f4f4;
+    float: left;
+    padding: 0 0.2rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0.1rem 0.1rem;
+    text-align: center;
+  }
+  .newsBox{
+    text-align: center;
   }
   .newsTime{
     color: #fff;
@@ -123,15 +124,12 @@
     width: 100%;
     height: 100%;
   }
-  .newsBox{
-    text-align: center;
-  }
 </style>
-
 <template>
   <div class="view">
     <div ref="top" class="topBox">
-      <div class="title font-h3">新闻</div>
+      <div class="back" v-tap="{methods:goBack}"></div>
+      <div class="title font-h3">减压空间</div>
     </div>
     <div class="content" ref="content">
       <div class="bannerBox">
@@ -141,6 +139,10 @@
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+      </div>
+      <div class="title2 font-t2">压力多多</div>
+      <div class="listBox">
+        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox">
@@ -168,24 +170,6 @@
         </div>
       </div>
     </div>
-    <div class="footer" ref="foot">
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'index'}">
-        <div class="menuIcon"></div>
-        <div class="menuTitle font-t3">首页</div>
-      </div>
-      <div class="menuBox">
-        <div class="menuIcon news_w"></div>
-        <div class="menuTitle font-t3">新闻</div>
-      </div>
-      <!--<div class="menuBox">-->
-        <!--<div class="menuIcon school_w"></div>-->
-        <!--<div class="menuTitle font-t3">智能择校</div>-->
-      <!--</div>-->
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">
-        <div class="menuIcon mine_w"></div>
-        <div class="menuTitle font-t3">我的</div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -209,16 +193,15 @@
           loop:true
         },
         swiperSlides: [1, 2, 3],
+        areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导']
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
     },
     methods: {
-      toOtherPage(params){
-        this.$router.push({
-          name:params.pageName
-        });
+      goBack(){
+        history.back();
       }
     },
     components:{

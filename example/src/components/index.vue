@@ -172,37 +172,37 @@
         <div class="title font-t2">精准·高校·院校搜索</div>
         <div class="line"></div>
         <div class="flexBox">
-          <div class="typeBox" v-on:click="toOtherPage('school')">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'school'}">
             <div class="typeIcon"></div>
             <div class="typeTitle font-t3">找学校</div>
           </div>
-          <div class="typeBox" v-on:click="toOtherPage('major')">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'major'}">
             <div class="typeIcon search2"></div>
             <div class="typeTitle font-t3">找专业</div>
           </div>
-          <div class="typeBox" v-on:click="toOtherPage('item')">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'item'}">
             <div class="typeIcon search3"></div>
             <div class="typeTitle font-t3">试题库</div>
           </div>
           <div class="typeBox">
-            <div class="typeIcon search4" v-on:click="toOtherPage('overseas')"></div>
+            <div class="typeIcon search4" v-tap="{methods:toOtherPage,pageName:'overseas'}"></div>
             <div class="typeTitle font-t3">去留学</div>
           </div>
         </div>
         <div class="flexBox">
-          <div class="typeBox" v-on:click="toOtherPage('skill')">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'skill'}">
             <div class="typeIcon search5"></div>
             <div class="typeTitle font-t3">技术培训</div>
           </div>
-          <div class="typeBox">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'job'}">
             <div class="typeIcon search6"></div>
             <div class="typeTitle font-t3">学生就业</div>
           </div>
-          <div class="typeBox">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'exam'}">
             <div class="typeIcon search7"></div>
             <div class="typeTitle font-t3">各种考试</div>
           </div>
-          <div class="typeBox">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'pressure'}">
             <div class="typeIcon search8"></div>
             <div class="typeTitle font-t3">减压空间</div>
           </div>
@@ -233,15 +233,15 @@
         <div class="menuIcon"></div>
         <div class="menuTitle font-t3">首页</div>
       </div>
-      <div class="menuBox">
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'news'}">
         <div class="menuIcon news_w"></div>
         <div class="menuTitle font-t3">新闻</div>
       </div>
-      <div class="menuBox">
-        <div class="menuIcon school_w"></div>
-        <div class="menuTitle font-t3">智能择校</div>
-      </div>
-      <div class="menuBox">
+      <!--<div class="menuBox">-->
+        <!--<div class="menuIcon school_w"></div>-->
+        <!--<div class="menuTitle font-t3">智能择校</div>-->
+      <!--</div>-->
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">
         <div class="menuIcon mine_w"></div>
         <div class="menuTitle font-t3">我的</div>
       </div>
@@ -260,9 +260,9 @@
       this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
     },
     methods: {
-      toOtherPage(pageName){
+      toOtherPage(params){
         this.$router.push({
-          name:pageName
+          name:params.pageName
         });
       }
     }

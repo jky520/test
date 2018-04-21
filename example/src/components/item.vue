@@ -116,7 +116,7 @@
 <template>
   <div class="view">
     <div ref="top" class="topBox">
-      <div class="back" v-on:click="goBack"></div>
+      <div class="back" v-tap="{methods:goBack}"></div>
       <div class="title font-h3">试题库</div>
     </div>
     <div class="banner" ref="ban"></div>

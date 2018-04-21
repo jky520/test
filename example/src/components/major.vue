@@ -8,6 +8,13 @@
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .content{
+    overflow-y: scroll;
   }
   .topBox{
     height: 1.46rem;
@@ -65,28 +72,30 @@
 <template>
     <div class="view">
       <div ref="top" class="topBox">
-        <div class="back" v-on:click="goBack"></div>
+        <div class="back" v-tap="{methods:goBack}"></div>
         <div class="title font-h3">找专业</div>
       </div>
-      <div class="bannerBox">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
-      <div class="title2 font-t2">专业类别选择</div>
-      <ul class="marjorType font-t1">
-        <li v-for="item in marjorArr">{{item}}</li>
-      </ul>
-      <div class="title2 font-t2">热点推荐</div>
-      <div class="hot">
-        <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-        <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-        <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-        <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-        <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+      <div class="content" ref="content">
+        <div class="bannerBox">
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="slide in swiperSlides" :key="slide">
+              <img src="../styles/images/icon_banner.jpg" >
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
+        <div class="title2 font-t2">专业类别选择</div>
+        <ul class="marjorType font-t1">
+          <li v-for="item in marjorArr">{{item}}</li>
+        </ul>
+        <div class="title2 font-t2">热点推荐</div>
+        <div class="hot">
+          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+        </div>
       </div>
     </div>
 </template>
@@ -115,7 +124,7 @@
             }
         },
         mounted() {
-
+          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
         },
         methods: {
           goBack(){
