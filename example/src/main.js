@@ -19,8 +19,6 @@ Vue.component(Field.name, Field);
 import { Search } from 'mint-ui';
 Vue.component(Search.name, Search);
 
-
-
 import $ from 'jquery';
 window.$ = $;
 

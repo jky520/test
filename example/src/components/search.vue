@@ -13,10 +13,15 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  .bdMap{
+    height:8rem;
+    width: 10rem;
+  }
 </style>
 <template>
   <div class="view">
     <mt-search v-model="sVal"></mt-search>
+    <div class="bdMap" id="bdMap"></div>
   </div>
 </template>
 
@@ -29,7 +34,11 @@
       }
     },
     mounted() {
-
+      let map = new BMap.Map("bdMap");
+      let local = new BMap.LocalSearch(map, {
+        renderOptions:{map: map}
+      });
+      local.search("贵州大学");
     },
     methods: {
 
