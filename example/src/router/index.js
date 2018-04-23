@@ -11,6 +11,10 @@ import job from '@/components/job';
 import exam from '@/components/job';
 import pressure from '@/components/pressure';
 import mine from '@/components/mine';
+import userInfoEdit from '@/components/userInfoEdit';
+import search from '@/components/search';
+import login from '@/components/login';
+import register from '@/components/register';
 
 Vue.use(Router);
 
@@ -19,6 +23,16 @@ export default new Router({
     {
       path: '/',
       redirect:'/index'
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:login
+    },
+    {
+      path:'/register',
+      name:'register',
+      component:register
     },
     {
       path: '/index',
@@ -74,6 +88,16 @@ export default new Router({
       path:'/mine',
       name:'mine',
       component:mine
+    },
+    {
+      path:'/edit',
+      name:'edit',
+      component:userInfoEdit
+    },
+    {
+      path:'/search',
+      name:'search',
+      component:search
     }
   ]
 })

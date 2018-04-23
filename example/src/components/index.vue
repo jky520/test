@@ -10,35 +10,18 @@
     height: 1.46rem;
     background-color: black;
   }
+  .topTitle{
+    color: #fff;
+    height: 1.46rem;
+    line-height: 1.46rem;
+    text-align: center;
+  }
   .contentBox{
     overflow-y: scroll;
   }
   .content{
     overflow: hidden;
     height: 7rem;
-  }
-  .inputBox{
-    margin: 0.325rem auto;
-    width: 5.78rem;
-    height: 0.81rem;
-  }
-  .searchInput{
-    padding: 0;
-    margin: 0;
-    width: 5.78rem;
-    height: 0.81rem;
-    -webkit-border-radius: 0.5rem;
-    -moz-border-radius: 0.5rem;
-    border-radius: 0.5rem;
-    outline: none;
-    color: #000;
-    text-indent: 0.9rem;
-    border: 0;
-    background-image: url(../styles/images/icon_glass.jpg);
-    background-repeat: no-repeat;
-    background-position: 0.3rem center;
-    -webkit-background-size: 0.5rem 0.5rem;
-    background-size: 0.5rem 0.5rem;
   }
   .banner{
     height: 5rem;
@@ -118,7 +101,7 @@
   .footer{
     height: 1.3rem;
     background-color: black;
-    color: #666666;
+    color: #fff;
     display: flex;
     display: -webkit-flex;
     justify-content: space-between;
@@ -162,9 +145,7 @@
 <template>
   <div class="view">
     <div ref="top" class="topBox">
-      <div class="inputBox">
-        <input type="text" class="searchInput font-t1" placeholder="搜索">
-      </div>
+      <div class="topTitle font-h3">教育在线</div>
     </div>
     <div class="contentBox" ref="mid">
       <div class="banner"></div>
@@ -264,6 +245,25 @@
         this.$router.push({
           name:params.pageName
         });
+      },
+      getIndex(){
+          // POST用data GET用params
+          this.$http({
+            method:'POST',
+            url:'',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            params:{
+
+            },
+            data:{
+
+            },
+            timeout: 5000
+          }).then((res)=>{
+              console.log(res);
+          },(err)=>{
+              console.log(err);
+          })
       }
     }
   }
