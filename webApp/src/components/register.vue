@@ -142,9 +142,7 @@
 
     },
     methods: {
-      goBack(){
-        history.back();
-      }
+
     },
     beforeUpdate(){
 

@@ -174,9 +174,7 @@
           this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.clientHeight -this.$refs.menu.clientHeight + 'px';
         },
         methods: {
-          goBack(){
-            history.back();
-          }
+
         }
     }
 </script>

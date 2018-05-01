@@ -68,6 +68,30 @@
     padding: 0.2rem 0.8rem;
     color: red;
   }
+  .para{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+  }
+  .la{
+    width: 1rem;
+  }
+  .lala{
+    position: absolute;
+    left: -0.5rem;
+    top: 0.3rem;
+    width: 0.15rem;
+    height: 0.15rem;
+    background-color: red;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .listText{
+    width: 8rem;
+    line-height: 0.8rem;
+    position: relative;
+  }
 </style>
 <template>
     <div class="view">
@@ -79,22 +103,22 @@
         <div class="bannerBox">
           <swiper :options="swiperOption">
             <swiper-slide v-for="slide in swiperSlides" :key="slide">
-              <img src="../styles/images/icon_banner.jpg" >
+              <img :src="slide.imageUrl" >
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
         <div class="title2 font-t2">专业类别选择</div>
-        <ul class="marjorType font-t1">
-          <li v-for="item in marjorArr">{{item}}</li>
-        </ul>
+        <div class="para">
+          <div class="la">
+          </div>
+          <div class="text">
+            <div class="listText font-t3" v-for="item in marjorArr"><span class="lala"></span>{{item}}</div>
+          </div>
+        </div>
         <div class="title2 font-t2">热点推荐</div>
         <div class="hot">
-          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
-          <div class="hotList font-t2">这里是最热门的专业推荐!</div>
+          <div class="hotList font-t2" v-for="item in hot" v-tap="{methods:toHotPage,id:item.idx}">{{item.title}}</div>
         </div>
       </div>
     </div>
@@ -119,16 +143,38 @@
                 apeed:500,
                 loop:true
               },
-              swiperSlides: [1, 2, 3],
-              marjorArr:['专科专业','本科专业','研究生专业','海外院校专业']
+              swiperSlides: [],
+              marjorArr:['专科专业','本科专业','研究生专业','海外院校专业'],
+              hot:[]
             }
         },
         mounted() {
           this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+          this.getMajor();
         },
         methods: {
-          goBack(){
-            history.back();
+          getMajor() {
+            this.$http({
+              method: 'get',
+              url: URL.findMajoy,
+              params: {},
+              responseType: 'stream',
+              timeout: 5000
+            }).then((res) => {
+              let response = res.data;
+              if (response.meta.code == "200") {
+                this.swiperSlides = response.data.picture;
+                this.hot = response.data.hot;
+              }
+            }, (err) => {
+              console.log(err);
+            })
+          },
+          toHotPage(params){
+            this.$store.commit('setHotId',params.id);
+            this.$router.push({
+              name:'hotR'
+            });
           }
         },
         components:{

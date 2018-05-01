@@ -9,6 +9,9 @@
     right: 0;
     bottom: 0;
   }
+  .content{
+    overflow-y: scroll;
+  }
   .list2{
     background: #f4f4f4;
     float: left;
@@ -71,30 +74,33 @@
     margin-left: 0.5rem;
     padding-right: 0.5rem;
   }
+  .schoolName{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
 </style>
 <template>
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">找学校</div>
+      <div class="title font-h3">学校搜索</div>
     </div>
-    <div class="searchBox">
+    <div class="searchBox" ref="searchBox">
       <mt-search v-model="sVal"></mt-search>
     </div>
-    <div class="listBox">
-      <div class="list2 font-t3" v-bind:class="{'on':majorType[index].checked === true}" v-for="(item,index) in majorType" v-tap="{methods:edition,index:index,arrName:'majorType'}">{{item.name}}</div>
-    </div>
-    <div class="listBox">
-      <div class="list2 font-t3" v-for="item in majorType">{{item.name}}</div>
-    </div>
-    <div class="searchResult">
-      <div class="result">
-        <span class="font-t2">0001</span>
-        <span class="font-h3">贵州大学</span>
+    <div class="content" ref="content">
+      <div class="listBox">
+        <div class="list2 font-t3" v-bind:class="{'on':majorType[index].checked === true}" v-for="(item,index) in majorType" v-tap="{methods:edition,index:index,arrName:'majorType'}">{{item.name}}</div>
       </div>
-      <div class="result">
-        <span class="font-t2">0001</span>
-        <span class="font-h3">贵州大学</span>
+      <!--<div class="listBox">-->
+      <!--<div class="list2 font-t3" v-for="item in majorType">{{item.name}}</div>-->
+      <!--</div>-->
+      <div class="searchResult">
+        <div class="result" v-for="item in searchResult" v-tap="{methods:schoolDetail,id:item.id}">
+          <span class="font-t2">{{item.id}}</span>
+          <span class="schoolName font-t1">{{item.name}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -106,26 +112,18 @@
     data() {
       return {
         sVal:'',
-        majorType:[{
-          name:'赛选条件1',
-          checked:true
-        },{
-          name:'赛选条件2',
-          checked:false
-        },{
-          name:'赛选条件3',
-          checked:false
-        }],
-
+        majorType:[],
+        searchData:{},
+        results:[]
       }
     },
     mounted() {
-
+      this.searchData = this.$store.state.searchData;
+      this.getSchoolList();
+      this.getCityList();
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight - this.$refs.searchBox.clientHeight + 'px';
     },
     methods: {
-      goBack(){
-        history.back();
-      },
       edition(params){
         let i = params.index;
         let arrName = params.arrName;
@@ -133,6 +131,79 @@
           arr[index].checked = false;
         });
         this[arrName][i].checked = true;
+        this.getSchoolList2(this[arrName][i].id);
+      },
+      getSchoolList(){
+        this.$http({
+          method:'get',
+          url:URL.schoolList,
+          params:{
+            category:this.searchData.category,
+            Id:this.searchData.id,
+          },
+          responseType:'stream',
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.results = response.data;
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      getCityList(){
+        this.$http({
+          method:'get',
+          url:URL.cityList,
+          params:{
+            category:this.searchData.category,
+          },
+          responseType:'stream',
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            let citys = response.data;
+            citys.checked = false;
+            this.majorType = citys;
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      getSchoolList2(cityId){
+        this.$http({
+          method:'get',
+          url:URL.schoolList2,
+          params:{
+            category:this.searchData.category,
+            Id:this.searchData.id,
+            cityId:cityId
+          },
+          responseType:'stream',
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.results = response.data;
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      schoolDetail(params){
+        this.$store.commit("setSchoolId",params.id);
+        this.$router.push({
+          name:'schoolDetail'
+        })
+      }
+    },
+    computed:{
+      searchResult(){
+        return this.results.filter((item)=>{
+          return item.name.indexOf(this.sVal)>-1;
+        })
       }
     }
   }

@@ -8,6 +8,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: hidden;
   }
   .bdMap{
     height:8rem;
@@ -41,9 +42,9 @@
     <div class="view">
       <div ref="top" class="topBox">
         <div class="back" v-tap="{methods:goBack}"></div>
-        <div class="title font-h3">找学校</div>
+        <div class="title font-h3">学校地址</div>
       </div>
-      <div class="bdMap" id="bdMap"></div>
+      <div class="bdMap" id="bdMap" ref="bdMap"></div>
     </div>
 </template>
 
@@ -53,6 +54,7 @@
     export default {
         data() {
             return {
+
             }
         },
         mounted() {
@@ -61,6 +63,7 @@
             renderOptions:{map: map}
           });
           local.search("贵州大学");
+          this.$refs.bdMap.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight + 'px';
         },
         methods: {}
     }

@@ -15,6 +15,14 @@ import userInfoEdit from '@/components/userInfoEdit';
 import search from '@/components/search';
 import login from '@/components/login';
 import register from '@/components/register';
+import schoolDetail from '@/components/schoolDetail';
+import schoolAdress from '@/components/schoolAdress';
+import studyLoad from '@/components/studyLoad';
+import trainLoad from '@/components/trainLoad';
+import schoolClass from '@/components/schoolClass';
+import hotR from '@/components/hotR';
+import itemList from '@/components/itemList';
+import studyDetail from '@/components/studyDetail';
 
 Vue.use(Router);
 
@@ -98,6 +106,46 @@ export default new Router({
       path:'/search',
       name:'search',
       component:search
+    },
+    {
+      path:'/schoolDetail',
+      name:'schoolDetail',
+      component:schoolDetail
+    },
+    {
+      path:'/schoolAdress',
+      name:'schoolAdress',
+      component:schoolAdress
+    },
+    {
+      path:'/studyLoad',
+      name:'studyLoad',
+      component:studyLoad
+    },
+    {
+      path:'/trainLoad',
+      name:'trainLoad',
+      component:trainLoad
+    },
+    {
+      path:'/schoolClass',
+      name:'schoolClass',
+      component:schoolClass
+    },
+    {
+      path:'/hotR',
+      name:'hotR',
+      component:hotR
+    },
+    {
+      path:'/itemList',
+      name:'itemList',
+      component:itemList
+    },
+    {
+      path:'/studyDetail',
+      name:'studyDetail',
+      component:studyDetail
     }
   ]
 })

@@ -931,6 +931,7 @@
   bottom: 0;
   left: 0;
   position: absolute;
+  display: none;
 }
 /* Cell Component */
 /* Header Component */

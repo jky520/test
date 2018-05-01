@@ -55,43 +55,6 @@
     display: inline-block;
     height: 0.37rem;
   }
-  .listBox{
-    width: 9rem;
-    margin: 0 auto;
-    padding: 0 0.5rem;
-  }
-  .listBox:after{
-    content: ' ';
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    display: block;
-    clear: both;
-  }
-  .list2{
-    background: #f4f4f4;
-    float: left;
-    padding: 0 0.2rem;
-    height: 0.7rem;
-    line-height: 0.7rem;
-    margin: 0.1rem 0.1rem;
-    text-align: center;
-  }
-  .newsBox{
-    text-align: center;
-  }
-  .newsTime{
-    color: #fff;
-    text-align: center;
-    padding: 0.1rem 0.5rem;
-    background-color: #cccccc;
-    margin: 0 auto;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    border-radius: 1rem;
-    display: inline-block;
-  }
   .lxImg{
     width: 2.2rem;
     height: 2.2rem;
@@ -115,58 +78,30 @@
     line-height: 0.6rem;
     color: #555;
   }
-  .lxBanner{
-    width: 9.4rem;
-    height: 5rem;
-    margin: 0.3rem auto 0 auto;
-  }
-  .lxBanner img{
-    width: 100%;
-    height: 100%;
-  }
 </style>
 <template>
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">减压空间</div>
+      <div class="title font-h3">留学</div>
     </div>
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
+          <swiper-slide v-for="slide in swiperSlides">
+            <img :src="slide.imageUrl" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="title2 font-t2">压力多多</div>
-      <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
-      </div>
-      <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
-        <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
+      <div class="title2 font-t2">{{cityName}}</div>
+      <div class="lxBox" v-for="item in studyNewInfo">
+        <div class="lxImg">
+          <img :src="item.themb">
         </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
+        <div class="lxIntro">
+          <div class="lxTitle font-h3">{{item.title}}</div>
+          <div class="lxText font-t2">{{item.brief}}</div>
         </div>
       </div>
     </div>
@@ -192,15 +127,37 @@
           apeed:500,
           loop:true
         },
-        swiperSlides: [1, 2, 3],
-        areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导']
+        swiperSlides: [1, 2],
+        studyCityId:0,
+        studyNewInfo:[],
+        cityName:''
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.studyCityId = this.$store.state.studyCityId;
+      this.getCityInfo();
     },
     methods: {
-
+      getCityInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.studyCityDetail + this.studyCityId+"/getStudyMessage",
+          params: {},
+          responseType: 'json',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            let advert = response.data.getAdvertImage[0].advert;
+            this.swiperSlides = advert;
+            this.studyNewInfo = response.data.getStudyMessage;
+            this.cityName = response.data.getStudyMessage[0].city.name;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      }
     },
     components:{
       swiper,
@@ -208,3 +165,4 @@
     }
   }
 </script>
+

@@ -129,96 +129,52 @@
       <div class="content" ref="content">
         <div class="bannerBox">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="slide in swiperSlides" :key="slide">
-              <img src="../styles/images/icon_banner.jpg" >
+            <swiper-slide v-for="slide in swiperSlides" v-on:click="toURL(item.url)">
+              <img :src="slide.imageUrl">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
         <div class="title2 font-t2">国内院校</div>
         <div class="listBox">
-          <div class="list font-t4" v-for="item in schoolType">{{item}}</div>
+          <div class="list font-t4" v-for="(item,index) in schoolType" v-if="item.category === 0" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="listBox">
-          <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
+          <div class="list2 font-t3" v-for="(item,index) in schoolType" v-if="item.category === 1" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="title2 font-t2">海外院校</div>
         <div class="listBox">
-          <div class="list2 font-t3" v-for="item in majorType">{{item}}</div>
-          <div class="list2 font-t3">查看更多></div>
+          <div class="list2 font-t3" v-for="(item,index) in schoolType" v-if="item.category === 2" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="title2 font-t2">留学</div>
         <div class="lx">
-          <div class="lxBox">
+          <div class="lxBox" v-for="item in study" v-tap="{methods:studyLoad,id:item.id}">
             <div class="lxImg">
-              <img src="../styles/images/icon_banner.jpg">
+              <img :src="item.image">
             </div>
             <div class="lxIntro">
-              <div class="lxTitle font-h3">美国留学</div>
-              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-            </div>
-          </div>
-          <div class="lxBox">
-            <div class="lxImg">
-              <img src="../styles/images/icon_banner.jpg">
-            </div>
-            <div class="lxIntro">
-              <div class="lxTitle font-h3">美国留学</div>
-              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-            </div>
-          </div>
-          <div class="lxBox">
-            <div class="lxImg">
-              <img src="../styles/images/icon_banner.jpg">
-            </div>
-            <div class="lxIntro">
-              <div class="lxTitle font-h3">美国留学</div>
-              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-            </div>
-          </div>
-          <div class="lxBox">
-            <div class="lxImg">
-              <img src="../styles/images/icon_banner.jpg">
-            </div>
-            <div class="lxIntro">
-              <div class="lxTitle font-h3">美国留学</div>
-              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+              <div class="lxTitle font-h3">{{item.title}}</div>
+              <div class="lxText font-t2">{{item.brief}}</div>
             </div>
           </div>
         </div>
         <div class="title2 font-t2">培训</div>
         <div class="px">
-          <div class="lxBanner">
-            <img src="../styles/images/icon_banner.jpg">
+          <div class="lxBanner" v-on:click="toURL(train[0].url)">
+            <img :src="train[0].image">
           </div>
-          <div class="lxBox">
+          <div class="lxBox" v-for="(item,index) in train" v-if="index >= 1" v-tap="{methods:trainLoad,id:item.id}">
             <div class="lxImg">
-              <img src="../styles/images/icon_banner.jpg">
+              <img :src="item.image">
             </div>
             <div class="lxIntro">
-              <div class="lxTitle font-h3">美国留学</div>
-              <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+              <div class="lxTitle font-h3">{{item.title}}</div>
+              <div class="lxText font-t2">{{item.desctiption}}</div>
             </div>
-          </div><div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div><div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
           </div>
         </div>
         </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -240,19 +196,55 @@
                 apeed:500,
                 loop:true
               },
-              swiperSlides: [1, 2, 3],
-              schoolType:['本科院校','高职专科','成人院校','独立院校','民办院校','研究生院','港澳台院校','海外院校','国内商学院','海外商学院','国际学校','国内高中'],
-              majorType:['综合','理工','财经','农林','政法','医药','民族','师范','体育','语言','艺术','军事'],
-              outSchool:['海外大学','医学院','商学院II','艺术设计','工程学院','农学院','法学院','教育学院','研究生II','法学院','海外高中'],
-
+              swiperSlides: [],
+              schoolType:[],
+              study:[],
+              train:[{}]
             }
         },
         mounted() {
+          this.getSchool();
           this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
         },
         methods: {
-          goBack(){
-            history.back();
+          getSchool(){
+            this.$http({
+              method:'get',
+              url:URL.school,
+              params:{
+                category:0
+              },
+              responseType:'stream',
+              timeout: 5000
+            }).then((res)=>{
+              let response = res.data;
+              if(response.meta.code == "200"){
+                this.swiperSlides = response.data.image;
+                this.schoolType = response.data.school;
+                this.study = response.data.study;
+                this.train = response.data.train;
+              }
+            },(err)=>{
+              console.log(err);
+            })
+          },
+          studyLoad(params){
+            this.$store.commit("setstudyloadid",params.id);
+            this.$router.push({
+              name:'studyLoad'
+            });
+          },
+          trainLoad(params){
+            this.$store.commit("setTrainLoadId",params.id);
+            this.$router.push({
+              name:'trainLoad'
+            });
+          },
+          searchSchool(params){
+            this.$store.commit("setSearchData",{id:params.id,category:params.category});
+            this.$router.push({
+              name:'search'
+            });
           }
         },
       components:{

@@ -134,38 +134,29 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
+          <swiper-slide v-for="slide in swiperSlides">
+            <img :src="slide.imageUrl" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
       <div class="title2 font-t2">找留学机构</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
+      <div class="newsBox" v-for="item in news">
+        <div class="newsTime font-t3">{{item.name}}</div>
         <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
+          <img :src="item.img_url">
         </div>
-        <div class="lxBox">
+        <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-for="lx in item.getStudyingAbroadRelatedInfo">
           <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
+            <img :src="lx.themb">
           </div>
           <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            <div class="lxTitle font-h3">{{lx.source}}</div>
+            <div class="lxText font-t2">{{lx.title}}</div>
           </div>
         </div>
       </div>
@@ -192,16 +183,71 @@
           apeed:500,
           loop:true
         },
-        swiperSlides: [1, 2, 3],
-        areaArr:['台湾','四川','陕西','青海','宁夏','黑龙江','吉林','辽宁','西藏','新疆','内蒙古','海南']
+        swiperSlides: [1, 2],
+        areaArr:['台湾','四川','陕西','青海','宁夏','黑龙江','吉林','辽宁','西藏','新疆','内蒙古','海南'],
+        news:[]
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getInfo();
+      this.getBanner();
+      this.getCityList();
     },
     methods: {
-      goBack(){
-        history.back();
+      getInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.studyAboard,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.news = response.data;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      getBanner(){
+        this.$http({
+          method: 'get',
+          url: URL.studyBanner,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.swiperSlides = response.data[0].advert;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      getCityList(){
+        this.$http({
+          method: 'get',
+          url: URL.studyCityList,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.areaArr = response.data;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      toDetail(params){
+        this.$store.commit("setStudyCityId",params.id);
+        this.$router.push({
+          name:'studyDetail'
+        });
       }
     },
     components:{

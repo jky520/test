@@ -118,6 +118,8 @@
   }
   .listText{
     width: 8rem;
+    line-height: 0.8rem;
+    position: relative;
   }
   .menuBox{
     width:25%;
@@ -139,6 +141,25 @@
   }
   .mine_w{
     background-image: url(../styles/images/icon_mine_w.png);
+  }
+  .para{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+  }
+  .la{
+    width: 1rem;
+  }
+  .lala{
+    position: absolute;
+    left: -0.5rem;
+    top: 0.3rem;
+    width: 0.15rem;
+    height: 0.15rem;
+    background-color: red;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
   }
 </style>
 
@@ -194,17 +215,13 @@
         <div class="more font-t2">更多新闻></div>
         <div class="line"></div>
         <div class="para">
-          <div class="list">
-            <span class="listIcon"></span><span class="listText font-t3">教育部：近五年已有约231万留学生学成归国</span>
+          <div class="la">
           </div>
-          <div class="list">
-            <span class="listIcon"></span><span class="listText font-t3">清华大学自主招生为何那么“重体育”</span>
-          </div>
-          <div class="list">
-            <span class="listIcon"></span><span class="listText font-t3">转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</span>
-          </div>
-          <div class="list">
-            <span class="listIcon"></span><span class="listText font-t3">最新调查显示：这拨大学生不到两成想当科学家</span>
+          <div class="text">
+            <div class="listText font-t3"><span class="lala"></span>教育部：近五年已有约231万留学生学成归国</div>
+            <div class="listText font-t3"><span class="lala"></span>清华大学自主招生为何那么“重体育”</div>
+            <div class="listText font-t3"><span class="lala"></span>转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</div>
+            <div class="listText font-t3"><span class="lala"></span>最新调查显示：这拨大学生不到两成想当科学家</div>
           </div>
         </div>
       </div>
@@ -249,15 +266,15 @@
       getIndex(){
           // POST用data GET用params
           this.$http({
-            method:'POST',
+            method:'post',
             url:'',
-            headers: {'X-Requested-With': 'XMLHttpRequest'},
             params:{
 
             },
             data:{
 
             },
+            responseType:'stream',
             timeout: 5000
           }).then((res)=>{
               console.log(res);

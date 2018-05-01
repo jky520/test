@@ -14,6 +14,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
 
+import utils from './lib/utils';
+Vue.use(utils);
+
 import { Field } from 'mint-ui';
 Vue.component(Field.name, Field);
 import { Search } from 'mint-ui';

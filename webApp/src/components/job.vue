@@ -200,9 +200,7 @@
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
     },
     methods: {
-      goBack(){
-        history.back();
-      }
+
     },
     components:{
       swiper,
