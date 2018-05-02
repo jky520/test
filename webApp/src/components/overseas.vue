@@ -134,8 +134,8 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides">
-            <img :src="slide.imageUrl" >
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -148,11 +148,11 @@
       <div class="newsBox" v-for="item in news">
         <div class="newsTime font-t3">{{item.name}}</div>
         <div class="lxBanner">
-          <img :src="item.img_url">
+          <img :src="getImgUrl(item.img_url)">
         </div>
         <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-for="lx in item.getStudyingAbroadRelatedInfo">
           <div class="lxImg">
-            <img :src="lx.themb">
+            <img :src="getImgUrl(lx.themb)">
           </div>
           <div class="lxIntro">
             <div class="lxTitle font-h3">{{lx.source}}</div>

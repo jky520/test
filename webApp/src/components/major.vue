@@ -103,7 +103,7 @@
         <div class="bannerBox">
           <swiper :options="swiperOption">
             <swiper-slide v-for="slide in swiperSlides" :key="slide">
-              <img :src="slide.imageUrl" >
+              <img :src="getImgUrl(slide.imageUrl)" >
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>

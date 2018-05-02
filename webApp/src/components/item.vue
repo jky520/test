@@ -116,6 +116,10 @@
     text-indent: 1rem;
     color: #344465;
   }
+  .banner img{
+    width: 100%;
+    height: 100%;
+  }
 </style>
 <template>
   <div class="view">
@@ -126,7 +130,7 @@
     <div class="banner" ref="ban">
       <swiper :options="swiperOption">
         <swiper-slide v-for="slide in swiperSlides" :key="slide.id">
-          <img :src="slide.imageUrl" >
+          <img :src="getImgUrl(slide.imageUrl)" >
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>

@@ -129,8 +129,8 @@
       <div class="content" ref="content">
         <div class="bannerBox">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="slide in swiperSlides" v-on:click="toURL(item.url)">
-              <img :src="slide.imageUrl">
+            <swiper-slide v-for="(slide,index) in swiperSlides" :key="index" v-on:click="toURL(item.url)">
+              <img :src="getImgUrl(slide.imageUrl)">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
@@ -150,7 +150,7 @@
         <div class="lx">
           <div class="lxBox" v-for="item in study" v-tap="{methods:studyLoad,id:item.id}">
             <div class="lxImg">
-              <img :src="item.image">
+              <img :src="getImgUrl(item.image)">
             </div>
             <div class="lxIntro">
               <div class="lxTitle font-h3">{{item.title}}</div>
@@ -161,11 +161,11 @@
         <div class="title2 font-t2">培训</div>
         <div class="px">
           <div class="lxBanner" v-on:click="toURL(train[0].url)">
-            <img :src="train[0].image">
+            <img :src="getImgUrl(train[0].image)">
           </div>
           <div class="lxBox" v-for="(item,index) in train" v-if="index >= 1" v-tap="{methods:trainLoad,id:item.id}">
             <div class="lxImg">
-              <img :src="item.image">
+              <img :src="getImgUrl(item.image)">
             </div>
             <div class="lxIntro">
               <div class="lxTitle font-h3">{{item.title}}</div>

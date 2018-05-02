@@ -88,8 +88,8 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides">
-            <img :src="slide.imageUrl" >
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -97,7 +97,7 @@
       <div class="title2 font-t2">{{cityName}}</div>
       <div class="lxBox" v-for="item in studyNewInfo">
         <div class="lxImg">
-          <img :src="item.themb">
+          <img :src="getImgUrl(item.themb)">
         </div>
         <div class="lxIntro">
           <div class="lxTitle font-h3">{{item.title}}</div>

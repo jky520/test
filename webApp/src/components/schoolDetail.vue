@@ -210,7 +210,7 @@
       <div class="logo-box">
         <div class="kjjg">
           <div class="logo">
-            <img :src="schoolInfo.logo">
+            <img :src="getImgUrl(schoolInfo.logo)">
           </div>
           <div class="name">
             <span class="en">{{schoolInfo.english}}</span>
@@ -220,8 +220,8 @@
       </div>
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in image">
-            <img :src="slide.image" >
+          <swiper-slide v-for="(slide,index) in image" :key="index">
+            <img :src="getImgUrl(slide.image)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>

@@ -72,7 +72,7 @@
     <div class="content" ref="content">
       <div class="title3 font-t1">{{pageData.title}}</div>
       <div class="bannerBox">
-        <img :src="pageData.image">
+        <img :src="getImgUrl(pageData.image)">
       </div>
       <div ref="pageContent">
 

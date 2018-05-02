@@ -124,7 +124,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
             <img src="../styles/images/icon_banner.jpg" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -201,12 +201,27 @@
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getNews();
     },
     methods: {
       toOtherPage(params){
         this.$router.push({
           name:params.pageName
         });
+      },
+      getNews(){
+        this.$http({
+          method: 'get',
+          url: URL.news,
+          params: {},
+          responseType: 'json',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+
+        }, (err) => {
+          console.log(err);
+        })
       }
     },
     components:{

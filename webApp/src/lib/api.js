@@ -15,7 +15,8 @@ let stg = {
   "studyAboard":"http://120.24.216.26:8080/eduOnline/relatedinfosection/getStudyingAbroadRelatedInfo",
   "studyBanner":"http://120.24.216.26:8080/eduOnline/study/getAdvertImage",
   "studyCityList":"http://120.24.216.26:8080/eduOnline/city/studyCityList",
-  "studyCityDetail":"http://120.24.216.26:8080/eduOnline/study/"
+  "studyCityDetail":"http://120.24.216.26:8080/eduOnline/study/",
+  "news":"http://120.24.216.26:8080/eduOnline/newsinfo/list"
 };
 
 let prd = {

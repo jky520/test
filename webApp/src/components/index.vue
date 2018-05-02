@@ -117,7 +117,7 @@
     background: #c33f3e;
   }
   .listText{
-    width: 8rem;
+    width: 8rem;;
     line-height: 0.8rem;
     position: relative;
   }
