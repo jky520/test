@@ -108,14 +108,14 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="title2 font-t2">专业类别选择</div>
-        <div class="para">
-          <div class="la">
-          </div>
-          <div class="text">
-            <div class="listText font-t3" v-for="item in marjorArr"><span class="lala"></span>{{item}}</div>
-          </div>
-        </div>
+        <!--<div class="title2 font-t2">专业类别选择</div>-->
+        <!--<div class="para">-->
+          <!--<div class="la">-->
+          <!--</div>-->
+          <!--<div class="text">-->
+            <!--<div class="listText font-t3" v-for="item in marjorArr"><span class="lala"></span>{{item}}</div>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="title2 font-t2">热点推荐</div>
         <div class="hot">
           <div class="hotList font-t2" v-for="item in hot" v-tap="{methods:toHotPage,id:item.idx}">{{item.title}}</div>
@@ -140,8 +140,7 @@
                   stopOnLastSlide: false,
                   disableOnInteraction: true,
                 },
-                apeed:500,
-                loop:true
+                apeed:500
               },
               swiperSlides: [],
               marjorArr:['专科专业','本科专业','研究生专业','海外院校专业'],

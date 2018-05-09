@@ -94,7 +94,7 @@
   }
   .lxImg{
     width: 2.2rem;
-    height: 2.2rem;
+    height: 1.8rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -104,7 +104,7 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.5rem;
+    height: 2.2rem;
     width: 6.7rem;
     vertical-align: top;
     margin: 0.2rem;
@@ -134,38 +134,29 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="title2 font-t2">考试详解</div>
+      <div class="title2 font-t2">找工作</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
+      <div class="newsBox" v-for="item in news">
+        <div class="newsTime font-t3">{{item.name}}</div>
         <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
+          <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox">
+        <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">
           <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
+            <img :src="getImgUrl(lx.themb)">
           </div>
           <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            <div class="lxTitle font-h3">{{lx.source}}</div>
+            <div class="lxText font-t2">{{lx.title}}</div>
           </div>
         </div>
       </div>
@@ -189,18 +180,48 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
-        swiperSlides: [1, 2, 3],
-        areaArr:['托福','雅思','GMAT','SAT','ACT','GRE','四六级','会计','司法','研究生','公务员','艺术','中考','高考']
+        swiperSlides: [1, 2],
+        areaArr:[],
+        news:[]
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getInfo();
     },
     methods: {
-
+      getInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.job,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.areaArr = response.data.city;
+            this.swiperSlides = response.data.image;
+            this.news = response.data.information;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      toLoad(params){
+        this.$store.commit("setJobLoadId",params.id);
+        this.$router.push({
+          name:"jobLoad"
+        })
+      },
+      toDetail(params){
+        this.$store.commit("setJobCityId",params.id);
+        this.$router.push({
+          name:'jobDetail'
+        })
+      }
     },
     components:{
       swiper,
@@ -208,3 +229,4 @@
     }
   }
 </script>
+

@@ -37,88 +37,69 @@
     line-height: 1.46rem;
     text-align: center;
   }
+
   .contentBox{
+    border-top: 1px solid #d4d4d4;
+    padding: 0.5rem;
     overflow-y: scroll;
   }
-  .itemList{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 0.8rem;
-    line-height: 0.8rem;
-    padding:0 0.5rem;
-    margin: 0 auto;
-    background-color: #fff;
-  }
-  .contentBox:nth-child(2){
-    background-color: #f4f4f4;
-  }
-  .itemText{
-    color: #666666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 7.5rem;
-  }
-  .downLoad{
-    color: red;
+  .title2{
+    font-weight: bold;
+    border-left: 0.2rem solid #c13c3d;
+    text-indent: 0.2rem;
+    display: inline-block;
+    height: 0.37rem;
   }
 </style>
 <template>
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">试题列表</div>
+      <div class="title font-h3">专业详情</div>
     </div>
     <div class="contentBox" ref="content">
-      <div class="itemList" v-for="item in itemList">
-        <div class="itemText font-t2">{{item.title}}</div>
-        <div class="downLoad font-t2" v-tap="{methods:downLoadItem,url:item.path}">下载</div>
-      </div>
+      <div class="title2 font-t2">{{textName}}</div>
+      <div class="context" ref="context"></div>
     </div>
   </div>
 </template>
 
 <script>
   import URL from '../lib/api';
-  import 'swiper/dist/css/swiper.css';
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   export default {
     data() {
       return {
-        pId:{},
-        itemList:[]
+        diplomasId:0,
+        schoolId:0,
+        textName:''
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
-      this.pId = this.$store.state.itemPid;
-      this.getItemList();
+      this.diplomasId = this.$store.state.diplomasId;
+      this.schoolId = this.$store.state.schoolId;
+      this.getMajorDetail();
     },
     methods: {
-      getItemList(){
+      getMajorDetail(){
         this.$http({
           method:'get',
-          url:URL.itemList,
+          url:URL.majorDetail,
           params:{
-            pId1:this.pId.pId1,
-            pId2:this.pId.pId2,
+            diplomasId:this.diplomasId,
+            schoolId:this.schoolId
           },
           responseType:'stream',
           timeout: 5000
         }).then((res)=>{
-          console.log(res);
           let response = res.data;
           if(response.meta.code == "200"){
-            this.itemList = response.data;
+            this.textName = response.data.name;
+            this.$refs.context.innerHTML = response.data.content;
           }
         },(err)=>{
           console.log(err);
-        })
-      },
-      downLoadItem(params){
-          location.href= "http://139.129.130.136:8081" + params.url;
+        });
       }
     }
   }

@@ -3,7 +3,6 @@
     background-color: #fff;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
@@ -13,6 +12,9 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .content{
+    overflow-y: scroll;
   }
   .topBox{
     height: 1.46rem;
@@ -31,151 +33,232 @@
     -webkit-background-size: 0.26rem 0.4rem;
     background-size: 0.26rem 0.4rem;
   }
-  .banner{
-    height: 5rem;
-    width: 10rem;
-    background-image: url(../styles/images/icon_banner2.jpg);
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    background-size: cover;
-  }
   .title{
     color: #fff;
     height: 1.46rem;
     line-height: 1.46rem;
     text-align: center;
   }
-
-  .contentBox{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-top: 1px solid #d4d4d4;
+  .bannerBox{
+    height: 5rem;
+    width: 10rem;
   }
-  .leftMenu{
-    width: 2.5rem;
-    background: #ececec;
-  }
-  .menu2li{
-    height: 1.08rem;
-    line-height: 1.08rem;
-    text-align: center;
-  }
-  .menu2li.on{
-    background-color: #fff;
-    color: #c33f3e;
-  }
-  .rightContent{
+  .bannerBox img{
     width: 100%;
     height: 100%;
   }
-  .items{
-    padding: 0.2rem;
-    position: relative;
-    border-bottom: 1px solid #d4d4d4;
-  }
-  .items span{
-    padding-top: 0.2rem;
-    width: 4.5rem;
+  .title2{
+    font-weight: bold;
+    border-left: 0.2rem solid #c13c3d;
+    text-indent: 0.2rem;
+    margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
-    vertical-align: top;
-    line-height: 0.5rem;
+    height: 0.37rem;
   }
-  .items img{
-    width: 1.85rem;
-    height: 1.5rem;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .price{
-    position: absolute;
-    bottom: 0.18rem;
-    right: 0.4rem;
-    color: #c33f3e;
-  }
-  .menu1{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    height:0.85rem;
-    width: 10rem;
+  .listBox{
+    width: 9rem;
     margin: 0 auto;
-    align-items:center;
+    padding: 0 0.5rem;
   }
-  .address{
-    color: #c33f3e;
-    line-height: 0.85rem;
-    text-indent: 0.625rem;
+  .listBox:after{
+    content: ' ';
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: block;
+    clear: both;
   }
-  .addInfo{
-    line-height: 0.85rem;
-    text-indent: 0.4rem;
-    color: #8b8b8b;
+  .list2{
+    background: #f4f4f4;
+    float: left;
+    padding: 0 0.2rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0.1rem 0.1rem;
+    text-align: center;
   }
-  .arrow{
-    background-image: url(../styles/images/icon_downArrow.png);
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 0.15rem;
-    height: 0.15rem;
-    margin-left: 0.1rem;
+  .newsBox{
+    text-align: center;
+  }
+  .newsTime{
+    color: #fff;
+    text-align: center;
+    padding: 0.1rem 0.5rem;
+    background-color: #cccccc;
+    margin: 0 auto;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    border-radius: 1rem;
+    display: inline-block;
+  }
+  .lxImg{
+    width: 2.2rem;
+    height: 1.8rem;
+    display: inline-block;
+    margin: 0.2rem 0 0.2rem 0.2rem;
+  }
+  .lxImg img{
+    width: 100%;
+    height: 100%;
+  }
+  .lxIntro{
+    display: inline-block;
+    height: 2.2rem;
+    width: 6.7rem;
+    vertical-align: top;
+    margin: 0.2rem;
+    text-align: left;
+  }
+  .lxText{
+    margin-top: 0.2rem;
+    line-height: 0.6rem;
+    color: #555;
+  }
+  .lxBanner{
+    width: 9.4rem;
+    height: 5rem;
+    margin: 0.3rem auto 0 auto;
+  }
+  .lxBanner img{
+    width: 100%;
+    height: 100%;
   }
 </style>
 <template>
-    <div class="view">
-      <div ref="top" class="topBox">
-        <div class="back" v-tap="{methods:goBack}"></div>
-        <div class="title font-h3">试题库</div>
+  <div class="view">
+    <div ref="top" class="topBox">
+      <div class="back" v-tap="{methods:goBack}"></div>
+      <div class="title font-h3">技能培训</div>
+    </div>
+    <div class="content" ref="content">
+      <div class="bannerBox">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
-      <div class="banner" ref="ban"></div>
-      <div class="menu1" ref="menu">
-
+      <div class="title2 font-t2">找培训机构</div>
+      <div class="listBox">
+        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
-      <div class="contentBox" ref="content">
-        <div class="leftMenu">
-          <div class="menu2li font-t4">IT教育</div>
-          <div class="menu2li font-t4 on">德育培训</div>
-          <div class="menu2li font-t4">驾驶培训</div>
-          <div class="menu2li font-t4">挖掘机培训</div>
-          <div class="menu2li font-t4">医师资格培训</div>
+      <div class="title2 font-t2">相关资讯</div>
+      <div class="newsBox" v-for="item in news">
+        <div class="newsTime font-t3">{{item.name}}</div>
+        <div class="lxBanner">
+          <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="rightContent">
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">大连语桥德语培训学校秋季基础中高级德语班</span>
+        <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">
+          <div class="lxImg">
+            <img :src="getImgUrl(lx.themb)">
           </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">大连语桥德语培训学校秋季基础中高级德语班</span>
-          </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">大连语桥德语培训学校秋季基础中高级德语班</span>
-          </div>
-          <div class="items">
-            <img src="../styles/images/icon_question.jpg">
-            <span class="font-t2">大连语桥德语培训学校秋季基础中高级德语班</span>
+          <div class="lxIntro">
+            <div class="lxTitle font-h3">{{lx.source}}</div>
+            <div class="lxText font-t2">{{lx.title}}</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-    import URL from '../lib/api';
-    export default {
-        data() {
-            return {}
+  import URL from '../lib/api';
+  import 'swiper/dist/css/swiper.css';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper';
+  export default {
+    data() {
+      return {
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: true,
+          },
+          apeed:500
         },
-        mounted() {
-          this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.clientHeight -this.$refs.menu.clientHeight + 'px';
-        },
-        methods: {
-
-        }
+        swiperSlides: [1, 2],
+        areaArr:[],
+        news:[]
+      }
+    },
+    mounted() {
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getInfo();
+      this.trainRelatedInfo();
+      this.trainAdvert();
+    },
+    methods: {
+      getInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.skillCityList,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.areaArr = response.data;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      trainRelatedInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.trainRelatedInfo,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.news = response.data;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      trainAdvert(){
+        this.$http({
+          method: 'get',
+          url: URL.trainAdvert,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.swiperSlides = response.data[0].advert;
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      toLoad(params){
+        this.$store.commit("setSkillLoadId",params.id);
+        this.$router.push({
+          name:"skillLoad"
+        })
+      },
+      toDetail(params){
+        this.$store.commit("setSkillCityId",params.id);
+        this.$router.push({
+          name:'skillDetail'
+        })
+      }
+    },
+    components:{
+      swiper,
+      swiperSlide
     }
+  }
 </script>
 

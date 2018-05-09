@@ -9,7 +9,15 @@ const store = new Vuex.Store({
     schoolId:0,
     hotId:0,
     itemPid:{},
-    studyCityId:0
+    studyCityId:0,
+    departmentId:{},
+    overseasLoadId:0,
+    diplomasId:0,
+    loadId:0,
+    skillCityId:0,
+    jobLoadId:0,
+    jobCityId:0,
+    jobCategoryId:0
   },
   mutations: {
     setstudyloadid(state,id){
@@ -32,6 +40,30 @@ const store = new Vuex.Store({
     },
     setStudyCityId(state,id){
       state.studyCityId = id;
+    },
+    setDepartmentId(state,obj){
+      state.departmentId = obj;
+    },
+    setOversearLoadId(state,id){
+      state.overseasLoadId = id;
+    },
+    setDiplomasId(state,diplomasId){
+      state.diplomasId = diplomasId;
+    },
+    setSkillLoadId(state,id){
+      state.loadId = id;
+    },
+    setSkillCityId(state,id){
+      state.skillCityId = id;
+    },
+    setJobLoadId(state,id){
+      state.jobLoadId = id;
+    },
+    setJobCityId(state,id){
+      state.jobCityId = id;
+    },
+    setJobCategoryId(state,id){
+      state.jobCategoryId = id;
     }
   },
   getters: {

@@ -23,6 +23,14 @@ import schoolClass from '@/components/schoolClass';
 import hotR from '@/components/hotR';
 import itemList from '@/components/itemList';
 import studyDetail from '@/components/studyDetail';
+import schoolDepartment from '@/components/schoolDepartment';
+import overseasLoad from '@/components/overseasLoad';
+import majorDetail from '@/components/majorDetail';
+import skillLoad from '@/components/skillLoad';
+import skillDetail from '@/components/skillDetail';
+import jobLoad from '@/components/jobLoad';
+import jobDetail from '@/components/jobDetail';
+import jobDetail2 from '@/components/jobDetail2';
 
 Vue.use(Router);
 
@@ -146,6 +154,46 @@ export default new Router({
       path:'/studyDetail',
       name:'studyDetail',
       component:studyDetail
-    }
+    },
+    {
+      path:'/schoolDepartment',
+      name:'schoolDepartment',
+      component:schoolDepartment
+    },
+    {
+      path: '/overseasLoad',
+      name: 'overseasLoad',
+      component: overseasLoad
+    },
+    {
+      path: '/majorDetail',
+      name: 'majorDetail',
+      component: majorDetail
+    },
+    {
+      path: '/skillLoad',
+      name: 'skillLoad',
+      component: skillLoad
+    },
+    {
+      path: '/skillDetail',
+      name: 'skillDetail',
+      component: skillDetail
+    },
+    {
+      path: '/jobLoad',
+      name: 'jobLoad',
+      component: jobLoad
+    },
+    {
+      path: '/jobDetail',
+      name: 'jobDetail',
+      component: jobDetail
+    },
+    {
+      path: '/jobDetail2',
+      name: 'jobDetail2',
+      component: jobDetail2
+    },
   ]
 })

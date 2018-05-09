@@ -124,8 +124,7 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
         swiperSlides: [1, 2],
         studyCityId:0,
@@ -157,6 +156,9 @@
         }, (err) => {
           console.log(err);
         })
+      },
+      toStudyLoad(){
+
       }
     },
     components:{

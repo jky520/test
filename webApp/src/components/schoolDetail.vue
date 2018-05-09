@@ -255,11 +255,11 @@
       </div>
       <div class="title2 font-t2">学校院系</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in faculty">{{item.name}}</div>
+        <div class="list2 font-t3" v-for="item in faculty" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">专业设置</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in major">{{item.name}}</div>
+        <div class="list2 font-t3" v-for="item in major" v-tap="{methods:toMajorDetail,diplomasId:item.id}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">招生信息</div>
       <div class="listBox">
@@ -309,8 +309,7 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
         image: [],
         showMore:false,
@@ -393,6 +392,18 @@
         },(err)=>{
           console.log(err);
         })
+      },
+      toDepartment(params){
+        this.$store.commit("setDepartmentId",{"id":params.id,"schoolId":params.schoolId});
+        this.$router.push({
+          name:'schoolDepartment'
+        })
+      },
+      toMajorDetail(params){
+        this.$store.commit("setDiplomasId",params.diplomasId);
+        this.$router.push({
+          name:'majorDetail'
+        });
       }
     },
     components:{

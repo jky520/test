@@ -129,7 +129,7 @@
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">去留学</div>
+      <div class="title font-h3">技能培训</div>
     </div>
     <div class="content" ref="content">
       <div class="bannerBox">
@@ -140,16 +140,12 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="title2 font-t2">找留学机构</div>
+      <div class="title2 font-t2">培训分类</div>
       <div class="listBox">
         <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">
-        <div class="newsTime font-t3">{{item.name}}</div>
-        <div class="lxBanner">
-          <img :src="getImgUrl(item.img_url)">
-        </div>
         <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">
           <div class="lxImg">
             <img :src="getImgUrl(lx.themb)">
@@ -190,46 +186,15 @@
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
       this.getInfo();
-      this.getBanner();
-      this.getCityList();
+      this.trainAdvert();
+      // this.detailInfo();
+      this.trainInfoList();
     },
     methods: {
       getInfo(){
         this.$http({
           method: 'get',
-          url: URL.studyAboard,
-          params: {},
-          responseType: 'stream',
-          timeout: 5000
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-            this.news = response.data;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      getBanner(){
-        this.$http({
-          method: 'get',
-          url: URL.studyBanner,
-          params: {},
-          responseType: 'stream',
-          timeout: 5000
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-            this.swiperSlides = response.data[0].advert;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      getCityList(){
-        this.$http({
-          method: 'get',
-          url: URL.studyCityList,
+          url: URL.traincategory,
           params: {},
           responseType: 'stream',
           timeout: 5000
@@ -242,18 +207,55 @@
           console.log(err);
         })
       },
-      toDetail(params){
-        this.$store.commit("setStudyCityId",params.id);
-        this.$router.push({
-          name:'studyDetail'
-        });
-      },
-      toLoad(params){
-        this.$store.commit("setOversearLoadId",params.id);
-        this.$router.push({
-          name:'overseasLoad'
+      trainAdvert(){
+        this.$http({
+          method: 'get',
+          url: URL.trainInfoAdvert,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.swiperSlides = response.data[0].advert;
+          }
+        }, (err) => {
+          console.log(err);
         })
-      }
+      },
+      detailInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.skillDetailInfo,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      trainInfoList(){
+        this.$http({
+          method: 'get',
+          url: URL.trainInfoList,
+          params: {},
+          responseType: 'stream',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+
     },
     components:{
       swiper,

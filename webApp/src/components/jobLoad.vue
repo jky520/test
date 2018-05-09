@@ -3,7 +3,6 @@
     background-color: #fff;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
@@ -13,6 +12,9 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .content{
+    overflow-y: scroll;
   }
   .topBox{
     height: 1.46rem;
@@ -37,88 +39,66 @@
     line-height: 1.46rem;
     text-align: center;
   }
-  .contentBox{
-    overflow-y: scroll;
-  }
-  .itemList{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 0.8rem;
-    line-height: 0.8rem;
-    padding:0 0.5rem;
-    margin: 0 auto;
-    background-color: #fff;
-  }
-  .contentBox:nth-child(2){
-    background-color: #f4f4f4;
-  }
-  .itemText{
+  .title2{
+    line-height: 1rem;
     color: #666666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 7.5rem;
+    font-weight: bold;
+    text-indent: 0.5rem;
   }
-  .downLoad{
-    color: red;
+  .context{
+    padding: 0 0.5rem;
   }
 </style>
 <template>
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">试题列表</div>
+      <div class="title font-h3">资讯</div>
     </div>
-    <div class="contentBox" ref="content">
-      <div class="itemList" v-for="item in itemList">
-        <div class="itemText font-t2">{{item.title}}</div>
-        <div class="downLoad font-t2" v-tap="{methods:downLoadItem,url:item.path}">下载</div>
-      </div>
+    <div class="content" ref="content">
+      <div class="title2 font-h3">{{pageData.title}}</div>
+      <div class="title2 font-t3">{{source}} {{date}}</div>
+      <div class="context" ref="context"></div>
     </div>
   </div>
 </template>
 
 <script>
   import URL from '../lib/api';
-  import 'swiper/dist/css/swiper.css';
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   export default {
     data() {
       return {
-        pId:{},
-        itemList:[]
+        oversearLoadId:0,
+        pageData:{},
+        date:0,
+        source:''
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
-      this.pId = this.$store.state.itemPid;
-      this.getItemList();
+      this.oversearLoadId = this.$store.state.jobLoadId;
+      this.studyLoad();
     },
     methods: {
-      getItemList(){
+      studyLoad(){
         this.$http({
           method:'get',
-          url:URL.itemList,
+          url:URL.jobLoad +this.oversearLoadId+ "/load",
           params:{
-            pId1:this.pId.pId1,
-            pId2:this.pId.pId2,
           },
-          responseType:'stream',
+          responseType:'json',
           timeout: 5000
         }).then((res)=>{
-          console.log(res);
           let response = res.data;
           if(response.meta.code == "200"){
-            this.itemList = response.data;
+            this.pageData = response.data;
+            this.$refs.context.innerHTML = this.pageData.content;
+            this.date = new Date(this.pageData.indate).format('yyyy年MM月dd日');
+            this.source = this.pageData.source;
           }
         },(err)=>{
           console.log(err);
         })
-      },
-      downLoadItem(params){
-          location.href= "http://139.129.130.136:8081" + params.url;
       }
     }
   }

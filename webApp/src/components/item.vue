@@ -167,8 +167,7 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
         swiperSlides: [],
       }

@@ -189,8 +189,7 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
         swiperSlides: [1, 2, 3],
         areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导']

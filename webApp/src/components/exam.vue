@@ -189,8 +189,7 @@
             stopOnLastSlide: false,
             disableOnInteraction: true,
           },
-          apeed:500,
-          loop:true
+          apeed:500
         },
         swiperSlides: [1, 2, 3],
         areaArr:['北京','天津','上海','重庆','河北','山西','辽宁','吉宁','黑龙江','内蒙古','江苏']
