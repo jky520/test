@@ -215,7 +215,10 @@
           method: 'get',
           url: URL.trainRelatedInfo,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;
@@ -231,7 +234,10 @@
           method: 'get',
           url: URL.trainAdvert,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;

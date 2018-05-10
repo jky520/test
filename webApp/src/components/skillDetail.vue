@@ -196,7 +196,10 @@
           method: 'get',
           url: URL.traincategory,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;
@@ -212,7 +215,10 @@
           method: 'get',
           url: URL.trainInfoAdvert,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;
@@ -228,7 +234,10 @@
           method: 'get',
           url: URL.skillDetailInfo,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;
@@ -244,7 +253,10 @@
           method: 'get',
           url: URL.trainInfoList,
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res) => {
           let response = res.data;

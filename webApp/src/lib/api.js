@@ -32,7 +32,9 @@ let stg = {
   "jobDetail":"http://120.24.216.26:8080/eduOnline/jobcity/",
   "jobCategory":"http://120.24.216.26:8080/eduOnline/jobcity/category",
   "trainInfoList":"http://120.24.216.26:8080/trainInfo/list",
-  "trainInfoAdvert":"http://120.24.216.26:8080/train/getTrain_infoAdvertImage"
+  "trainInfoAdvert":"http://120.24.216.26:8080/train/getTrain_infoAdvertImage",
+  "login":"http://120.24.216.26:8080/eduOnline/user/login",
+  "register":"http://120.24.216.26:8080/eduOnline/user/regist"
 };
 
 let prd = {

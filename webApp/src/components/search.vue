@@ -159,7 +159,10 @@
           params:{
             category:this.searchData.category,
           },
-          responseType:'stream',
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res)=>{
           let response = res.data;
@@ -181,7 +184,10 @@
             Id:this.searchData.id,
             cityId:cityId
           },
-          responseType:'stream',
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
         }).then((res)=>{
           let response = res.data;

@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    userInfo:{},
     studyloadid:0,
     trainLoadId:0,
     searchData:{},
@@ -20,6 +21,9 @@ const store = new Vuex.Store({
     jobCategoryId:0
   },
   mutations: {
+    setUserInfo(state,userInfo){
+      state.userInfo = userInfo;
+    },
     setstudyloadid(state,id){
       state.studyloadid = id;
     },

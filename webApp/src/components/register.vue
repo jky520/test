@@ -110,7 +110,6 @@
       <div class="back" v-tap="{methods:goBack}"></div>
       <div class="title font-h3">注册</div>
     </div>
-
     <div class="register">
       <div class="username">
         <div class="uText font-h3">帐号</div>
@@ -124,12 +123,13 @@
         <div class="uText font-h3">密码确认</div>
         <input type="password" class="uInput" placeholder="请再次输入密码" v-model="passwordTwo">
       </div>
-      <div class="loginBtn" ref="loginBtn">注册</div>
+      <div class="loginBtn font-h3" v-tap="{methods:register}">注册</div>
     </div>
   </div>
 </template>
 
 <script>
+  import URL from '../lib/api';
   export default{
     data(){
       return {
@@ -142,7 +142,31 @@
 
     },
     methods: {
-
+      register(){
+        if(this.password == this.passwordTwo){
+          if(this.username!=""){
+            this.$http({
+              method: 'post',
+              url: URL.register,
+              params: {
+                account:this.username,
+                password:this.password
+              },
+              responseType: 'json',
+              timeout: 5000
+            }).then((res) => {
+              let response = res.data;
+              console.log(response);
+            }, (err) => {
+              console.log(err);
+            })
+          }else{
+              console.log("请输入用户名");
+          }
+        }else{
+            console.log("两次密码不一致");
+        }
+      }
     },
     beforeUpdate(){
 

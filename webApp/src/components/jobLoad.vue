@@ -86,6 +86,9 @@
           url:URL.jobLoad +this.oversearLoadId+ "/load",
           params:{
           },
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           responseType:'json',
           timeout: 5000
         }).then((res)=>{

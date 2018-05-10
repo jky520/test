@@ -271,13 +271,18 @@
             params:{
 
             },
-            data:{
-
-            },
-            responseType:'stream',
+            responseType:'json',
+            headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+                token:this.$store.state.userinfo.token
+            }),
             timeout: 5000
           }).then((res)=>{
               console.log(res);
+              if(res.meta.code == "200"){
+                  this.$router.push({
+                    name:"login"
+                  })
+              }
           },(err)=>{
               console.log(err);
           })

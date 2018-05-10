@@ -119,40 +119,74 @@
         <div class="uText font-h3">密码</div>
         <input type="password" class="uInput" placeholder="请输入密码" v-model="password">
       </div>
-      <div class="loginBtn" ref="loginBtn">登录</div>
+      <div class="loginBtn font-h3" v-tap="{methods:toLogin}">登录</div>
       <div class="fr">
         <span class="colorB">忘记密码</span>
         <span>|</span>
-        <span class="colorB">快速注册</span>
+        <span class="colorB" v-tap="{methods:toRegister}">快速注册</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import URL from '../lib/api';
   export default{
     data(){
       return {
         username: '',
         password: '',
-        passwordTwo:''
       }
     },
     mounted(){
 
     },
     methods: {
+      toRegister(){
+        this.$router.push({
+          name: 'register'
+        })
+      },
+      toLogin(){
+        this.$http({
+          method: 'post',
+          url: URL.login,
+          params: {
+            account: this.username,
+            password: this.password
+          },
+          responseType: 'json',
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          console.log(response);
+          if(response.meta.code == "200"){
+              this.$store.commit("setUserInfo",response.data);
+              this.$router.push({
+                name:'index'
+              });
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    }
+    ,
+    beforeUpdate()
+    {
 
-    },
-    beforeUpdate(){
+    }
+    ,
+    updated()
+    {
 
-    },
-    updated(){
+    }
+    ,
+    beforeDestroy()
+    {
 
-    },
-    beforeDestroy(){
-
-    },
+    }
+    ,
     watch: {}
   }
 </script>
