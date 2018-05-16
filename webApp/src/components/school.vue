@@ -225,6 +225,8 @@
                 this.schoolType = response.data.school;
                 this.study = response.data.study;
                 this.train = response.data.train;
+              }else{
+                this.handleError(response)
               }
             },(err)=>{
               console.log(err);

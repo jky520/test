@@ -124,7 +124,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
             <img src="../styles/images/icon_banner.jpg" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -132,26 +132,17 @@
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
-        <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
+        <!--<div class="newsTime font-t3">2018年1月1日</div>-->
+        <!--<div class="lxBanner">-->
+          <!--<img src="../styles/images/icon_banner.jpg">-->
+        <!--</div>-->
+        <div class="lxBox" v-for="item in news">
+          <div class="lxImg" v-tap="{methods:toBaidu}">
+            <img :src="getImgUrl(item.themb)">
           </div>
           <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            <div class="lxTitle font-h3">{{item.from}}</div>
+            <div class="lxText font-t2">{{item.title}}</div>
           </div>
         </div>
       </div>
@@ -196,6 +187,7 @@
           apeed:500
         },
         swiperSlides: [1, 2, 3],
+        news:[]
       }
     },
     mounted() {
@@ -220,7 +212,11 @@
           timeout: 5000
         }).then((res) => {
           let response = res.data;
-
+          if(response.meta.code == "200"){
+              this.news = response.data;
+          }else{
+              this.handleError(response);
+          }
         }, (err) => {
           console.log(err);
         })

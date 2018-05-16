@@ -99,6 +99,8 @@
             this.$refs.context.innerHTML = this.pageData.content;
             this.date = new Date(this.pageData.indate).format('yyyy年MM月dd日');
             this.source = this.pageData.source;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);

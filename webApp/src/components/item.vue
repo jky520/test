@@ -129,7 +129,7 @@
     </div>
     <div class="banner" ref="ban">
       <swiper :options="swiperOption">
-        <swiper-slide v-for="slide in swiperSlides" :key="slide.id">
+        <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide.id">
           <img :src="getImgUrl(slide.imageUrl)" >
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -202,6 +202,8 @@
             this.bookList = arr[0].subs;
             this.swiperSlides = arr[0].image;
             this.menuArr = arr;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);

@@ -169,7 +169,7 @@
       <div class="topTitle font-h3">教育在线</div>
     </div>
     <div class="contentBox" ref="mid">
-      <div class="banner"></div>
+      <div class="banner" v-tap="{methods:toBaidu}"></div>
       <div class="content">
         <div class="title font-t2">精准·高校·院校搜索</div>
         <div class="line"></div>
@@ -210,21 +210,21 @@
           </div>
         </div>
       </div>
-      <div class="content">
-        <div class="title font-t2">新闻推荐</div>
-        <div class="more font-t2">更多新闻></div>
-        <div class="line"></div>
-        <div class="para">
-          <div class="la">
-          </div>
-          <div class="text">
-            <div class="listText font-t3"><span class="lala"></span>教育部：近五年已有约231万留学生学成归国</div>
-            <div class="listText font-t3"><span class="lala"></span>清华大学自主招生为何那么“重体育”</div>
-            <div class="listText font-t3"><span class="lala"></span>转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</div>
-            <div class="listText font-t3"><span class="lala"></span>最新调查显示：这拨大学生不到两成想当科学家</div>
-          </div>
-        </div>
-      </div>
+      <!--<div class="content">-->
+        <!--<div class="title font-t2">新闻推荐</div>-->
+        <!--<div class="more font-t2" v-tap="{methods:toOtherPage,pageName:'news'}">更多新闻></div>-->
+        <!--<div class="line"></div>-->
+        <!--<div class="para">-->
+          <!--<div class="la">-->
+          <!--</div>-->
+          <!--<div class="text">-->
+            <!--<div class="listText font-t3"><span class="lala"></span>教育部：近五年已有约231万留学生学成归国</div>-->
+            <!--<div class="listText font-t3"><span class="lala"></span>清华大学自主招生为何那么“重体育”</div>-->
+            <!--<div class="listText font-t3"><span class="lala"></span>转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</div>-->
+            <!--<div class="listText font-t3"><span class="lala"></span>最新调查显示：这拨大学生不到两成想当科学家</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
     <div class="footer" ref="foot">
       <div class="menuBox">
@@ -282,6 +282,8 @@
                   this.$router.push({
                     name:"login"
                   })
+              }else{
+                this.handleError(response)
               }
           },(err)=>{
               console.log(err);

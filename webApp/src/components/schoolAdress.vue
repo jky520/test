@@ -62,7 +62,7 @@
           let local = new BMap.LocalSearch(map, {
             renderOptions:{map: map}
           });
-          local.search("贵州大学");
+          local.search(this.$store.state.searchName);
           this.$refs.bdMap.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight + 'px';
         },
         methods: {}

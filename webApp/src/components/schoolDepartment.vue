@@ -86,6 +86,8 @@
               let response = res.data;
               if(response.meta.code == "200"){
                 this.$refs.content.innerHTML = response.data.brief;
+              }else{
+                this.handleError(response)
               }
             },(err)=>{
               console.log(err);

@@ -18,7 +18,9 @@ const store = new Vuex.Store({
     skillCityId:0,
     jobLoadId:0,
     jobCityId:0,
-    jobCategoryId:0
+    jobCategoryId:0,
+    searchName:'',
+    videoId:0
   },
   mutations: {
     setUserInfo(state,userInfo){
@@ -68,6 +70,12 @@ const store = new Vuex.Store({
     },
     setJobCategoryId(state,id){
       state.jobCategoryId = id;
+    },
+    setSearchName(state,searchName){
+      state.searchName = searchName;
+    },
+    setVideoId(state,videoId){
+      state.videoId = videoId;
     }
   },
   getters: {

@@ -102,7 +102,7 @@
       <div class="content" ref="content">
         <div class="bannerBox">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="slide in swiperSlides" :key="slide">
+            <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
               <img :src="getImgUrl(slide.imageUrl)" >
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -167,6 +167,8 @@
               if (response.meta.code == "200") {
                 this.swiperSlides = response.data.picture;
                 this.hot = response.data.hot;
+              }else{
+                this.handleError(response)
               }
             }, (err) => {
               console.log(err);

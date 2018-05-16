@@ -8,7 +8,7 @@ import major from '@/components/major';
 import overseas from '@/components/overseas';
 import news from '@/components/news';
 import job from '@/components/job';
-import exam from '@/components/job';
+import exam from '@/components/exam';
 import pressure from '@/components/pressure';
 import mine from '@/components/mine';
 import userInfoEdit from '@/components/userInfoEdit';
@@ -31,7 +31,7 @@ import skillDetail from '@/components/skillDetail';
 import jobLoad from '@/components/jobLoad';
 import jobDetail from '@/components/jobDetail';
 import jobDetail2 from '@/components/jobDetail2';
-
+import classVideo from '@/components/classVideo';
 Vue.use(Router);
 
 export default new Router({
@@ -195,5 +195,11 @@ export default new Router({
       name: 'jobDetail2',
       component: jobDetail2
     },
+    {
+      path: '/classVideo',
+      name: 'classVideo',
+      component: classVideo
+    },
+
   ]
 })

@@ -115,6 +115,8 @@
           let response = res.data;
           if(response.meta.code == "200"){
             this.itemList = response.data;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);

@@ -88,7 +88,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -96,7 +96,7 @@
       </div>
       <div class="title2 font-t2">{{cityName}}</div>
       <div class="lxBox" v-for="item in studyNewInfo">
-        <div class="lxImg">
+        <div class="lxImg" v-tap="{methods:toBaidu}">
           <img :src="getImgUrl(item.themb)">
         </div>
         <div class="lxIntro">
@@ -155,6 +155,8 @@
             this.swiperSlides = advert;
             this.studyNewInfo = response.data.getStudyMessage;
             this.cityName = response.data.getStudyMessage[0].city.name;
+          }else{
+            this.handleError(response)
           }
         }, (err) => {
           console.log(err);

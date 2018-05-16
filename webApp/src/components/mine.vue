@@ -97,7 +97,7 @@
         <div class="title font-h3">个人资料</div>
       </div>
       <div class="infoHead">
-        <div class="userHead">
+        <div class="userHead" v-tap="{methods:toBaidu}">
           <img src="../styles/images/icon_userhead.png">
         </div>
         <div class="edit font-h3" v-tap="{methods:toOtherPage,pageName:'edit'}">{{isLogin?'资料编辑':'去登录'}}&nbsp;&gt;</div>

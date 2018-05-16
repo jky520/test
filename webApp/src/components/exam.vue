@@ -124,6 +124,12 @@
     width: 100%;
     height: 100%;
   }
+  .tishi{
+    color: red;
+    padding: 0.5rem;
+    background-color: #eeeeee;
+    line-height: 0.5rem;
+  }
 </style>
 <template>
   <div class="view">
@@ -134,38 +140,30 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
-            <img src="../styles/images/icon_banner.jpg" >
+          <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
+            <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
       <div class="title2 font-t2">找留学机构</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr">{{item.name}}</div>
       </div>
+      <p class="tishi font-t2">{{tishi}}</p>
       <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
-        <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
+      <div class="newsBox" v-for="item in news">
+        <div class="newsTime font-t3">{{item.name}}</div>
+        <div class="lxBanner" v-tap="{methods:toOther,url:item.link}">
+          <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
+        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0">
+          <div class="lxImg" v-tap="{methods:toBaidu}">
+            <img :src="getImgUrl(item2.themb)">
           </div>
           <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            <div class="lxTitle font-h3">{{item2.source}}</div>
+            <div class="lxText font-t2">{{item2.title}}</div>
           </div>
         </div>
       </div>
@@ -192,14 +190,106 @@
           apeed:500
         },
         swiperSlides: [1, 2, 3],
-        areaArr:['北京','天津','上海','重庆','河北','山西','辽宁','吉宁','黑龙江','内蒙古','江苏']
+        areaArr:[],
+        news:[],
+        tishi:''
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getSlide();
+      this.examList();
+      this.getExamRelatedInfo();
+      this.examTooltip();
     },
     methods: {
-
+      getSlide(){
+        this.$http({
+          method:'get',
+          url:URL.examSlide,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.swiperSlides = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      examList(){
+        this.$http({
+          method:'get',
+          url:URL.examList,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.areaArr = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      getExamRelatedInfo(){
+        this.$http({
+          method:'get',
+          url:URL.getExamRelatedInfo,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.news = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      examTooltip(){
+        this.$http({
+          method:'get',
+          url:URL.examTooltip,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.tishi = response.data[0].tishi;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      toOther(params){
+        this.toURL(params.url);
+      }
     },
     components:{
       swiper,

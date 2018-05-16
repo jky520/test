@@ -71,7 +71,7 @@
     </div>
     <div class="content" ref="content">
       <div class="title3 font-t1">{{pageData.title}}</div>
-      <div class="bannerBox">
+      <div class="bannerBox" v-tap="{methods:toBaidu}">
         <img :src="getImgUrl(pageData.image)">
       </div>
       <div ref="pageContent">
@@ -113,6 +113,8 @@
           if(response.meta.code == "200"){
             this.pageData = response.data;
             this.$refs.pageContent.innerHTML = response.data.content;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);

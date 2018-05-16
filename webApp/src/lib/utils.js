@@ -9,5 +9,13 @@ export default{
     Vue.prototype.getImgUrl = function(url){
       return 'http://139.129.130.136:8081'+url;
     };
+    Vue.prototype.handleError = function(res){
+      if(res.meta.code == "4001"){
+        location.href = "/";
+      }
+    };
+    Vue.prototype.toBaidu = function(){
+      location.href = "http://www.baidu.com";
+    }
   }
 }

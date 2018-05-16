@@ -89,6 +89,8 @@
           if (response.meta.code == "200") {
             this.title = response.data.title;
             this.$refs.context.innerHTML = response.data.info;
+          }else{
+              this.handleError(response);
           }
         }, (err) => {
           console.log(err);

@@ -215,6 +215,8 @@
           let response = res.data;
           if (response.meta.code == "200") {
 
+          }else{
+            this.handleError(response)
           }
         }, (err) => {
           console.log(err);

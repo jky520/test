@@ -97,7 +97,7 @@
       <!--<div class="list2 font-t3" v-for="item in majorType">{{item.name}}</div>-->
       <!--</div>-->
       <div class="searchResult">
-        <div class="result" v-for="item in searchResult" v-tap="{methods:schoolDetail,id:item.id}">
+        <div class="result" v-for="item in searchResult" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
           <span class="font-t2">{{item.id}}</span>
           <span class="schoolName font-t1">{{item.name}}</span>
         </div>
@@ -193,6 +193,8 @@
           let response = res.data;
           if(response.meta.code == "200"){
             this.results = response.data;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);
@@ -200,6 +202,7 @@
       },
       schoolDetail(params){
         this.$store.commit("setSchoolId",params.id);
+        this.$store.commit("setSearchName",params.name);
         this.$router.push({
           name:'schoolDetail'
         })

@@ -23,7 +23,7 @@ let stg = {
   "majorDetail":"http://120.24.216.26:8080/eduOnline/school/specialty",
   "skillCityList":"http://120.24.216.26:8080/eduOnline/city/list",
   "trainRelatedInfo":"http://120.24.216.26:8080/eduOnline/relatedinfosection/getTrainRelatedInfo",
-  "trainAdvert":"http://120.24.216.26:8080/eduOnline/train/getTrain_infoAdvertImage",
+  "trainAdvert":"http://120.24.216.26:8080/eduOnline/trainInfo/getTrain_infoAdvertImage",
   "skillLoad":"http://120.24.216.26:8080/eduOnline/relatedinfo/",
   "traincategory":"http://120.24.216.26:8080/eduOnline/traincategory/list",
   "job":"http://120.24.216.26:8080/eduOnline/jobcity/list",
@@ -34,7 +34,16 @@ let stg = {
   "trainInfoList":"http://120.24.216.26:8080/trainInfo/list",
   "trainInfoAdvert":"http://120.24.216.26:8080/train/getTrain_infoAdvertImage",
   "login":"http://120.24.216.26:8080/eduOnline/user/login",
-  "register":"http://120.24.216.26:8080/eduOnline/user/regist"
+  "register":"http://120.24.216.26:8080/eduOnline/user/regist",
+  "examSlide":"http://120.24.216.26:8080/eduOnline/exam/getExamBgImg",
+  "examList":"http://120.24.216.26:8080/eduOnline/exam/list",
+  "getExamRelatedInfo":"http://120.24.216.26:8080/eduOnline/relatedinfosection/getExamRelatedInfo",
+  "examTooltip":"http://120.24.216.26:8080/eduOnline/exambrief/list",
+  "getJianyaImg":"http://120.24.216.26:8080/eduOnline/advert/getJianyaImg",
+  "pressDD":"http://120.24.216.26:8080/eduOnline/decompressCategory/list",
+  "pressNews":"http://120.24.216.26:8080/eduOnline/relatedinfosection/getDecompressRelatedInfo",
+  "schoolVideo":"http://120.24.216.26:8080/eduOnline/videoinfo/",
+  "getVideo":"http://120.24.216.26:8080/eduOnline/videoinfo/"
 };
 
 let prd = {

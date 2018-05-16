@@ -134,7 +134,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" :key="slide">
+          <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
             <img src="../styles/images/icon_banner.jpg" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -142,30 +142,21 @@
       </div>
       <div class="title2 font-t2">压力多多</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox">
-        <div class="newsTime font-t3">2018年1月1日</div>
-        <div class="lxBanner">
-          <img src="../styles/images/icon_banner.jpg">
+      <div class="newsBox" v-for="item in news">
+        <div class="newsTime font-t3">{{item.name}}</div>
+        <div class="lxBanner" v-tap="{methods:toBaidu}">
+          <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
+        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0">
+          <div class="lxImg" v-tap="{methods:toBaidu}">
+            <img :src="getImgUrl(item2.themb)">
           </div>
           <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
-          </div>
-        </div>
-        <div class="lxBox">
-          <div class="lxImg">
-            <img src="../styles/images/icon_banner.jpg">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">美国留学</div>
-            <div class="lxText font-t2">我要去美国留学我要去美国留学我要去美国留学</div>
+            <div class="lxTitle font-h3">{{item2.source}}</div>
+            <div class="lxText font-t2">{{item2.title}}</div>
           </div>
         </div>
       </div>
@@ -192,14 +183,80 @@
           apeed:500
         },
         swiperSlides: [1, 2, 3],
-        areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导']
+        areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导'],
+        news:[]
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getJianyaImg();
+      this.pressDD();
+      this.pressNews();
     },
     methods: {
+      getJianyaImg(){
+        this.$http({
+          method:'get',
+          url:URL.getJianyaImg,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
 
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      pressDD(){
+        this.$http({
+          method:'get',
+          url:URL.pressDD,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.areaArr = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      },
+      pressNews(){
+        this.$http({
+          method:'get',
+          url:URL.pressNews,
+          params:{},
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.news = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
+      }
     },
     components:{
       swiper,

@@ -99,6 +99,8 @@
           if(response.meta.code == "200"){
             this.textName = response.data.name;
             this.$refs.context.innerHTML = response.data.content;
+          }else{
+            this.handleError(response)
           }
         },(err)=>{
           console.log(err);

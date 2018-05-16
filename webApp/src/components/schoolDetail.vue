@@ -67,6 +67,7 @@
     background: #fff;
     min-height: 4rem;
     padding: 0.2rem;
+    position: relative;
   }
   .kjjg {
     width: 100%;
@@ -199,6 +200,13 @@
     line-height: 0.8rem;
     position: relative;
   }
+  .classLogo{
+    position: absolute;
+    right: 0.5rem;
+    top: 0.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 </style>
 <template>
   <div class="view">
@@ -209,8 +217,11 @@
     <div class="content" ref="content">
       <div class="logo-box">
         <div class="kjjg">
-          <div class="logo">
+          <div class="logo" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(schoolInfo.logo)">
+          </div>
+          <div class="classLogo" v-tap="{methods:toClassVideo}">
+            <img src="../styles/images/icon_class.png">
           </div>
           <div class="name">
             <span class="en">{{schoolInfo.english}}</span>
@@ -220,7 +231,7 @@
       </div>
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in image" :key="index">
+          <swiper-slide v-for="(slide,index) in image" v-tap="{methods:toBaidu}" :key="index">
             <img :src="getImgUrl(slide.image)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -275,7 +286,7 @@
         <div class="rightInfo">
           <div  class="oneLine twoLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">北京市XX区XX路 <span class="gps"></span></div>
           <div  class="oneLine twoLine">13312345678</div>
-          <div  class="oneLine twoLine">localhost:8080</div>
+          <div  class="oneLine twoLine">www.baidu.com</div>
         </div>
       </div>
       <div class="title2 font-t2">最新排名</div>
@@ -407,6 +418,11 @@
         this.$router.push({
           name:'majorDetail'
         });
+      },
+      toClassVideo(){
+        this.$router.push({
+          name:'schoolClass'
+        })
       }
     },
     components:{

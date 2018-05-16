@@ -130,6 +130,7 @@
 
 <script>
   import URL from '../lib/api';
+  import { Toast } from 'mint-ui';
   export default{
     data(){
       return {
@@ -157,14 +158,22 @@
             }).then((res) => {
               let response = res.data;
               console.log(response);
+              if(response.meta.code == "200"){
+                  Toast("注册成功");
+                  this.$router.push({
+                    name:'login'
+                  });
+              }else{
+                  this.handleError(response);
+              }
             }, (err) => {
               console.log(err);
             })
           }else{
-              console.log("请输入用户名");
+            Toast("请输入用户名");
           }
         }else{
-            console.log("两次密码不一致");
+          Toast("两次密码不一致");
         }
       }
     },

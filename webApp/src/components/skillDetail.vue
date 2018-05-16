@@ -134,7 +134,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -147,7 +147,7 @@
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">
         <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">
-          <div class="lxImg">
+          <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(lx.themb)">
           </div>
           <div class="lxIntro">
@@ -262,6 +262,8 @@
           let response = res.data;
           if (response.meta.code == "200") {
 
+          }else{
+            this.handleError(response)
           }
         }, (err) => {
           console.log(err);

@@ -39,62 +39,32 @@
     line-height: 1.46rem;
     text-align: center;
   }
-  .item{
-    position: relative;
-    background-color: #fff;
-    height: 2rem;
-    border-bottom:1px solid #eaeaea;
-  }
-  .videoImg{
-    height: 1.8rem;
-    width: 1.8rem;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .textBox{
-    display: inline-block;
-  }
-  .videoImg img{
-    width: 100%;
-    height: 100%;
+  .video{
+    width: 10rem;
+    height: 5rem;
   }
   .videoTitle{
-    font-weight: bold;
-    position: absolute;
-    top: 0.3rem;
-    left: 2.5rem;
+    margin-top: 0.5rem;
+    text-align: center;
   }
-  .videoContext{
-    color: #888;
-    position: absolute;
-    top: 1rem;
-    left: 2.5rem;
-  }
-  .videoPrice{
-    color: red;
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.2rem;
+  .video video{
+    height: 100%;
+    width: 100%;
   }
 </style>
 <template>
   <div class="view">
     <div ref="top" class="topBox">
       <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">学校视频课程</div>
+      <div class="title font-h3">视频课程</div>
     </div>
     <div class="content" ref="content">
-      <div class="videoBox">
-        <div class="item" v-for="item in videoList" v-tap="{methods:toVideo,id:item.id}">
-          <div class="videoImg">
-            <img :src="getImgUrl(item.themes)">
-          </div>
-          <div class="textBox">
-            <div class="videoTitle font-t1">{{item.name}}</div>
-            <div class="videoContext font-t2">{{item.brief}}</div>
-            <div class="videoPrice font-t2">￥{{item.price}}</div>
-          </div>
-        </div>
+      <div class="video">
+        <video :src="getImgUrl(video.path)" :poster="getImgUrl(videoinfo.themes)" controls="controls"></video>
+      </div>
+      <div class="videoInfo">
+        <div class="videoTitle font-h2">{{videoinfo.name}}</div>
+        <!--<p class="info">{{videoinfo.brief}}</p>-->
       </div>
     </div>
   </div>
@@ -105,37 +75,33 @@
   export default {
     data() {
       return {
-        schoolId:1181,
-        videoList:[]
+        videoId:0,
+        videoinfo:'',
+        video:{}
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
-      this.schoolId = this.$store.state.schoolId;
-      this.getSchoolDetail();
+      this.videoId = this.$store.state.videoId;
+      this.getVideo();
     },
     methods: {
-      getSchoolDetail() {
+      getVideo(){
         this.$http({
           method: 'get',
-          url: URL.schoolVideo + this.schoolId + "/videolist",
+          url: URL.getVideo + this.videoId + "/video",
           params: {},
           responseType: 'stream',
           timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
-            this.videoList = response.data;
+            this.video = response.data.videofile[0];
+            this.videoinfo = response.data.videoinfo;
           }
         }, (err) => {
           console.log(err);
         })
-      },
-      toVideo(params){
-        this.$store.commit("setVideoId",params.id);
-        this.$router.push({
-          name:'classVideo'
-        });
       }
     }
   }

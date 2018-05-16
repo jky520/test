@@ -107,7 +107,7 @@
 <template>
   <div class="view">
     <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
+      <!--<div class="back" v-tap="{methods:goBack}"></div>-->
       <div class="title font-h3">登录</div>
     </div>
     <div class="loginBox">
@@ -131,6 +131,7 @@
 
 <script>
   import URL from '../lib/api';
+  import { Toast } from 'mint-ui';
   export default{
     data(){
       return {
@@ -165,6 +166,9 @@
               this.$router.push({
                 name:'index'
               });
+              Toast('登录成功');
+          }else{
+              this.handleError(response);
           }
         }, (err) => {
           console.log(err);
