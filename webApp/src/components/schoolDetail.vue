@@ -91,12 +91,10 @@
     color: #444444;
     word-break: break-all;
     line-height: 0.5rem;
-    font-size: 0.35rem;
   }
   .logo-box .zh {
     line-height: 30px;
     color: #444444;
-    font-size: 1.3em;
   }
   .schoolInfo{
     display: flex;
@@ -207,13 +205,13 @@
     width: 1.5rem;
     height: 1.5rem;
   }
+  .colorRed{
+    color: red;
+  }
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">学校详情</div>
-    </div>
+    <Header :title="'学校详情'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="logo-box">
         <div class="kjjg">
@@ -224,8 +222,8 @@
             <img src="../styles/images/icon_class.png">
           </div>
           <div class="name">
-            <span class="en">{{schoolInfo.english}}</span>
-            <span class="zh">{{schoolInfo.name}}</span>
+            <span class="en colorRed font-t3">{{schoolInfo.english}}</span>
+            <span class="zh font-d2">{{schoolInfo.name}}</span>
           </div>
         </div>
       </div>
@@ -251,10 +249,10 @@
         <div class="rightInfo">
             <div  class="oneLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">{{schoolInfo.outsideAddr}} <span class="gps"></span></div>
             <div  class="oneLine">{{schoolInfo.formedDate}}</div>
-            <div  class="oneLine">{{nature}}</div>
+            <div  class="oneLine colorRed">{{nature}}</div>
             <div  class="oneLine">{{schoolInfo.custom_category}}</div>
             <div  class="oneLine">{{degreeText}}</div>
-            <div  class="oneLine">{{schoolInfo.belong}}</div>
+            <div  class="oneLine colorRed">{{schoolInfo.belong}}</div>
             <div  class="oneLine"></div>
             <div  class="oneLine"></div>
         </div>
@@ -335,7 +333,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.schoolId = this.$store.state.schoolId;
       this.getSchoolDetail();
       this.getNature()

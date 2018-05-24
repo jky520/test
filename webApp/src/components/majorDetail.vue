@@ -53,10 +53,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">专业详情</div>
-    </div>
+    <Header :title="'专业详情'" :hasBack="true" ref="top"></Header>
     <div class="contentBox" ref="content">
       <div class="title2 font-t2">{{textName}}</div>
       <div class="context" ref="context"></div>
@@ -75,7 +72,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.diplomasId = this.$store.state.diplomasId;
       this.schoolId = this.$store.state.schoolId;
       this.getMajorDetail();

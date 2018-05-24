@@ -10,6 +10,8 @@ import './lib/polyfill';
 import vueTap from 'v-tap';
 Vue.use(vueTap);
 
+import './components/common/common';
+
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
@@ -22,8 +24,8 @@ Vue.component(Field.name, Field);
 import { Search } from 'mint-ui';
 Vue.component(Search.name, Search);
 
-import $ from 'jquery';
-window.$ = $;
+// import $ from 'jquery';
+// window.$ = $;
 
 Vue.config.productionTip = false;
 

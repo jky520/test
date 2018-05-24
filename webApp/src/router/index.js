@@ -32,6 +32,11 @@ import jobLoad from '@/components/jobLoad';
 import jobDetail from '@/components/jobDetail';
 import jobDetail2 from '@/components/jobDetail2';
 import classVideo from '@/components/classVideo';
+import develop from '@/components/develop';
+import examDetail from '@/components/examDetail';
+import examLoad from '@/components/examLoad';
+import pressureIdea from '@/components/pressureIdea';
+import pressLoad from '@/components/pressLoad';
 Vue.use(Router);
 
 export default new Router({
@@ -200,6 +205,30 @@ export default new Router({
       name: 'classVideo',
       component: classVideo
     },
-
+    {
+      path: '/develop',
+      name: 'develop',
+      component: develop
+    },
+    {
+      path: '/examDetail',
+      name: 'examDetail',
+      component: examDetail
+    },
+    {
+      path: '/examLoad',
+      name: 'examLoad',
+      component: examLoad
+    },
+    {
+      path: '/pressureIdea',
+      name: 'pressureIdea',
+      component: pressureIdea
+    },
+    {
+      path: '/pressLoad',
+      name: 'pressLoad',
+      component: pressLoad
+    },
   ]
 })

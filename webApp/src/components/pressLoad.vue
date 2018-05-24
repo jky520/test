@@ -1,6 +1,6 @@
 <style scoped>
   .view{
-    background-color: #F9F9F9;
+    background-color: #fff;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -39,30 +39,23 @@
     line-height: 1.46rem;
     text-align: center;
   }
-  .video{
-    width: 10rem;
-    height: 5rem;
+  .title2{
+    line-height: 1rem;
+    color: #666666;
+    font-weight: bold;
+    text-indent: 0.5rem;
   }
-  .videoTitle{
-    margin-top: 0.5rem;
-    text-align: center;
-  }
-  .video video{
-    height: 100%;
-    width: 100%;
+  .context{
+    padding: 0 0.5rem;
   }
 </style>
 <template>
   <div class="view">
-    <Header :title="'视频课程'" :hasBack="true" ref="top"></Header>
+    <Header :title="'资讯'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
-      <div class="video">
-        <video :src="getImgUrl(video.path)" :poster="getImgUrl(videoinfo.themes)" controls="controls"></video>
-      </div>
-      <div class="videoInfo">
-        <div class="videoTitle font-h2">{{videoinfo.name}}</div>
-        <!--<p class="info">{{videoinfo.brief}}</p>-->
-      </div>
+      <div class="title2 font-h3">{{pageData.title}}</div>
+      <div class="title2 font-t3">{{source}} {{date}}</div>
+      <div class="context" ref="context"></div>
     </div>
   </div>
 </template>
@@ -72,34 +65,44 @@
   export default {
     data() {
       return {
-        videoId:0,
-        videoinfo:'',
-        video:{}
+        examLoadId:0,
+        pageData:{},
+        date:0,
+        source:''
       }
     },
     mounted() {
       this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
-      this.videoId = this.$store.state.videoId;
-      this.getVideo();
+      this.examLoadId = this.$store.state.examLoadId;
+      this.studyLoad();
     },
     methods: {
-      getVideo(){
+      studyLoad(){
         this.$http({
-          method: 'get',
-          url: URL.getVideo + this.videoId + "/video",
-          params: {},
-          responseType: 'stream',
+          method:'get',
+          url:URL.examLoad +this.examLoadId+ "/load",
+          params:{
+          },
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
           timeout: 5000
-        }).then((res) => {
+        }).then((res)=>{
           let response = res.data;
-          if (response.meta.code == "200") {
-            this.video = response.data.videofile[0];
-            this.videoinfo = response.data.videoinfo;
+          if(response.meta.code == "200"){
+            this.pageData = response.data;
+            this.$refs.context.innerHTML = this.pageData.content;
+            this.date = new Date(this.pageData.indate).format('yyyy年MM月dd日');
+            this.source = this.pageData.source;
+          }else{
+            this.handleError(response)
           }
-        }, (err) => {
+        },(err)=>{
           console.log(err);
         })
       }
     }
   }
 </script>
+

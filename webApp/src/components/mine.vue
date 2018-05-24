@@ -138,14 +138,14 @@
         <div class="menuIcon"></div>
         <div class="menuTitle font-t3">首页</div>
       </div>
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'news'}">
-        <div class="menuIcon news_w"></div>
-        <div class="menuTitle font-t3">新闻</div>
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+        <div class="menuIcon school_w"></div>
+        <div class="menuTitle font-t3">智能择校</div>
       </div>
-      <!--<div class="menuBox">-->
-      <!--<div class="menuIcon school_w"></div>-->
-      <!--<div class="menuTitle font-t3">智能择校</div>-->
-      <!--</div>-->
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+        <div class="menuIcon news_w"></div>
+        <div class="menuTitle font-t3">同学汇</div>
+      </div>
       <div class="menuBox">
         <div class="menuIcon mine_w"></div>
         <div class="menuTitle font-t3">我的</div>

@@ -82,10 +82,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">学校搜索</div>
-    </div>
+    <Header :title="'学校搜索'" :hasBack="true" ref="top"></Header>
     <div class="searchBox" ref="searchBox">
       <mt-search v-model="sVal"></mt-search>
     </div>
@@ -121,7 +118,7 @@
       this.searchData = this.$store.state.searchData;
       this.getSchoolList();
       this.getCityList();
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight - this.$refs.searchBox.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight - this.$refs.searchBox.clientHeight + 'px';
     },
     methods: {
       edition(params){

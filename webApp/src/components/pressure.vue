@@ -124,17 +124,19 @@
     width: 100%;
     height: 100%;
   }
+  .ideaList{
+    line-height: 0.8rem;
+    padding-left: 0.5rem;
+    color: red;
+  }
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">减压空间</div>
-    </div>
+    <Header :title="'减压空间'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
             <img src="../styles/images/icon_banner.jpg" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -144,13 +146,17 @@
       <div class="listBox">
         <div class="list2 font-t3" v-for="item in areaArr">{{item.name}}</div>
       </div>
+      <div class="getIdea">
+        <div class="ideaList font-t1" v-tap="{methods:toIdea}">找减压方法</div>
+        <div class="ideaList font-t1">找心里专家</div>
+      </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">
         <div class="newsTime font-t3">{{item.name}}</div>
         <div class="lxBanner" v-tap="{methods:toBaidu}">
           <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0">
+        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0" v-tap="{methods:toLoad,id:item.id}">
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item2.themb)">
           </div>
@@ -188,7 +194,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
       this.getJianyaImg();
       this.pressDD();
       this.pressNews();
@@ -255,6 +261,17 @@
           }
         },(err)=>{
           console.log(err);
+        })
+      },
+      toIdea(){
+        this.$router.push({
+          name:'pressureIdea'
+        })
+      },
+      toLoad(params){
+        this.$store.commit("setExamLoadId",params.id);
+        this.$router.push({
+          name:'pressLoad'
         })
       }
     },

@@ -1,5 +1,10 @@
 <style scoped="scoped">
   .view{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: #fff;
     display: flex;
     display: -webkit-flex;
@@ -8,13 +13,26 @@
   }
   .topBox{
     height: 1.46rem;
-    background-color: black;
+    background-color: #191e29;
+    position: relative;
   }
   .topTitle{
     color: #fff;
     height: 1.46rem;
     line-height: 1.46rem;
     text-align: center;
+  }
+  .topLogo{
+    height: 1.46rem;
+    position: absolute;
+    top: 0;
+    right: 0.2rem;
+    background-image: url(../styles/images/logo01.jpg);
+    background-repeat: no-repeat;
+    width: 2rem;
+    -webkit-background-size: 2rem auto;
+    background-size: 2rem auto;
+    background-position: center center;
   }
   .contentBox{
     overflow-y: scroll;
@@ -35,7 +53,7 @@
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
     text-indent: 0.2rem;
-    height: 0.37rem;
+    /*height: 0.37rem;*/
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
   }
@@ -161,17 +179,18 @@
     -moz-border-radius: 100%;
     border-radius: 100%;
   }
+  .colorGray{
+    color: gray;
+  }
 </style>
 
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="topTitle font-h3">教育在线</div>
-    </div>
+    <Header :title="'教育在线网'" :hasBack="false" ref="top"></Header>
     <div class="contentBox" ref="mid">
       <div class="banner" v-tap="{methods:toBaidu}"></div>
       <div class="content">
-        <div class="title font-t2">精准·高校·院校搜索</div>
+        <div class="title font-t2"><p>精准高效教育信息 · 数据 · 服务</p><p class="colorGray">School·College·University</p></div>
         <div class="line"></div>
         <div class="flexBox">
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'school'}">
@@ -210,35 +229,32 @@
           </div>
         </div>
       </div>
-      <!--<div class="content">-->
-        <!--<div class="title font-t2">新闻推荐</div>-->
-        <!--<div class="more font-t2" v-tap="{methods:toOtherPage,pageName:'news'}">更多新闻></div>-->
-        <!--<div class="line"></div>-->
-        <!--<div class="para">-->
-          <!--<div class="la">-->
-          <!--</div>-->
-          <!--<div class="text">-->
-            <!--<div class="listText font-t3"><span class="lala"></span>教育部：近五年已有约231万留学生学成归国</div>-->
-            <!--<div class="listText font-t3"><span class="lala"></span>清华大学自主招生为何那么“重体育”</div>-->
-            <!--<div class="listText font-t3"><span class="lala"></span>转变发展理念促进研究生教育内涵式发展——国务院学位办、教育部研究生司负责人答记者问</div>-->
-            <!--<div class="listText font-t3"><span class="lala"></span>最新调查显示：这拨大学生不到两成想当科学家</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="content">
+        <div class="title font-t2">新闻推荐</div>
+        <div class="more font-t2" v-tap="{methods:toOtherPage,pageName:'news'}">更多新闻></div>
+        <div class="line"></div>
+        <div class="para">
+          <div class="la">
+          </div>
+          <div class="text">
+            <div class="listText font-t3" v-for="item in news"><span class="lala"></span>{{item.title}}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer" ref="foot">
       <div class="menuBox">
         <div class="menuIcon"></div>
         <div class="menuTitle font-t3">首页</div>
       </div>
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'news'}">
-        <div class="menuIcon news_w"></div>
-        <div class="menuTitle font-t3">新闻</div>
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+        <div class="menuIcon school_w"></div>
+        <div class="menuTitle font-t3">智能择校</div>
       </div>
-      <!--<div class="menuBox">-->
-        <!--<div class="menuIcon school_w"></div>-->
-        <!--<div class="menuTitle font-t3">智能择校</div>-->
-      <!--</div>-->
+      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+        <div class="menuIcon news_w"></div>
+        <div class="menuTitle font-t3">同学汇</div>
+      </div>
       <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">
         <div class="menuIcon mine_w"></div>
         <div class="menuTitle font-t3">我的</div>
@@ -248,14 +264,18 @@
 </template>
 
 <script>
+  import URL from '../lib/api';
   export default {
     data() {
       return {
-
+        news:""
       }
     },
     mounted() {
-      this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.getNews();
+      this.$nextTick(()=>{
+        this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight - this.$refs.top.$el.clientHeight + 'px';
+      });
     },
     methods: {
       toOtherPage(params){
@@ -288,6 +308,27 @@
           },(err)=>{
               console.log(err);
           })
+      },
+      getNews(){
+        this.$http({
+          method: 'get',
+          url: URL.news,
+          params: {},
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.$store.state.userInfo.token
+          }),
+          timeout: 5000
+        }).then((res) => {
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.news = response.data;
+          }else{
+            this.handleError(response);
+          }
+        }, (err) => {
+          console.log(err);
+        })
       }
     }
   }

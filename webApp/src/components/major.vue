@@ -95,14 +95,11 @@
 </style>
 <template>
     <div class="view">
-      <div ref="top" class="topBox">
-        <div class="back" v-tap="{methods:goBack}"></div>
-        <div class="title font-h3">找专业</div>
-      </div>
+      <Header :title="'找专业'" :hasBack="true" ref="top"></Header>
       <div class="content" ref="content">
         <div class="bannerBox">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
+            <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
               <img :src="getImgUrl(slide.imageUrl)" >
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -148,7 +145,7 @@
             }
         },
         mounted() {
-          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
           this.getMajor();
         },
         methods: {

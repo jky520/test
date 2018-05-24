@@ -68,10 +68,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">资料编辑</div>
-    </div>
+    <Header :title="'资料编辑'" :hasBack="true" ref="top"></Header>
     <div class="contentBox" ref="content">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
       <mt-field label="邮箱" placeholder="请输入邮箱" type="email" v-model="email"></mt-field>
@@ -99,7 +96,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
     },
     methods: {
 

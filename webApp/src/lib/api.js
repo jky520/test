@@ -43,7 +43,14 @@ let stg = {
   "pressDD":"http://120.24.216.26:8080/eduOnline/decompressCategory/list",
   "pressNews":"http://120.24.216.26:8080/eduOnline/relatedinfosection/getDecompressRelatedInfo",
   "schoolVideo":"http://120.24.216.26:8080/eduOnline/videoinfo/",
-  "getVideo":"http://120.24.216.26:8080/eduOnline/videoinfo/"
+  "getVideo":"http://120.24.216.26:8080/eduOnline/videoinfo/",
+  "examDetail":"http://120.24.216.26:8080/eduOnline/exam/getExamInfo/",
+  "examLoad":"http://120.24.216.26:8080/eduOnline/relatedinfo/",
+  "getExerciseAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getExerciseAll",
+  "getFoodAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getFoodAll",
+  "getThankfulAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getThankfulAll",
+  "getXuanXieAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getXuanXieAll",
+  "getGameAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getGameAll",
 };
 
 let prd = {

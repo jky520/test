@@ -123,10 +123,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">试题库</div>
-    </div>
+    <Header :title="'试题库'" :hasBack="true" ref="top"></Header>
     <div class="banner" ref="ban">
       <swiper :options="swiperOption">
         <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide.id">
@@ -173,7 +170,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.ban.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.getCategoryList();
     },
     methods: {

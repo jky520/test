@@ -40,10 +40,7 @@
 </style>
 <template>
     <div class="view">
-      <div ref="top" class="topBox">
-        <div class="back" v-tap="{methods:goBack}"></div>
-        <div class="title font-h3">学校地址</div>
-      </div>
+      <Header :title="'学校地址'" :hasBack="true" ref="top"></Header>
       <div class="bdMap" id="bdMap" ref="bdMap"></div>
     </div>
 </template>
@@ -63,7 +60,7 @@
             renderOptions:{map: map}
           });
           local.search(this.$store.state.searchName);
-          this.$refs.bdMap.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight + 'px';
+          this.$refs.bdMap.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
         },
         methods: {}
     }

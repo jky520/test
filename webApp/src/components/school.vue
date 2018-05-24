@@ -119,13 +119,13 @@
     width: 100%;
     height: 100%;
   }
+  .colorRed{
+    color: red;
+  }
 </style>
 <template>
     <div class="view">
-      <div ref="top" class="topBox">
-        <div class="back" v-tap="{methods:goBack}"></div>
-        <div class="title font-h3">找学校</div>
-      </div>
+      <Header :title="'找学校'" :hasBack="true" ref="top"></Header>
       <div class="content" ref="content">
         <div class="bannerBox">
           <swiper :options="swiperOption">
@@ -137,14 +137,14 @@
         </div>
         <div class="title2 font-t2">国内院校</div>
         <div class="listBox">
-          <div class="list font-t4" v-for="(item,index) in schoolType" v-if="item.category === 0" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
+          <div class="list font-t4 colorRed" v-for="(item,index) in schoolType" v-if="item.category === 0" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="listBox">
           <div class="list2 font-t3" v-for="(item,index) in schoolType" v-if="item.category === 1" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="title2 font-t2">海外院校</div>
         <div class="listBox">
-          <div class="list2 font-t3" v-for="(item,index) in schoolType" v-if="item.category === 2" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
+          <div class="list2 font-t2" v-for="(item,index) in schoolType" v-if="item.category === 2" v-tap="{methods:searchSchool,category:item.category,id:item.id}">{{item.name}}</div>
         </div>
         <div class="title2 font-t2">留学</div>
         <div class="lx">
@@ -203,7 +203,7 @@
         },
         mounted() {
           this.getSchool();
-          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
         },
         methods: {
           getSchool(){

@@ -65,10 +65,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">留学</div>
-    </div>
+    <Header :title="'留学'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title3 font-t1">{{pageData.title}}</div>
       <div class="bannerBox" v-tap="{methods:toBaidu}">
@@ -91,7 +88,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.studyloadid = this.$store.state.studyloadid;
       this.studyLoad();
     },

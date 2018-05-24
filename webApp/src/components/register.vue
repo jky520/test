@@ -106,10 +106,7 @@
 
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">注册</div>
-    </div>
+    <Header :title="'注册'" :hasBack="true" ref="top"></Header>
     <div class="register">
       <div class="username">
         <div class="uText font-h3">帐号</div>

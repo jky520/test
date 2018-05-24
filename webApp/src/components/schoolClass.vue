@@ -79,10 +79,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">学校视频课程</div>
-    </div>
+    <Header :title="'学校视频课程'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="videoBox">
         <div class="item" v-for="item in videoList" v-tap="{methods:toVideo,id:item.id}">
@@ -110,7 +107,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.schoolId = this.$store.state.schoolId;
       this.getSchoolDetail();
     },

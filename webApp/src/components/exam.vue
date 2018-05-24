@@ -133,22 +133,19 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">考试信息</div>
-    </div>
+    <Header :title="'考试信息'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="title2 font-t2">找留学机构</div>
+      <div class="title2 font-t2">考试详解</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr">{{item.name}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
       <p class="tishi font-t2">{{tishi}}</p>
       <div class="title2 font-t2">相关资讯</div>
@@ -157,7 +154,7 @@
         <div class="lxBanner" v-tap="{methods:toOther,url:item.link}">
           <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0">
+        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0" v-tap="{methods:toLoad,id:item.id}">
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item2.themb)">
           </div>
@@ -196,7 +193,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.getSlide();
       this.examList();
       this.getExamRelatedInfo();
@@ -289,6 +286,18 @@
       },
       toOther(params){
         this.toURL(params.url);
+      },
+      toDetail(params){
+        this.$store.commit("setExamId",params.id);
+        this.$router.push({
+          name:'examDetail'
+        });
+      },
+      toLoad(params){
+        this.$store.commit("setExamLoadId",params.id);
+        this.$router.push({
+          name:'examLoad'
+        })
       }
     },
     components:{

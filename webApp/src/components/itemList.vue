@@ -67,10 +67,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">试题列表</div>
-    </div>
+    <Header :title="'试题列表'" :hasBack="true" ref="top"></Header>
     <div class="contentBox" ref="content">
       <div class="itemList" v-for="item in itemList">
         <div class="itemText font-t2">{{item.title}}</div>
@@ -92,7 +89,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.pId = this.$store.state.itemPid;
       this.getItemList();
     },

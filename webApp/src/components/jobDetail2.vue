@@ -108,10 +108,7 @@
 </style>
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="back" v-tap="{methods:goBack}"></div>
-      <div class="title font-h3">招聘信息</div>
-    </div>
+    <Header :title="'招聘信息'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title2 font-t2">关注</div>
       <div class="newsBox" v-for="item in news">
@@ -152,7 +149,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.cityId = this.$store.state.jobCityId;
       this.categoryId = this.$store.state.jobCategoryId;
       this.getInfo();

@@ -118,9 +118,7 @@
 
 <template>
   <div class="view">
-    <div ref="top" class="topBox">
-      <div class="title font-h3">新闻</div>
-    </div>
+    <Header :title="'新闻'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
@@ -147,24 +145,24 @@
         </div>
       </div>
     </div>
-    <div class="footer" ref="foot">
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'index'}">
-        <div class="menuIcon"></div>
-        <div class="menuTitle font-t3">首页</div>
-      </div>
-      <div class="menuBox">
-        <div class="menuIcon news_w"></div>
-        <div class="menuTitle font-t3">新闻</div>
-      </div>
-      <!--<div class="menuBox">-->
-        <!--<div class="menuIcon school_w"></div>-->
-        <!--<div class="menuTitle font-t3">智能择校</div>-->
+    <!--<div class="footer" ref="foot">-->
+      <!--<div class="menuBox" v-tap="{methods:toOtherPage,pageName:'index'}">-->
+        <!--<div class="menuIcon"></div>-->
+        <!--<div class="menuTitle font-t3">首页</div>-->
       <!--</div>-->
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">
-        <div class="menuIcon mine_w"></div>
-        <div class="menuTitle font-t3">我的</div>
-      </div>
-    </div>
+      <!--<div class="menuBox">-->
+        <!--<div class="menuIcon news_w"></div>-->
+        <!--<div class="menuTitle font-t3">新闻</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;<div class="menuBox">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="menuIcon school_w"></div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="menuTitle font-t3">智能择校</div>&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--<div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">-->
+        <!--<div class="menuIcon mine_w"></div>-->
+        <!--<div class="menuTitle font-t3">我的</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -191,7 +189,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight -this.$refs.top.clientHeight + 'px';
+      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.getNews();
     },
     methods: {
