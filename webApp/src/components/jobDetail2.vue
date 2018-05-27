@@ -15,37 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
-  }
-  .bannerBox{
-    height: 5rem;
-    width: 10rem;
-  }
-  .bannerBox img{
-    width: 100%;
-    height: 100%;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .title2{
     font-weight: bold;
@@ -54,29 +25,6 @@
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
     height: 0.37rem;
-  }
-  .listBox{
-    width: 9rem;
-    margin: 0 auto;
-    padding: 0 0.5rem;
-  }
-  .listBox:after{
-    content: ' ';
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    display: block;
-    clear: both;
-  }
-  .list2{
-    background: #f4f4f4;
-    float: left;
-    padding: 0 0.2rem;
-    height: 0.7rem;
-    line-height: 0.7rem;
-    margin: 0.1rem 0.1rem;
-    text-align: center;
   }
   .newsBox{
     border-top: 0.05rem solid #eeeeee;

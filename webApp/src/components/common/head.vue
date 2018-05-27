@@ -12,19 +12,6 @@
     text-align: center;
   }
 
-  .topLogo {
-    height: 1.46rem;
-    position: absolute;
-    top: 0;
-    right: 0.2rem;
-    background-image: url(../../styles/images/logo01.jpg);
-    background-repeat: no-repeat;
-    width: 2rem;
-    -webkit-background-size: 2rem auto;
-    background-size: 2rem auto;
-    background-position: center center;
-  }
-
   .back {
     width: 2rem;
     height: 1.46rem;
@@ -42,7 +29,6 @@
     <div ref="top" class="topBox">
       <div class="back" v-if="hasBack" v-tap="{methods:goBack}"></div>
       <div class="topTitle font-h3">{{title}}</div>
-      <div class="topLogo"></div>
     </div>
 </template>
 

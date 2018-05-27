@@ -15,29 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .title2{
     line-height: 1rem;
@@ -56,6 +35,7 @@
       <div class="title2 font-h3">{{pageData.title}}</div>
       <div class="title2 font-t3">{{source}} {{date}}</div>
       <div class="context" ref="context"></div>
+      <Review :type="6" :objId="$store.state.jobLoadId"></Review>
     </div>
   </div>
 </template>
@@ -72,7 +52,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.oversearLoadId = this.$store.state.jobLoadId;
       this.studyLoad();
     },

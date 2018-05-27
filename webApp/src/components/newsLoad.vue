@@ -35,7 +35,7 @@
       <div class="title2 font-h3">{{pageData.title}}</div>
       <div class="title2 font-t3">{{source}} {{date}}</div>
       <div class="context" ref="context"></div>
-      <Review :type="4" :objId="$store.state.examLoadId"></Review>
+      <Review :type="8" :objId="$store.state.examLoadId"></Review>
     </div>
   </div>
 </template>
@@ -47,12 +47,11 @@
       return {
         examLoadId:0,
         pageData:{},
-        date:0,
+        date:'无数据',
         source:''
       }
     },
     mounted() {
-      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.examLoadId = this.$store.state.examLoadId;
       this.studyLoad();
     },

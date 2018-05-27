@@ -15,29 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .bannerBox{
     height: 5rem;
@@ -63,12 +42,14 @@
     width: 1.6rem;
     height: 1.6rem;
     border-radius:100%;
-    background-color: #f4f4f4;
+    /*background-color: #f4f4f4;*/
     float: left;
     margin: 0.2rem 0.2rem;
     text-align: center;
     line-height: 1.6rem;
     color: #b13c3c;
+    border: 1px solid red;
+    box-sizing: border-box;
   }
   .listBox:after{
     content: ' ';
@@ -149,12 +130,12 @@
         <div class="title2 font-t2">留学</div>
         <div class="lx">
           <div class="lxBox" v-for="item in study" v-tap="{methods:studyLoad,id:item.id}">
-            <div class="lxImg">
-              <img :src="getImgUrl(item.image)">
-            </div>
             <div class="lxIntro">
               <div class="lxTitle font-h3">{{item.title}}</div>
               <div class="lxText font-t2">{{item.brief}}</div>
+            </div>
+            <div class="lxImg">
+              <img :src="getImgUrl(item.image)">
             </div>
           </div>
         </div>
@@ -164,12 +145,12 @@
             <img :src="getImgUrl(train[0].image)">
           </div>
           <div class="lxBox" v-for="(item,index) in train" v-if="index >= 1" v-tap="{methods:trainLoad,id:item.id}">
-            <div class="lxImg">
-              <img :src="getImgUrl(item.image)">
-            </div>
             <div class="lxIntro">
               <div class="lxTitle font-h3">{{item.title}}</div>
               <div class="lxText font-t2">{{item.desctiption}}</div>
+            </div>
+            <div class="lxImg">
+              <img :src="getImgUrl(item.image)">
             </div>
           </div>
         </div>
@@ -203,7 +184,7 @@
         },
         mounted() {
           this.getSchool();
-          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+          // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
         },
         methods: {
           getSchool(){

@@ -14,31 +14,10 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
-  }
   .contentBox{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .itemList{
     display: flex;
@@ -50,6 +29,9 @@
     padding:0 0.5rem;
     margin: 0 auto;
     background-color: #fff;
+  }
+  .itemList:nth-child(2n){
+    background:#c8c8c8;
   }
   .contentBox:nth-child(2){
     background-color: #f4f4f4;
@@ -89,7 +71,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.pId = this.$store.state.itemPid;
       this.getItemList();
     },

@@ -14,46 +14,18 @@
     justify-content: space-between;
   }
   .content{
+    padding: 0 0.5rem;
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1;
   }
   .bannerBox{
     height: 5rem;
-    width: 10rem;
+    width: 9rem;
   }
   .bannerBox img{
     width: 100%;
     height: 100%;
-  }
-  .title2{
-    font-weight: bold;
-    border-left: 0.2rem solid #c13c3d;
-    text-indent: 0.2rem;
-    margin: 0.53rem 0.44rem 0.25rem 0.44rem;
-    display: inline-block;
-    height: 0.37rem;
   }
   .title3{
     font-weight: bold;
@@ -74,6 +46,7 @@
       <div ref="pageContent">
 
       </div>
+      <Review :type="9" :objId="$store.state.studyloadid"></Review>
     </div>
   </div>
 </template>
@@ -88,7 +61,6 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.studyloadid = this.$store.state.studyloadid;
       this.studyLoad();
     },

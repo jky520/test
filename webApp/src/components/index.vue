@@ -11,35 +11,14 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .topBox{
-    height: 1.46rem;
-    background-color: #191e29;
-    position: relative;
-  }
-  .topTitle{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
-  }
-  .topLogo{
-    height: 1.46rem;
-    position: absolute;
-    top: 0;
-    right: 0.2rem;
-    background-image: url(../styles/images/logo01.jpg);
-    background-repeat: no-repeat;
-    width: 2rem;
-    -webkit-background-size: 2rem auto;
-    background-size: 2rem auto;
-    background-position: center center;
-  }
   .contentBox{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .content{
     overflow: hidden;
-    height: 7rem;
+    height: 10.5rem;
   }
   .banner{
     height: 5rem;
@@ -53,7 +32,7 @@
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
     text-indent: 0.2rem;
-    /*height: 0.37rem;*/
+    height: 0.37rem;
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
   }
@@ -118,7 +97,7 @@
   }
   .footer{
     height: 1.3rem;
-    background-color: black;
+    background-color: #191e29;
     color: #fff;
     display: flex;
     display: -webkit-flex;
@@ -182,11 +161,30 @@
   .colorGray{
     color: gray;
   }
+  .topBox {
+    height: 1.46rem;
+    background-color: #191e29;
+    position: relative;
+  }
+  .topLogo {
+    height: 1.46rem;
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    background-image: url(../styles/images/logo01.jpg);
+    background-repeat: no-repeat;
+    width: 5rem;
+    -webkit-background-size: auto 1.46rem;
+    background-size: auto 1.46rem;
+    background-position: left center;
+  }
 </style>
 
 <template>
   <div class="view">
-    <Header :title="'教育在线网'" :hasBack="false" ref="top"></Header>
+    <div class="topBox">
+      <div class="topLogo"></div>
+    </div>
     <div class="contentBox" ref="mid">
       <div class="banner" v-tap="{methods:toBaidu}"></div>
       <div class="content">
@@ -213,7 +211,7 @@
         <div class="flexBox">
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'skill'}">
             <div class="typeIcon search5"></div>
-            <div class="typeTitle font-t3">技术培训</div>
+            <div class="typeTitle font-t3">技能培训</div>
           </div>
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'job'}">
             <div class="typeIcon search6"></div>
@@ -221,11 +219,29 @@
           </div>
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'exam'}">
             <div class="typeIcon search7"></div>
-            <div class="typeTitle font-t3">各种考试</div>
+            <div class="typeTitle font-t3">各类考试</div>
           </div>
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'pressure'}">
             <div class="typeIcon search8"></div>
             <div class="typeTitle font-t3">减压空间</div>
+          </div>
+        </div>
+        <div class="flexBox">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+            <div class="typeIcon"></div>
+            <div class="typeTitle font-t3">院校排名</div>
+          </div>
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+            <div class="typeIcon"></div>
+            <div class="typeTitle font-t3">同学汇</div>
+          </div>
+          <div class="typeBox">
+            <div class=""></div>
+            <div class="typeTitle font-t3"></div>
+          </div>
+          <div class="typeBox">
+            <div class=""></div>
+            <div class="typeTitle font-t3"></div>
           </div>
         </div>
       </div>
@@ -237,7 +253,7 @@
           <div class="la">
           </div>
           <div class="text">
-            <div class="listText font-t3" v-for="item in news"><span class="lala"></span>{{item.title}}</div>
+            <div class="listText font-t3" v-for="item in news" v-tap="{methods:toLoad,id:item.id}"><span class="lala"></span>{{item.title}}</div>
           </div>
         </div>
       </div>
@@ -273,9 +289,6 @@
     },
     mounted() {
       this.getNews();
-      this.$nextTick(()=>{
-        this.$refs.mid.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight - this.$refs.top.$el.clientHeight + 'px';
-      });
     },
     methods: {
       toOtherPage(params){
@@ -293,7 +306,7 @@
             },
             responseType:'json',
             headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-                token:this.$store.state.userinfo.token
+                token:this.$store.state.userInfo.token
             }),
             timeout: 5000
           }).then((res)=>{
@@ -328,6 +341,12 @@
           }
         }, (err) => {
           console.log(err);
+        })
+      },
+      toLoad(params){
+        this.$store.commit("setExamLoadId",params.id);
+        this.$router.push({
+          name:'newsLoad'
         })
       }
     }

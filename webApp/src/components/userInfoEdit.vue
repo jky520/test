@@ -14,31 +14,9 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
-  }
   .contentBox{
-
+    -webkit-box-flex: 1;
+    flex: 1;
   }
   .items span{
     padding-top: 0.2rem;
@@ -96,7 +74,6 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
     },
     methods: {
 

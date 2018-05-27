@@ -15,29 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1;
   }
   .bannerBox{
     height: 5rem;
@@ -109,6 +88,9 @@
   .rightInfo{
     width: 7rem;
   }
+  .rightInfo .oneLine{
+    text-indent: 0.1rem
+  }
   .oneLine{
     font-size: 0.3rem;
     text-indent: 0.5rem;
@@ -168,7 +150,7 @@
   .list2{
     background: #f4f4f4;
     float: left;
-    padding: 0 0.2rem;
+    padding: 0 0.4rem;
     height: 0.7rem;
     line-height: 0.7rem;
     margin: 0.1rem 0.1rem;
@@ -206,7 +188,12 @@
     height: 1.5rem;
   }
   .colorRed{
-    color: red;
+    color: red !important;
+  }
+  .guanzhu{
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
   }
 </style>
 <template>
@@ -223,8 +210,9 @@
           </div>
           <div class="name">
             <span class="en colorRed font-t3">{{schoolInfo.english}}</span>
-            <span class="zh font-d2">{{schoolInfo.name}}</span>
+            <span class="zh font-h3">{{schoolInfo.name}}</span>
           </div>
+          <div class="guanzhu font-t3">{{attentioncount}}人关注</div>
         </div>
       </div>
       <div class="bannerBox">
@@ -282,8 +270,8 @@
           <div  class="oneLine twoLine">官网:</div>
         </div>
         <div class="rightInfo">
-          <div  class="oneLine twoLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">北京市XX区XX路 <span class="gps"></span></div>
-          <div  class="oneLine twoLine">13312345678</div>
+          <div  class="oneLine twoLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">北京市海淀区颐和园路5号<span class="gps"></span></div>
+          <div  class="oneLine twoLine"><a href="tel:13312345678">13312345678</a></div>
           <div  class="oneLine twoLine">www.baidu.com</div>
         </div>
       </div>
@@ -329,11 +317,12 @@
         degreeText:'',
         nature:'',
         faculty:[],
-        major:[]
+        major:[],
+        attentioncount:0
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.schoolId = this.$store.state.schoolId;
       this.getSchoolDetail();
       this.getNature()
@@ -352,7 +341,7 @@
           method:'get',
           url:URL.schoolDetail+this.schoolId+"/schoolInformation",
           params:{},
-          responseType:'stream',
+          responseType:'json',
           timeout: 5000
         }).then((res)=>{
           let response = res.data;
@@ -363,6 +352,7 @@
             this.faculty = response.data.faculty;
             this.major = response.data.major;
             this.image = response.data.image;
+            this.attentioncount = response.data.attentioncount;
             let str = '';
             for(let i = 0;i<5;i++){
               if(i == 4){

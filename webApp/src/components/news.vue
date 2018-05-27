@@ -8,6 +8,8 @@
   }
   .content{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .bannerBox{
     height: 5rem;
@@ -17,48 +19,9 @@
     width: 100%;
     height: 100%;
   }
-  .footer{
-    height: 1.3rem;
-    background-color: black;
-    color: #fff;
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-  }
+
   .list span{
     display: inline-block;
-  }
-  .menuBox{
-    width:25%;
-    text-align: center;
-  }
-  .menuIcon{
-    background-image: url(../styles/images/icon_home_red.png);
-    background-repeat:no-repeat;
-    background-position: center center;
-    -webkit-background-size:.46rem;
-    background-size:.46rem;
-    height:0.84rem;
-  }
-  .news_w{
-    background-image: url(../styles/images/icon_news_w.png);
-  }
-  .school_w{
-    background-image: url(../styles/images/icon_school_w.png);
-  }
-  .mine_w{
-    background-image: url(../styles/images/icon_mine_w.png);
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
   }
   .title2{
     font-weight: bold;
@@ -67,17 +30,6 @@
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
     height: 0.37rem;
-  }
-  .newsTime{
-    color: #fff;
-    text-align: center;
-    padding: 0.1rem 0.5rem;
-    background-color: #cccccc;
-    margin: 0 auto;
-    -webkit-border-radius: 1rem;
-    -moz-border-radius: 1rem;
-    border-radius: 1rem;
-    display: inline-block;
   }
   .lxImg{
     width: 2.2rem;
@@ -97,19 +49,10 @@
     margin: 0.2rem;
     text-align: left;
   }
-  .lxText{
+  .lxText {
     margin-top: 0.2rem;
     line-height: 0.6rem;
     color: #555;
-  }
-  .lxBanner{
-    width: 9.4rem;
-    height: 5rem;
-    margin: 0.3rem auto 0 auto;
-  }
-  .lxBanner img{
-    width: 100%;
-    height: 100%;
   }
   .newsBox{
     text-align: center;
@@ -134,7 +77,7 @@
         <!--<div class="lxBanner">-->
           <!--<img src="../styles/images/icon_banner.jpg">-->
         <!--</div>-->
-        <div class="lxBox" v-for="item in news">
+        <div class="lxBox" v-for="item in news" v-tap="{methods:toLoad,id:item.id}">
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item.themb)">
           </div>
@@ -189,7 +132,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.getNews();
     },
     methods: {
@@ -217,6 +160,12 @@
           }
         }, (err) => {
           console.log(err);
+        })
+      },
+      toLoad(params){
+        this.$store.commit("setExamLoadId",params.id);
+        this.$router.push({
+          name:'newsLoad'
         })
       }
     },

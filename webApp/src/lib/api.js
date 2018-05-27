@@ -51,6 +51,12 @@ let stg = {
   "getThankfulAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getThankfulAll",
   "getXuanXieAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getXuanXieAll",
   "getGameAll":"http://120.24.216.26:8080/eduOnline/decompressMethod/getGameAll",
+  "majorCategory":"http://120.24.216.26:8080/eduOnline/majorCategory/list/",
+  "jianyaCity":"http://120.24.216.26:8080/eduOnline/decomcity/list",
+  "guanzhuList":"http://120.24.216.26:8080/eduOnline/dppf/list",
+  "pinglun":"http://120.24.216.26:8080/eduOnline/evaluatemessage/list",
+  "pinglunAdd":"http://120.24.216.26:8080/eduOnline/evaluatemessage/add",
+  "praise":"http://120.24.216.26:8080/eduOnline/evaluatemessage/praise/"
 };
 
 let prd = {

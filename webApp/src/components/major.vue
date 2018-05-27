@@ -15,29 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .bannerBox{
     height: 5rem;
@@ -82,7 +61,7 @@
     top: 0.3rem;
     width: 0.15rem;
     height: 0.15rem;
-    background-color: red;
+    background-color: rgb(73, 119, 181);
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;
@@ -90,6 +69,7 @@
   .listText{
     width: 8rem;
     line-height: 0.8rem;
+    color: #082b65;
     position: relative;
   }
 </style>
@@ -105,14 +85,15 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <!--<div class="title2 font-t2">专业类别选择</div>-->
-        <!--<div class="para">-->
-          <!--<div class="la">-->
-          <!--</div>-->
-          <!--<div class="text">-->
-            <!--<div class="listText font-t3" v-for="item in marjorArr"><span class="lala"></span>{{item}}</div>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="title2 font-t2">专业类别选择</div>
+        <div class="para">
+          <div class="la">
+          </div>
+          <div class="text">
+            <div class="listText font-t1" v-for="item in marjorArr" v-tap="{methods:toDetail,id:item.id}">
+              <span class="lala"></span>{{item.name}}</div>
+          </div>
+        </div>
         <div class="title2 font-t2">热点推荐</div>
         <div class="hot">
           <div class="hotList font-t2" v-for="item in hot" v-tap="{methods:toHotPage,id:item.idx}">{{item.title}}</div>
@@ -140,12 +121,23 @@
                 apeed:500
               },
               swiperSlides: [],
-              marjorArr:['专科专业','本科专业','研究生专业','海外院校专业'],
+              marjorArr:[{
+                "name":"专科专业",
+                "id":"0"
+              },{
+                "name":"本科专业",
+                "id":"1"
+              },{
+                "name":"研究生专业",
+                "id":"2"
+              },{
+                "name":"海外院校专业",
+                "id":"3"
+              }],
               hot:[]
             }
         },
         mounted() {
-          this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
           this.getMajor();
         },
         methods: {
@@ -176,6 +168,12 @@
             this.$router.push({
               name:'hotR'
             });
+          },
+          toDetail(params){
+            this.$store.commit("setMajorId",params.id);
+            this.$router.push({
+              name:'majorSearch'
+            })
           }
         },
         components:{

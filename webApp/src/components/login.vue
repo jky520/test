@@ -106,7 +106,7 @@
 
 <template>
   <div class="view">
-    <Header :title="'登录'" :hasBack="false" ref="top"></Header>
+    <Header :title="'登录'" :hasBack="false"></Header>
     <div class="loginBox">
       <div class="username">
         <div class="uText font-h3">帐号</div>

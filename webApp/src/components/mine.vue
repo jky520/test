@@ -1,6 +1,11 @@
 <style scoped="scoped">
   .view{
     background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -8,10 +13,12 @@
   }
   .contentBox{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .footer{
     height: 1.3rem;
-    background-color: black;
+    background-color: #191e29;
     color: #fff;
     display: flex;
     display: -webkit-flex;
@@ -88,13 +95,30 @@
     right:0.3rem;
     color: #666666;
   }
+  .topBox {
+    height: 1.46rem;
+    background-color: #191e29;
+    position: relative;
+  }
+  .topLogo {
+    height: 1.46rem;
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    background-image: url(../styles/images/logo01.jpg);
+    background-repeat: no-repeat;
+    width: 5rem;
+    -webkit-background-size: auto 1.46rem;
+    background-size: auto 1.46rem;
+    background-position: left center;
+  }
 </style>
 
 <template>
   <div class="view">
     <div class="contentBox" ref="content">
-      <div ref="top" class="topBox">
-        <div class="title font-h3">个人资料</div>
+      <div class="topBox">
+        <div class="topLogo"></div>
       </div>
       <div class="infoHead">
         <div class="userHead" v-tap="{methods:toBaidu}">
@@ -162,7 +186,9 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight + 'px';
+      this.$nextTick(()=>{
+        // this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight+ 'px';
+      });
     },
     methods: {
       toOtherPage(params){

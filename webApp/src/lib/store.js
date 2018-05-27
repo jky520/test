@@ -22,7 +22,8 @@ const store = new Vuex.Store({
     searchName:'',
     videoId:0,
     examId:1,
-    examLoadId:0
+    examLoadId:0,
+    majorId:0
   },
   mutations: {
     setUserInfo(state,userInfo){
@@ -84,6 +85,9 @@ const store = new Vuex.Store({
     },
     setExamLoadId(state,id){
       state.examLoadId = id;
+    },
+    setMajorId(state,id){
+      state.majorId = id;
     }
   },
   getters: {

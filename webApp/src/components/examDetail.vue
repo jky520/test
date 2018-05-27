@@ -15,6 +15,8 @@
   }
   .content{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
 
   .bannerBox{
@@ -141,7 +143,7 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
+      // this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.examDetail();
     },
     methods: {

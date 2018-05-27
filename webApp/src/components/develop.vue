@@ -16,7 +16,7 @@
   }
   .footer{
     height: 1.3rem;
-    background-color: black;
+    background-color: #191e29;
     color: #fff;
     display: flex;
     display: -webkit-flex;
@@ -43,10 +43,29 @@
   .mine_w{
     background-image: url(../styles/images/icon_mine_w.png);
   }
+  .topBox {
+    height: 1.46rem;
+    background-color: #191e29;
+    position: relative;
+  }
+  .topLogo {
+    height: 1.46rem;
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    background-image: url(../styles/images/logo01.jpg);
+    background-repeat: no-repeat;
+    width: 5rem;
+    -webkit-background-size: auto 1.46rem;
+    background-size: auto 1.46rem;
+    background-position: left center;
+  }
 </style>
 <template>
     <div class="view">
-      <Header :title="'建设中'" :hasBack="false" ref="top"></Header>
+      <div class="topBox">
+        <div class="topLogo"></div>
+      </div>
       <p class="font-h1">建设中......</p>
       <div class="footer" ref="foot">
         <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'index'}">

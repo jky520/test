@@ -15,29 +15,8 @@
   }
   .content{
     overflow-y: scroll;
-  }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .bannerBox{
     height: 5rem;
@@ -137,7 +116,7 @@
       <div class="bannerBox">
         <swiper :options="swiperOption">
           <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
-            <img src="../styles/images/icon_banner.jpg" >
+            <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -156,7 +135,7 @@
         <div class="lxBanner" v-tap="{methods:toBaidu}">
           <img :src="getImgUrl(item.img_url)">
         </div>
-        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0" v-tap="{methods:toLoad,id:item.id}">
+        <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0" v-tap="{methods:toLoad,id:item2.id}">
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item2.themb)">
           </div>
@@ -188,13 +167,12 @@
           },
           apeed:500
         },
-        swiperSlides: [1, 2, 3],
+        swiperSlides: [],
         areaArr:['厌学','逆反','网瘾','早恋','敏感多疑','自卑','性格孤僻','胆小懦弱','自闭症','妒忌心强','偷东西','情绪调节','考试焦虑','孤独症','自我认知','考前心理辅导'],
         news:[]
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
       this.getJianyaImg();
       this.pressDD();
       this.pressNews();
@@ -208,12 +186,11 @@
           responseType:'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.$store.state.userInfo.token
-          }),
-          timeout: 5000
+          })
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
-
+            this.swiperSlides = response.data;
           }else{
             this.handleError(response)
           }

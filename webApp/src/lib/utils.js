@@ -16,6 +16,14 @@ export default{
     };
     Vue.prototype.toBaidu = function(){
       location.href = "http://www.baidu.com";
-    }
+    };
+    Vue.prototype.toNumber = function(num,n) {
+      let len = num.toString().length;
+      while(len < n) {
+        num = "0" + num;
+        len++;
+      }
+      return num;
+    };
   }
 }

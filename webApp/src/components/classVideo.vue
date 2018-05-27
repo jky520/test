@@ -15,6 +15,8 @@
   }
   .content{
     overflow-y: scroll;
+    -webkit-box-flex: 1;
+    flex: 1
   }
   .topBox{
     height: 1.46rem;
@@ -63,6 +65,7 @@
         <div class="videoTitle font-h2">{{videoinfo.name}}</div>
         <!--<p class="info">{{videoinfo.brief}}</p>-->
       </div>
+      <Review :type="1" :objId="$store.state.videoId"></Review>
     </div>
   </div>
 </template>
@@ -78,7 +81,6 @@
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
       this.videoId = this.$store.state.videoId;
       this.getVideo();
     },
@@ -88,7 +90,7 @@
           method: 'get',
           url: URL.getVideo + this.videoId + "/video",
           params: {},
-          responseType: 'stream',
+          responseType: 'json',
           timeout: 5000
         }).then((res) => {
           let response = res.data;

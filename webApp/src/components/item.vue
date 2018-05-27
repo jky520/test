@@ -14,41 +14,9 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .topBox{
-    height: 1.46rem;
-    background-color: black;
-    position: relative;
-  }
-  .back{
-    width: 2rem;
-    height: 1.46rem;
-    background-image: url("../styles/images/icon_back.png");
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-position: 0.4rem center;
-    -webkit-background-size: 0.26rem 0.4rem;
-    background-size: 0.26rem 0.4rem;
-  }
   .banner{
     height: 5rem;
     width: 10rem;
-  }
-  .title{
-    color: #fff;
-    height: 1.46rem;
-    line-height: 1.46rem;
-    text-align: center;
-  }
-  .menu1{
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height:0.85rem;
-    width: 6rem;
-    margin: 0 auto;
   }
   .menu1 div{
     text-align: center;

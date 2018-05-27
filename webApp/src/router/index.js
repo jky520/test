@@ -37,6 +37,8 @@ import examDetail from '@/components/examDetail';
 import examLoad from '@/components/examLoad';
 import pressureIdea from '@/components/pressureIdea';
 import pressLoad from '@/components/pressLoad';
+import newsLoad from '@/components/newsLoad';
+import majorSearch from '@/components/majorSearch';
 Vue.use(Router);
 
 export default new Router({
@@ -229,6 +231,16 @@ export default new Router({
       path: '/pressLoad',
       name: 'pressLoad',
       component: pressLoad
+    },
+    {
+      path: '/newsLoad',
+      name: 'newsLoad',
+      component: newsLoad
+    },
+    {
+      path: '/majorSearch',
+      name: 'majorSearch',
+      component: majorSearch
     },
   ]
 })
