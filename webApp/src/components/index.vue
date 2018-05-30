@@ -17,8 +17,8 @@
     flex: 1
   }
   .content{
-    overflow: hidden;
-    height: 10.5rem;
+    /*overflow: hidden;*/
+    /*height: 9rem;*/
   }
   .banner{
     height: 5rem;
@@ -48,7 +48,7 @@
   }
   .flexBox{
     width: 8.2rem;
-    margin: 0.45rem auto 0 auto;
+    margin: 0.45rem auto 0.1rem auto;
     display: flex;
     display: -webkit-flex; /* Safari */
     flex-direction:row;
@@ -178,12 +178,22 @@
     background-size: auto 1.46rem;
     background-position: left center;
   }
+  .toptitle{
+    height: 1.46rem;
+  }
+  .bgRed{
+    background: red;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
 </style>
 
 <template>
   <div class="view">
     <div class="topBox">
       <div class="topLogo"></div>
+      <div class="toptitle">&nbsp;</div>
     </div>
     <div class="contentBox" ref="mid">
       <div class="banner" v-tap="{methods:toBaidu}"></div>
@@ -228,11 +238,11 @@
         </div>
         <div class="flexBox">
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
-            <div class="typeIcon"></div>
+            <div class="typeIcon bgRed"></div>
             <div class="typeTitle font-t3">院校排名</div>
           </div>
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
-            <div class="typeIcon"></div>
+            <div class="typeIcon bgRed"></div>
             <div class="typeTitle font-t3">同学汇</div>
           </div>
           <div class="typeBox">
@@ -284,7 +294,8 @@
   export default {
     data() {
       return {
-        news:""
+        news:"",
+        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
       }
     },
     mounted() {
@@ -306,7 +317,7 @@
             },
             responseType:'json',
             headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-                token:this.$store.state.userInfo.token
+                token:this.userInfo.token
             }),
             timeout: 5000
           }).then((res)=>{
@@ -329,7 +340,7 @@
           params: {},
           responseType: 'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-            token:this.$store.state.userInfo.token
+            token:this.userInfo.token
           }),
           timeout: 5000
         }).then((res) => {
@@ -344,9 +355,11 @@
         })
       },
       toLoad(params){
-        this.$store.commit("setExamLoadId",params.id);
         this.$router.push({
-          name:'newsLoad'
+          name:'newsLoad',
+          query: {
+            id: params.id
+          }
         })
       }
     }

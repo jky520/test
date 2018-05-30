@@ -107,7 +107,8 @@
         data() {
             return {
               pList:[],
-              val:''
+              val:'',
+              userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
             }
         },
         props:['type','objId'],
@@ -127,7 +128,7 @@
               responseType:'json',
               timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-                token:this.$store.state.userInfo.token
+                token:this.userInfo.token
               })
             }).then((res)=>{
               let response = res.data;
@@ -149,7 +150,7 @@
               responseType:'json',
               timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-                token:this.$store.state.userInfo.token
+                token:this.userInfo.token
               })
             }).then((res)=>{
               let response = res.data;
@@ -175,7 +176,7 @@
               responseType:'json',
               timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-                token:this.$store.state.userInfo.token
+                token:this.userInfo.token
               })
             }).then((res)=>{
               let response = res.data;

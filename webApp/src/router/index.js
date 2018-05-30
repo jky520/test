@@ -1,44 +1,70 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+// login
+import login from '@/components/login/login';
+import register from '@/components/login/register';
+// main
 import index from '@/components/index';
-import item from '@/components/item';
-import skill from '@/components/skill';
-import school from '@/components/school';
-import major from '@/components/major';
-import overseas from '@/components/overseas';
-import news from '@/components/news';
-import job from '@/components/job';
-import exam from '@/components/exam';
-import pressure from '@/components/pressure';
 import mine from '@/components/mine';
-import userInfoEdit from '@/components/userInfoEdit';
-import search from '@/components/search';
-import login from '@/components/login';
-import register from '@/components/register';
-import schoolDetail from '@/components/schoolDetail';
-import schoolAdress from '@/components/schoolAdress';
-import studyLoad from '@/components/studyLoad';
-import trainLoad from '@/components/trainLoad';
-import schoolClass from '@/components/schoolClass';
-import hotR from '@/components/hotR';
-import itemList from '@/components/itemList';
-import studyDetail from '@/components/studyDetail';
-import schoolDepartment from '@/components/schoolDepartment';
-import overseasLoad from '@/components/overseasLoad';
-import majorDetail from '@/components/majorDetail';
-import skillLoad from '@/components/skillLoad';
-import skillDetail from '@/components/skillDetail';
-import jobLoad from '@/components/jobLoad';
-import jobDetail from '@/components/jobDetail';
-import jobDetail2 from '@/components/jobDetail2';
-import classVideo from '@/components/classVideo';
 import develop from '@/components/develop';
-import examDetail from '@/components/examDetail';
-import examLoad from '@/components/examLoad';
-import pressureIdea from '@/components/pressureIdea';
-import pressLoad from '@/components/pressLoad';
-import newsLoad from '@/components/newsLoad';
-import majorSearch from '@/components/majorSearch';
+// school
+import school from '@/components/school/school';
+import studyLoad from '@/components/school/studyLoad';
+import trainLoad from '@/components/school/trainLoad';
+import search from '@/components/school/search';
+import schoolDetail from '@/components/school/schoolDetail';
+import schoolAdress from '@/components/school/schoolAdress';
+import schoolClass from '@/components/school/schoolClass';
+import schoolDepartment from '@/components/school/schoolDepartment';
+import classVideo from '@/components/school/classVideo';
+import majorDetail from '@/components/school/majorDetail';
+import schoolIntro from '@/components/school/schoolIntro';
+// major
+import major from '@/components/major/major';
+import hotR from '@/components/major/hotR';
+import majorSearch from '@/components/major/majorSearch';
+import majorInfo from '@/components/major/majorInfo';
+//item
+import item from '@/components/item/item';
+import itemList from '@/components/item/itemList';
+import showOnline from '@/components/item/showOnline';
+
+//overseas
+import overseas from '@/components/overseas/overseas';
+import overseasLoad from '@/components/overseas/overseasLoad';
+import studyDetail from '@/components/overseas/studyDetail';
+import overseasInfo from '@/components/overseas/overseasInfo';
+
+//skill
+import skill from '@/components/skill/skill';
+import skillLoad from '@/components/skill/skillLoad';
+import skillDetail from '@/components/skill/skillDetail';
+import skillInfo from '@/components/skill/skillInfo';
+import skillDetail2 from '@/components/skill/skillDetail2';
+import skillDetail3 from '@/components/skill/skillDetail3';
+
+//job
+import job from '@/components/job/job';
+import jobLoad from '@/components/job/jobLoad';
+import jobDetail from '@/components/job/jobDetail';
+import jobDetail2 from '@/components/job/jobDetail2';
+import jobCompany from '@/components/job/jobCompany';
+//exam
+import exam from '@/components/exam/exam';
+import examLoad from '@/components/exam/examLoad';
+import examDetail from '@/components/exam/examDetail';
+//press
+import pressure from '@/components/press/pressure';
+import pressLoad from '@/components/press/pressLoad';
+import pressureIdea from '@/components/press/pressureIdea';
+import pressurePerson from '@/components/press/pressurePerson';
+import pressurePerson2 from '@/components/press/pressurePerson2';
+import personDetail from '@/components/press/personDetail';
+//news
+import news from '@/components/news/news';
+import newsLoad from '@/components/news/newsLoad';
+import userInfoEdit from '@/components/userInfoEdit';
+
 Vue.use(Router);
 
 export default new Router({
@@ -242,5 +268,60 @@ export default new Router({
       name: 'majorSearch',
       component: majorSearch
     },
+    {
+      path: '/schoolIntro',
+      name: 'schoolIntro',
+      component: schoolIntro
+    },
+    {
+      path: '/majorInfo',
+      name: 'majorInfo',
+      component: majorInfo
+    },
+    {
+      path: '/showOnline',
+      name: 'showOnline',
+      component: showOnline
+    },
+    {
+      path: '/overseasInfo',
+      name: 'overseasInfo',
+      component: overseasInfo
+    },
+    {
+      path: '/skillInfo',
+      name: 'skillInfo',
+      component: skillInfo
+    },
+    {
+      path: '/skillDetail2',
+      name: 'skillDetail2',
+      component: skillDetail2
+    },
+    {
+      path: '/skillDetail3',
+      name: 'skillDetail3',
+      component: skillDetail3
+    },
+    {
+      path: '/jobCompany',
+      name: 'jobCompany',
+      component: jobCompany
+    },
+    {
+      path: '/pressurePerson',
+      name: 'pressurePerson',
+      component: pressurePerson
+    },
+    {
+      path: '/pressurePerson2',
+      name: 'pressurePerson2',
+      component: pressurePerson2
+    },
+    {
+      path: '/personDetail',
+      name: 'personDetail',
+      component: personDetail
+    }
   ]
 })

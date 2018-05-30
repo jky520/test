@@ -186,9 +186,7 @@
       }
     },
     mounted() {
-      this.$nextTick(()=>{
-        // this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.foot.clientHeight+ 'px';
-      });
+
     },
     methods: {
       toOtherPage(params){
