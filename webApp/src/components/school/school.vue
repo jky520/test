@@ -42,14 +42,14 @@
     width: 1.6rem;
     height: 1.6rem;
     border-radius:100%;
-    /*background-color: #f4f4f4;*/
+    background-color: #f4f4f4;
     float: left;
     margin: 0.2rem 0.2rem;
     text-align: center;
     line-height: 1.6rem;
     color: #b13c3c;
-    border: 1px solid red;
-    box-sizing: border-box;
+    /*border: 1px solid red;*/
+    /*box-sizing: border-box;*/
   }
   .listBox:after{
     content: ' ';
@@ -131,7 +131,7 @@
         <div class="lx">
           <div class="lxBox" v-for="item in study" v-tap="{methods:studyLoad,id:item.id}">
             <div class="lxIntro">
-              <div class="lxTitle font-h3">{{item.title}}</div>
+              <!--<div class="lxTitle font-t2">{{item.title}}</div>-->
               <div class="lxText font-t2">{{item.brief}}</div>
             </div>
             <div class="lxImg">
@@ -146,7 +146,7 @@
           </div>
           <div class="lxBox" v-for="(item,index) in train" v-if="index >= 1" v-tap="{methods:trainLoad,id:item.id}">
             <div class="lxIntro">
-              <div class="lxTitle font-h3">{{item.title}}</div>
+              <!--<div class="lxTitle font-t2">{{item.title}}</div>-->
               <div class="lxText font-t2">{{item.desctiption}}</div>
             </div>
             <div class="lxImg">
@@ -172,7 +172,7 @@
                 autoplay: {
                   delay: 3000,
                   stopOnLastSlide: false,
-                  disableOnInteraction: true,
+                  disableOnInteraction: false,
                 },
                 apeed:500
               },
@@ -198,7 +198,6 @@
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
                 token:this.userInfo.token
               }),
-              timeout: 5000
             }).then((res)=>{
               let response = res.data;
               if(response.meta.code == "200"){

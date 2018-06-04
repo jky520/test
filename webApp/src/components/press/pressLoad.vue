@@ -34,6 +34,7 @@
     <div class="content" ref="content">
       <div class="title2 font-h3">{{pageData.title}}</div>
       <div class="title2 font-t3">{{source}} {{date}}</div>
+      <div class="bLine"></div>
       <div class="context" ref="context"></div>
       <Review :type="7" :objId="$route.query.id"></Review>
     </div>
@@ -66,7 +67,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){

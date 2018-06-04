@@ -19,6 +19,7 @@ import schoolDepartment from '@/components/school/schoolDepartment';
 import classVideo from '@/components/school/classVideo';
 import majorDetail from '@/components/school/majorDetail';
 import schoolIntro from '@/components/school/schoolIntro';
+import faculty from '@/components/school/faculty';
 // major
 import major from '@/components/major/major';
 import hotR from '@/components/major/hotR';
@@ -322,6 +323,11 @@ export default new Router({
       path: '/personDetail',
       name: 'personDetail',
       component: personDetail
+    },
+    {
+      path: '/faculty',
+      name: 'faculty',
+      component: faculty
     }
   ]
 })

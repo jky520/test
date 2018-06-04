@@ -23,7 +23,7 @@
     <div class="content" ref="context">
 
     </div>
-    <Review :type="0" :objId="$route.query.id"></Review>
+    <Review :type="0" :objId="$route.query.objId"></Review>
   </div>
 </template>
 
@@ -50,7 +50,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){

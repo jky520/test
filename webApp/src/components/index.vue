@@ -173,10 +173,10 @@
     left: 0.2rem;
     background-image: url(../styles/images/logo01.jpg);
     background-repeat: no-repeat;
-    width: 5rem;
+    width: 10rem;
     -webkit-background-size: auto 1.46rem;
     background-size: auto 1.46rem;
-    background-position: left center;
+    background-position: center center;
   }
   .toptitle{
     height: 1.46rem;
@@ -186,6 +186,32 @@
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
+  }
+  .lxImg{
+    width: 2.2rem;
+    height: 2.2rem;
+    display: inline-block;
+    margin: 0.2rem 0 0.2rem 0.2rem;
+  }
+  .lxImg img{
+    width: 100%;
+    height: 100%;
+  }
+  .lxIntro{
+    display: inline-block;
+    height: 2.5rem;
+    width: 6.7rem;
+    vertical-align: top;
+    margin: 0.2rem;
+    text-align: left;
+  }
+  .lxText {
+    margin-top: 0.2rem;
+    line-height: 0.6rem;
+    color: #555;
+  }
+  .newsBox{
+    text-align: center;
   }
 </style>
 
@@ -238,11 +264,11 @@
         </div>
         <div class="flexBox">
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
-            <div class="typeIcon bgRed"></div>
+            <div class="typeIcon"></div>
             <div class="typeTitle font-t3">院校排名</div>
           </div>
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
-            <div class="typeIcon bgRed"></div>
+            <div class="typeIcon"></div>
             <div class="typeTitle font-t3">同学汇</div>
           </div>
           <div class="typeBox">
@@ -259,11 +285,14 @@
         <div class="title font-t2">新闻推荐</div>
         <div class="more font-t2" v-tap="{methods:toOtherPage,pageName:'news'}">更多新闻></div>
         <div class="line"></div>
-        <div class="para">
-          <div class="la">
-          </div>
-          <div class="text">
-            <div class="listText font-t3" v-for="item in news" v-tap="{methods:toLoad,id:item.id}"><span class="lala"></span>{{item.title}}</div>
+        <div class="newsBox">
+          <div class="lxBox" v-for="item in news" v-tap="{methods:toLoad,id:item.id}">
+            <div class="lxIntro">
+              <div class="lxText font-t2">{{item.title}}</div>
+            </div>
+            <div class="lxImg" v-tap="{methods:toBaidu}">
+              <img :src="getImgUrl(item.themb)">
+            </div>
           </div>
         </div>
       </div>
@@ -318,8 +347,7 @@
             responseType:'json',
             headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
                 token:this.userInfo.token
-            }),
-            timeout: 5000
+            })
           }).then((res)=>{
               console.log(res);
               if(res.meta.code == "200"){
@@ -341,8 +369,7 @@
           responseType: 'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
-          }),
-          timeout: 5000
+          })
         }).then((res) => {
           let response = res.data;
           if(response.meta.code == "200"){

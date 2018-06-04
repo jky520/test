@@ -138,6 +138,7 @@
   .listBox{
     width: 10rem;
     margin: 0 auto;
+    position: relative;
   }
   .listBox:after{
     content: ' ';
@@ -191,6 +192,9 @@
   .colorRed{
     color: red !important;
   }
+  .colorRed2{
+    color: #75282C !important;
+  }
   .guanzhu{
     position: absolute;
     right: 0.5rem;
@@ -198,6 +202,15 @@
   }
   .title3{
     text-indent: 0.5rem;
+  }
+  .rank{
+    color: red;
+  }
+  .showMore{
+    position: absolute;
+    right: 0;
+    top: -0.8rem;
+    color: #8d2a2a;
   }
 </style>
 <template>
@@ -213,40 +226,32 @@
             <img src="../../styles/images/icon_class.png">
           </div>
           <div class="name">
-            <span class="en colorRed font-t3">{{school.english}}</span>
+            <span class="en colorRed2 font-t3">{{school.english}}</span>
             <span class="zh font-h3">{{school.name}}</span>
           </div>
           <div class="guanzhu font-t3">{{school.attentioncount}}人关注</div>
         </div>
       </div>
-      <div class="bannerBox">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in image" v-tap="{methods:toBaidu}" :key="index">
-            <img :src="getImgUrl(slide.image)" >
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
       <div class="schoolInfo">
         <div class="leftInfo">
-            <div class="oneLine">所属地区:</div>
-            <div  class="oneLine">成立时间:</div>
-            <div  class="oneLine">学校性质:</div>
-            <div  class="oneLine">学校类型:</div>
-            <div  class="oneLine">学历层次:</div>
-            <div  class="oneLine">教育认证:</div>
-            <div  class="oneLine">参考费用:</div>
-            <div  class="oneLine">气候特征:</div>
+          <div class="oneLine">所属地区:</div>
+          <div  class="oneLine">成立时间:</div>
+          <div  class="oneLine">学校性质:</div>
+          <div  class="oneLine">学校类型:</div>
+          <div  class="oneLine">学历层次:</div>
+          <div  class="oneLine">教育认证:</div>
+          <div  class="oneLine">参考费用:</div>
+          <div  class="oneLine">气候特征:</div>
         </div>
         <div class="rightInfo">
-            <div  class="oneLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">{{school.outsideaddr}} <span class="gps"></span></div>
-            <div  class="oneLine">{{school.formeddate}}</div>
-            <div  class="oneLine colorRed">{{nature}}</div>
-            <div  class="oneLine">{{school.custom_category}}</div>
-            <div  class="oneLine">{{degreeText}}</div>
-            <div  class="oneLine colorRed">{{school.belong}}</div>
-            <div  class="oneLine">{{school.custom_category}}</div>
-            <div  class="oneLine">{{school.air}}</div>
+          <div  class="oneLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">{{school.outsideaddr}} <span class="gps"></span></div>
+          <div  class="oneLine">{{school.formeddate}}</div>
+          <div  class="oneLine colorRed">{{nature}}</div>
+          <div  class="oneLine">{{school.custom_category}}</div>
+          <div  class="oneLine">{{degreeText}}</div>
+          <div  class="oneLine colorRed">{{school.belong}}</div>
+          <div  class="oneLine">{{school.referencefee}}</div>
+          <div  class="oneLine">{{school.air}}</div>
         </div>
       </div>
       <div class="title2 font-t2">学校简介</div>
@@ -256,7 +261,8 @@
       </div>
       <div class="title2 font-t2">学校院系</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in faculty" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
+        <div class="showMore font-t3" v-tap="{methods:toShowAll}">查看全部>></div>
+        <div class="list2 font-t3" v-for="(item,index) in faculty" v-if="index<4" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">专业设置</div>
       <div class="listBox">
@@ -276,26 +282,24 @@
         <div class="rightInfo">
           <div  class="oneLine twoLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">{{school.address}}<span class="gps"></span></div>
           <div  class="oneLine twoLine"><a :href="'tel:'+school.tel">{{school.tel}}</a></div>
-          <div  class="oneLine twoLine">{{school.url}}</div>
+          <div  class="oneLine twoLine colorRed">{{school.url}}</div>
         </div>
       </div>
       <div class="title2 font-t2">最新排名</div>
       <div class="title3 font-t2">院校</div>
-      <div class="para">
+      <div class="para" v-if="school.ranking">
         <div class="la">
         </div>
         <div class="text">
-          <div class="listText font-t3"><span class="lala"></span>2018院校排名第一</div>
-          <div class="listText font-t3"><span class="lala"></span>2018院校排名第一</div>
+          <div class="listText font-t3" v-for="(item,index) in school.ranking.schoolRanking"><span class="lala"></span><i class="rank">{{item.year}}</i>{{item.title}}-第<i class="rank">{{item.number}}</i>名</div>
         </div>
       </div>
       <div class="title3 font-t2">专业</div>
-      <div class="para">
+      <div class="para" v-if="school.ranking">
         <div class="la">
         </div>
         <div class="text">
-          <div class="listText font-t3"><span class="lala"></span>2018院校排名第一</div>
-          <div class="listText font-t3"><span class="lala"></span>2018院校排名第一</div>
+          <div class="listText font-t3" v-for="(item,index) in school.ranking.majorRanking"><span class="lala"></span><i class="rank">{{item.year}}</i>{{item.title}}-第<i class="rank">{{item.number}}</i>名</div>
         </div>
       </div>
     </div>
@@ -304,8 +308,6 @@
 
 <script>
   import URL from '../../lib/api';
-  import 'swiper/dist/css/swiper.css';
-  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   export default {
     data() {
       return {
@@ -316,7 +318,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -348,6 +350,14 @@
           }
         });
       },
+      toShowAll(){
+        this.$router.push({
+          name:'faculty',
+          query:{
+            schoolId:this.$route.query.schoolId
+          }
+        })
+      },
       getSchoolDetail(){
         this.$http({
           method:'get',
@@ -357,7 +367,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
@@ -389,7 +398,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
@@ -443,10 +451,6 @@
           }
         })
       }
-    },
-    components:{
-      swiper,
-      swiperSlide
     }
   }
 </script>

@@ -127,12 +127,12 @@
           <img :src="getImgUrl(item.img_url)">
         </div>
         <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">
+          <div class="lxIntro">
+            <!--<div class="lxTitle font-t3">{{lx.source}}</div>-->
+            <div class="lxText font-t2">{{lx.title}}</div>
+          </div>
           <div class="lxImg">
             <img :src="getImgUrl(lx.themb)">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">{{lx.source}}</div>
-            <div class="lxText font-t2">{{lx.title}}</div>
           </div>
         </div>
       </div>
@@ -154,7 +154,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -179,7 +179,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
@@ -198,7 +197,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
@@ -217,7 +215,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {

@@ -14,9 +14,7 @@
     -webkit-box-flex: 1;
     flex: 1;
   }
-  .searchBox{
-    height: 1.5rem;
-  }
+
   .result{
     display: flex;
     justify-content: space-between;
@@ -55,12 +53,53 @@
     padding-right: 0.5rem;
     line-height: 1.5rem;
   }
+  .searchBox{
+    height: 1rem;
+    background: #ccc;
+    padding-top: 0.5rem;
+  }
+  .search{
+    background: #b65822;
+    color: #fff;
+    width: 2rem;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    text-align: center;
+    height: 0.7rem;
+    line-height: 0.7rem;
+  }
+  .inputBox{
+    width: 6rem;
+    font-size: 0.4rem;
+    border: 0;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    text-indent: 0.3rem;
+  }
+  .l{
+    width: 8rem;
+    height: 0.7rem;
+    margin: 0 auto;
+    -webkit-border-radius: 0.35rem;
+    -moz-border-radius: 0.35rem;
+    border-radius: 0.35rem;
+    overflow: hidden;
+  }
 </style>
 <template>
   <div class="view">
     <Header :title="'学校搜索'" :hasBack="true" ref="top"></Header>
     <div class="searchBox" ref="searchBox">
-      <mt-search v-model="sVal"></mt-search>
+      <div class="l">
+        <input class="inputBox" type="text" v-model="sVal" placeholder="学校名称"><span class="search font-t1" v-tap="{methods:guolv}">搜索</span>
+      </div>
     </div>
     <div class="content" ref="content">
       <select name="major" @change="changeCategory" v-model="Id">
@@ -71,7 +110,7 @@
         <option v-for="(item,index) in majorType" :value="item.id">{{item.name}}</option>
       </select>
       <div class="searchResult">
-        <div class="result" v-for="(item,index) in searchResult" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
+        <div class="result" v-for="(item,index) in result" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
           <span class="font-t4 suoyin">{{toNumber(index+1,5)}}</span>
           <span class="schoolName font-t1">{{item.name}}</span>
           <span class="font-t1 colorRed">进入</span>
@@ -90,6 +129,7 @@
         majorType:[],
         searchData:{},
         results:[],
+        result:[],
         schoolType:'',
         cityId:0,
         Id:0,
@@ -117,7 +157,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
@@ -151,11 +190,11 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
             this.results = response.data;
+            this.result = response.data;
           }
         },(err)=>{
           console.log(err);
@@ -172,7 +211,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
@@ -196,11 +234,11 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
             this.results = response.data;
+            this.result = response.data;
           }else{
             this.handleError(response)
           }
@@ -216,6 +254,9 @@
             name:params.name
           }
         })
+      },
+      guolv(){
+        this.result = this.searchResult;
       }
     },
     computed:{

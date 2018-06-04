@@ -105,7 +105,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -130,7 +130,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
@@ -149,7 +148,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
@@ -171,7 +169,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {

@@ -154,7 +154,6 @@
             password: this.password
           },
           responseType: 'json',
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           console.log(response);

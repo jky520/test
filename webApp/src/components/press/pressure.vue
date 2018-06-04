@@ -136,12 +136,12 @@
           <img :src="getImgUrl(item.img_url)">
         </div>
         <div class="lxBox" v-for="item2 in item.getStudyingAbroadRelatedInfo" v-if="item.getStudyingAbroadRelatedInfo.length>0" v-tap="{methods:toLoad,id:item2.id}">
+          <div class="lxIntro">
+            <!--<div class="lxTitle font-t3">{{item2.source}}</div>-->
+            <div class="lxText font-t2">{{item2.title}}</div>
+          </div>
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item2.themb)">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">{{item2.source}}</div>
-            <div class="lxText font-t2">{{item2.title}}</div>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -208,7 +208,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
@@ -229,7 +228,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){

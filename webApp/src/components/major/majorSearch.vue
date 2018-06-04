@@ -36,9 +36,6 @@
     margin: 0.3rem 0;
     text-indent: 0.2rem;
   }
-  .searchBox{
-    height: 1.5rem;
-  }
   .major{
     color:#2a669b;
     display: inline-block;
@@ -64,12 +61,53 @@
     -webkit-background-size: cover;
     background-size: cover;
   }
+  .searchBox{
+    height: 1rem;
+    background: #ccc;
+    padding-top: 0.5rem;
+  }
+  .search{
+    background: #b65822;
+    color: #fff;
+    width: 2rem;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    text-align: center;
+    height: 0.7rem;
+    line-height: 0.7rem;
+  }
+  .inputBox{
+    width: 6rem;
+    font-size: 0.4rem;
+    border: 0;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    text-indent: 0.3rem;
+  }
+  .l{
+    width: 8rem;
+    height: 0.7rem;
+    margin: 0 auto;
+    -webkit-border-radius: 0.35rem;
+    -moz-border-radius: 0.35rem;
+    border-radius: 0.35rem;
+    overflow: hidden;
+  }
 </style>
 <template>
   <div class="view">
     <Header :title="'找专业'" :hasBack="true"></Header>
     <div class="searchBox" ref="searchBox">
-      <mt-search v-model="sVal"></mt-search>
+      <div class="l">
+        <input class="inputBox" type="text" v-model="sVal" placeholder="专业名称"><span class="search font-t1" v-tap="{methods:guolv}">搜索</span>
+      </div>
     </div>
     <select name="major" @change="changeCategory" v-model="Id">
       <option v-for="(item,index) in marjorArr" :value="item.id">{{item.name}}</option>
@@ -128,6 +166,9 @@
       changeCategory(){
         this.majorId = this.Id;
         this.getMsg();
+      },
+      guolv(){
+
       },
       getMsg(){
         this.$http({

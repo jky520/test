@@ -43,6 +43,7 @@
     display: -webkit-flex;
     justify-content:space-between;
     border-bottom: 1px solid #DDD;
+    padding-top: 0.2rem;
   }
   .headIcon{
     width: 1.5rem;
@@ -126,7 +127,6 @@
                 objId:this.objId
               },
               responseType:'json',
-              timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
                 token:this.userInfo.token
               })
@@ -148,7 +148,6 @@
               url:URL.praise+params.id,
               params:{},
               responseType:'json',
-              timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
                 token:this.userInfo.token
               })
@@ -174,7 +173,6 @@
                 message:this.val
               },
               responseType:'json',
-              timeout: 5000,
               headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
                 token:this.userInfo.token
               })

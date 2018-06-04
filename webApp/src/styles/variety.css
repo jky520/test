@@ -53,6 +53,16 @@ body {
 .font-t4{
   font-size: 0.27rem;
 }
-font-t5{
+.font-t5{
   font-size: 0.2rem;
+}
+
+.lxBox{
+  border-bottom: 1px solid #eeeeee;
+}
+
+.bLine{
+  border-bottom: 1px solid #eeeeee;
+  height: 1px;
+  width: 10rem;
 }

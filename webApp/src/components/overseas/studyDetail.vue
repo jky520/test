@@ -72,12 +72,12 @@
       </div>
       <div class="title2 font-t2">{{cityName}}</div>
       <div class="lxBox" v-for="item in studyNewInfo" v-tap="{methods:toInfo,id:item.id}">
+        <div class="lxIntro">
+          <!--<div class="lxTitle font-h3">{{item.title}}</div>-->
+          <div class="lxText font-t2">{{item.brief}}</div>
+        </div>
         <div class="lxImg" v-tap="{methods:toBaidu}">
           <img :src="getImgUrl(item.themb)">
-        </div>
-        <div class="lxIntro">
-          <div class="lxTitle font-h3">{{item.title}}</div>
-          <div class="lxText font-t2">{{item.brief}}</div>
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -123,7 +123,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {

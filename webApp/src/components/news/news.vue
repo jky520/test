@@ -73,39 +73,16 @@
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox">
-        <!--<div class="newsTime font-t3">2018年1月1日</div>-->
-        <!--<div class="lxBanner">-->
-          <!--<img src="../styles/images/icon_banner.jpg">-->
-        <!--</div>-->
         <div class="lxBox" v-for="item in news" v-tap="{methods:toLoad,id:item.id}">
+          <div class="lxIntro">
+            <div class="lxText font-t2">{{item.title}}</div>
+          </div>
           <div class="lxImg" v-tap="{methods:toBaidu}">
             <img :src="getImgUrl(item.themb)">
-          </div>
-          <div class="lxIntro">
-            <div class="lxTitle font-h3">{{item.from}}</div>
-            <div class="lxText font-t2">{{item.title}}</div>
           </div>
         </div>
       </div>
     </div>
-    <!--<div class="footer" ref="foot">-->
-      <!--<div class="menuBox" v-tap="{methods:toOtherPage,pageName:'index'}">-->
-        <!--<div class="menuIcon"></div>-->
-        <!--<div class="menuTitle font-t3">首页</div>-->
-      <!--</div>-->
-      <!--<div class="menuBox">-->
-        <!--<div class="menuIcon news_w"></div>-->
-        <!--<div class="menuTitle font-t3">新闻</div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;<div class="menuBox">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="menuIcon school_w"></div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="menuTitle font-t3">智能择校</div>&ndash;&gt;-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--<div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">-->
-        <!--<div class="menuIcon mine_w"></div>-->
-        <!--<div class="menuTitle font-t3">我的</div>-->
-      <!--</div>-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -123,7 +100,7 @@
           autoplay: {
             delay: 3000,
             stopOnLastSlide: false,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           },
           apeed:500
         },
@@ -150,7 +127,6 @@
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-          timeout: 5000
         }).then((res) => {
           let response = res.data;
           if(response.meta.code == "200"){

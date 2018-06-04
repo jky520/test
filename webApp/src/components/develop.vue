@@ -55,10 +55,10 @@
     left: 0.2rem;
     background-image: url(../styles/images/logo01.jpg);
     background-repeat: no-repeat;
-    width: 5rem;
+    width: 10rem;
     -webkit-background-size: auto 1.46rem;
     background-size: auto 1.46rem;
-    background-position: left center;
+    background-position: center center;
   }
 </style>
 <template>
