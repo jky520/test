@@ -64,7 +64,7 @@
   }
   .nav .on{
     color: #43B5CC;
-    border-bottom: 1px solid #43B5CC;
+    border-bottom: 2px solid #43B5CC;
   }
   .navList{
     width: 5rem;
@@ -78,10 +78,14 @@
   .lab-item{
     display: flex;
     display: -webkit-flex;
+    margin-top: 1rem;
   }
   .lab-item-status{
-    width: 1rem;
-    height: 1rem;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .lab-item-title{
+    line-height: 0.5rem;
   }
   .lab-item-status img{
     width: 100%;
@@ -102,7 +106,7 @@
         <div class="navList font-h2" v-bind:class="{'on':item.on}" v-for="(item,index) in menu"  v-tap="{methods:checkMenu,index:index}">{{item.name}}</div>
       </div>
       <div class="tab-content">
-        <div class="tab-pane active" v-show="menu[0].on">
+        <div class="tab-pane active font-t2" v-show="menu[0].on">
           <div v-html="videoinfo.brief"></div>
           <div class="lab-item" v-for="a in catalogJsons">
             <div class="lab-item-status">
@@ -111,7 +115,7 @@
             <div class="lab-item-title">{{videoinfo.name}}{{a.name}}</div>
           </div>
         </div>
-        <div class="tab-pane" v-show="menu[1].on">
+        <div class="tab-pane font-t2" v-show="menu[1].on">
           <div v-html="video.catalog"></div>
           <div class="lab-item" v-for="a in catalogJsons">
             <div class="lab-item-status">

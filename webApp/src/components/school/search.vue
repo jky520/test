@@ -56,7 +56,7 @@
   .searchBox{
     height: 1rem;
     background: #ccc;
-    padding-top: 0.5rem;
+    padding-top: 0.2rem;
   }
   .search{
     background: #b65822;
@@ -70,7 +70,7 @@
     line-height: 0.7rem;
   }
   .inputBox{
-    width: 6rem;
+    width: 7rem;
     font-size: 0.4rem;
     border: 0;
     outline: none;
@@ -84,7 +84,7 @@
     text-indent: 0.3rem;
   }
   .l{
-    width: 8rem;
+    width: 9rem;
     height: 0.7rem;
     margin: 0 auto;
     -webkit-border-radius: 0.35rem;

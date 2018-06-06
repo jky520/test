@@ -1,6 +1,6 @@
 <style scoped>
   .view{
-    background-color: #fff;
+    background-color: #f1f1f1;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -34,28 +34,39 @@
     display: inline-block;
     height: 0.37rem;
   }
-  .listBox{
-    width: 9rem;
-    margin: 0 auto;
-    padding: 0 0.5rem;
+  .colorRed{
+    color: red;
   }
-  .listBox:after{
-    content: ' ';
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    display: block;
-    clear: both;
+  .para{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
   }
-  .list2{
-    background: #f4f4f4;
-    float: left;
-    padding: 0 0.2rem;
-    height: 0.7rem;
-    line-height: 0.7rem;
-    margin: 0.1rem 0.1rem;
+  .la{
+    width: 1rem;
+  }
+  .lala{
+    position: absolute;
+    left: -0.5rem;
+    top: 0.3rem;
+    width: 0.15rem;
+    height: 0.15rem;
+    background-color: red;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+  }
+  .listText{
+    width: 8rem;
+    line-height: 0.8rem;
+    color: black;
+    position: relative;
+  }
+  .btn-more{
     text-align: center;
+    line-height: 1rem;
+    color: #908e8e;
+    font-weight: bold;
   }
   .newsBox{
     text-align: center;
@@ -72,10 +83,14 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
+    width: 2rem;
     height: 1.8rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
+  }
+  .lxBox{
+    background: #fff;
+    margin:0 0.3rem;
   }
   .lxImg img{
     width: 100%;
@@ -84,7 +99,7 @@
   .lxIntro{
     display: inline-block;
     height: 2.2rem;
-    width: 6.7rem;
+    width: 6rem;
     vertical-align: top;
     margin: 0.2rem;
     text-align: left;
@@ -106,22 +121,32 @@
 </style>
 <template>
   <div class="view">
-    <Header :title="'去留学'" :hasBack="true" ref="top"></Header>
+    <Header :title="'学校排名'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
-            <img :src="getImgUrl(slide.imageUrl)" >
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index" v-on:click="toURL(item.url)">
+            <img :src="getImgUrl(slide.imageUrl)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="title2 font-t2">找留学机构</div>
-      <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
+      <div class="para">
+        <div class="la">
+        </div>
+        <div class="text">
+          <div class="listText font-t2" v-for="(item,index) in rankList" v-show="index<num">
+            <span class="lala"></span>
+            <span class="colorRed">{{item.year}}</span>
+            <span>年 {{item.name}}</span>
+          </div>
+          <div class="btn-more font-t2" v-show="showMore" v-tap="{methods:toShowMore}">查看更多&gt;&gt;</div>
+        </div>
       </div>
-      <div class="title2 font-t2">相关资讯</div>
-      <div class="newsBox" v-for="item in news">
+      <div style="background: #fff;">
+        <div class="title2 font-t2">相关资讯</div>
+      </div>
+      <div class="newsBox" v-for="item in relatedInfo">
         <div class="newsTime font-t3">{{item.name}}</div>
         <div class="lxBanner" v-tap="{methods:toBaidu}">
           <img :src="getImgUrl(item.img_url)">
@@ -158,89 +183,51 @@
           },
           apeed:500
         },
-        swiperSlides: [1, 2],
-        areaArr:[],
-        news:[],
+        showMore:true,
+        num:10,
+        swiperSlides: [],
+        rankList:[],
+        relatedInfo:[],
         userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
       }
     },
     mounted() {
-      this.getInfo();
-      this.getBanner();
-      this.getCityList();
+      this.getSchool();
     },
     methods: {
-      getInfo(){
+      getSchool(){
         this.$http({
-          method: 'get',
-          url: URL.studyAboard,
-          params: {},
-          responseType: 'json',
+          method:'get',
+          url:URL.base + 'universityrank/list',
+          params:{},
+          responseType:'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
           }),
-        }).then((res) => {
+        }).then((res)=>{
           let response = res.data;
-          if (response.meta.code == "200") {
-            this.news = response.data;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      getBanner(){
-        this.$http({
-          method: 'get',
-          url: URL.studyBanner,
-          params: {},
-          responseType: 'json',
-          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-            token:this.userInfo.token
-          }),
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-            this.swiperSlides = response.data[0].advert;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      getCityList(){
-        this.$http({
-          method: 'get',
-          url: URL.studyCityList,
-          params: {},
-          responseType: 'json',
-          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-            token:this.userInfo.token
-          }),
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-            this.areaArr = response.data;
+          if(response.meta.code == "200"){
+            this.swiperSlides = response.data.images;
+            this.rankList = response.data.rankList;
+            this.relatedInfo = response.data.relatedInfo;
           }else{
             this.handleError(response)
           }
-        }, (err) => {
+        },(err)=>{
           console.log(err);
         })
       },
-      toDetail(params){
-        this.$router.push({
-          name:'studyDetail',
-          query:{
-            studyCityId:params.id
-          }
-        });
-      },
       toLoad(params){
         this.$router.push({
-          name:'overseasLoad',
+          name:'rankLoad',
           query:{
             id:params.id
           }
         })
+      },
+      toShowMore(){
+        this.showMore = false;
+        this.num = 100;
       }
     },
     components:{

@@ -263,7 +263,7 @@
           </div>
         </div>
         <div class="flexBox">
-          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+          <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'rank'}">
             <div class="typeIcon"></div>
             <div class="typeTitle font-t3">院校排名</div>
           </div>
@@ -383,7 +383,7 @@
       },
       toLoad(params){
         this.$router.push({
-          name:'newsLoad',
+          name:'rankLoad',
           query: {
             id: params.id
           }

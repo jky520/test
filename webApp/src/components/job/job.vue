@@ -118,7 +118,7 @@
       </div>
       <div class="title2 font-t2">找工作</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
+        <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id,name:item.name}">{{item.name}}</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">
@@ -202,7 +202,8 @@
         this.$router.push({
           name:'jobDetail',
           query:{
-            cityId:params.id
+            cityId:params.id,
+            name:params.name
           }
         })
       }

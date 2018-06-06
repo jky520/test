@@ -18,6 +18,14 @@
     -webkit-box-flex: 1;
     flex: 1
   }
+  .bannerBox{
+    height: 5rem;
+    width: 10rem;
+  }
+  .bannerBox img{
+    width: 100%;
+    height: 100%;
+  }
   .title2{
     font-weight: bold;
     border-left: 0.2rem solid #c13c3d;
@@ -36,7 +44,6 @@
     color: red;
   }
   .newsTitle{
-    height: 0.8rem;
     text-indent: 0.5rem;
     line-height: 0.8rem;
   }
@@ -58,8 +65,16 @@
   <div class="view">
     <Header :title="'招聘信息'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
-      <div class="title2 font-t2">关注</div>
-      <div class="newsBox" v-for="item in news">
+      <div class="bannerBox">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </div>
+      <div class="title2 font-t2">{{$route.query.name}}</div>
+      <div class="newsBox" v-for="item in news" v-tap="{methods:toCompany,id:item.companyId}">
         <div class="newsTitle font-t1">{{item.name}}</div>
         <div class="newsContent">
           <span class="newsCity font-t1">[{{item.jobCity.name}}]</span>
@@ -89,75 +104,31 @@
           },
           apeed:500
         },
-        swiperSlides: [1, 2],
-        areaArr:[],
+        swiperSlides: [],
         news:[],
         cityId:0,
-        categoryId:0,
         userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
       }
     },
     mounted() {
-      this.$refs.content.style.height = document.documentElement.clientHeight -this.$refs.top.$el.clientHeight + 'px';
-      this.cityId = this.$store.state.jobCityId;
-      this.categoryId = this.$store.state.jobCategoryId;
+      this.cityId = this.$route.query.cityId;
       this.getInfo();
+      this.getImgs();
     },
     methods: {
-      getInfo(){
+      getImgs(){
         this.$http({
           method: 'get',
-          url: URL.jobCategory,
-          params: {
-            cityId:this.cityId,
-            categoryId:this.categoryId
-          },
-          responseType: 'json',
-          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-            token:this.userInfo.token
-          }),
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-            // this.areaArr = response.data;
-            // this.areaArr = response.data.Category;
-            // this.news = response.data.attention;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      trainAdvert(){
-        this.$http({
-          method: 'get',
-          url: URL.trainAdvert,
+          url: URL.base + 'jobcity/list',
           params: {},
           responseType: 'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
-          }),
+          })
         }).then((res) => {
           let response = res.data;
           if (response.meta.code == "200") {
-            this.swiperSlides = response.data[0].advert;
-          }
-        }, (err) => {
-          console.log(err);
-        })
-      },
-      detailInfo(){
-        this.$http({
-          method: 'get',
-          url: URL.skillDetailInfo,
-          params: {},
-          responseType: 'json',
-          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
-            token:this.userInfo.token
-          }),
-        }).then((res) => {
-          let response = res.data;
-          if (response.meta.code == "200") {
-
+            this.swiperSlides = response.data.image;
           }else{
             this.handleError(response)
           }
@@ -165,6 +136,37 @@
           console.log(err);
         })
       },
+      getInfo(){
+        this.$http({
+          method: 'get',
+          url: URL.base + 'jobcity/category',
+          params: {
+            cityId: this.$route.query.cityId,
+            categoryId:this.$route.query.categoryId
+          },
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.userInfo.token
+          })
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.news = response.data;
+          }else{
+            this.handleError(response)
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
+      toCompany(params){
+        this.$router.push({
+          name:"jobCompany",
+          query:{
+            id:params.id
+          }
+        })
+      }
     },
     components:{
       swiper,

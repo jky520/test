@@ -67,7 +67,6 @@
     color: red;
   }
   .newsTitle{
-    height: 0.8rem;
     text-indent: 0.5rem;
     line-height: 0.8rem;
   }
@@ -188,13 +187,14 @@
         })
       },
       toDetail(params){
-          // this.$router.push({
-          //   name:"jobDetail2",
-          //   query:{
-          //     cityId:this.cityId,
-          //     categoryId:params.id
-          //   }
-          // })
+          this.$router.push({
+            name:"jobDetail2",
+            query:{
+              cityId:this.cityId,
+              categoryId:params.id,
+              name:this.$route.query.name
+            }
+          })
       },
       toCompany(params){
         this.$router.push({

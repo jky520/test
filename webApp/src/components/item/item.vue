@@ -33,7 +33,7 @@
     display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
-    border-top: 1px solid #d4d4d4;
+    border-top: 2px solid #d4d4d4;
   }
   .leftMenu{
     width: 2.5rem;
@@ -59,7 +59,7 @@
   .items{
     padding: 0.2rem;
     position: relative;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 2px solid #d4d4d4;
   }
   .items span{
     padding-top: 0.2rem;

@@ -54,10 +54,13 @@
     <div class="content" ref="content">
       <div class="title font-t1">{{title}}</div>
       <div class="majorIntro font-h3" v-tap="{methods:toShow}">专业介绍 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
-      <div class="majorText" ref="text1" v-show="show1">
+      <div class="majorText" v-html="feature" v-show="show1">
 
       </div>
-      <div class="majorIntro font-h3" v-tap="{methods:toShow}">专业介绍 <span class="arrow" v-bind:class="{'toDown':!show1}">&gt;</span></div>
+      <div class="majorIntro font-h3" v-tap="{methods:toShow2}">开设院校 <span class="arrow" v-bind:class="{'toDown':!show2}">&gt;</span></div>
+      <div class="majorText" v-show="show2">
+
+      </div>
       <Review :type="2" :objId="$route.query.id"></Review>
     </div>
   </div>
@@ -70,7 +73,9 @@
       return {
         userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{},
         show1:true,
-        title:''
+        show2:false,
+        title:'',
+        feature:''
       }
     },
     mounted() {
@@ -91,7 +96,7 @@
           let response = res.data;
           if (response.meta.code == "200") {
             this.title = response.data.name;
-            this.$refs.text1.innerHTML = response.data.feature;
+            this.feature = response.data.feature;
           }else{
             this.handleError(response)
           }
@@ -101,6 +106,9 @@
       },
       toShow(){
         this.show1 = !this.show1;
+      },
+      toShow2(){
+        this.show2 = !this.show2;
       }
     }
   }

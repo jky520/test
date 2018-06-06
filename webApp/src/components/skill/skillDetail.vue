@@ -120,7 +120,7 @@
       <div class="listBox">
         <div class="list2 font-t3" v-for="item in areaArr" v-tap="{methods:toDetail,id:item.id}">{{item.name}}</div>
       </div>
-      <div class="title2 font-t2">相关资讯</div>
+      <div class="title2 font-t2">关注</div>
       <div class="newsBox">
         <div class="lxBox" v-for="item in news" v-tap="{methods:toLoad,id:item.id}">
           <div class="lxIntro">

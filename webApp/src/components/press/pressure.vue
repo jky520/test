@@ -106,7 +106,8 @@
   .ideaList{
     line-height: 0.8rem;
     padding-left: 0.5rem;
-    color: red;
+    color: #344465;
+    font-weight: bold;
   }
 </style>
 <template>
@@ -127,7 +128,7 @@
       </div>
       <div class="getIdea">
         <div class="ideaList font-t1" v-tap="{methods:toIdea}">找减压方法</div>
-        <div class="ideaList font-t1" v-tap="{methods:toPerson,id:1}">找心里专家</div>
+        <div class="ideaList font-t1" v-tap="{methods:toPerson,id:1}">找心理专家</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">

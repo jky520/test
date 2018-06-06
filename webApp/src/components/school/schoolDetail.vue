@@ -1,6 +1,5 @@
 <style scoped>
   .view{
-    background-color: #fff;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -12,6 +11,7 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+    background: #DEDEDE;
   }
   .content{
     overflow-y: scroll;
@@ -44,21 +44,20 @@
   }
   .logo-box {
     background: #9d9d9d;
-    min-height: 4rem;
+    min-height: 3.3rem;
     padding: 0.2rem;
     position: relative;
   }
   .kjjg {
     width: 100%;
-    min-height: 4rem;
+    min-height: 3.3rem;
   }
   .logo {
-    padding: 0.2rem 0.5rem;
-    height: 1.5rem ;
-    width: 1.5rem;
+    padding: 0.2rem 0.8rem;
+    height: 1.2rem ;
+    width: 1.2rem;
   }
   .logo-box img {
-    border-radius: 50%;
     width: 100%;
     height: 100%;
   }
@@ -73,13 +72,13 @@
   }
   .logo-box .zh {
     line-height: 30px;
-    color: #444444;
+    color: #fff;
   }
   .schoolInfo{
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
-    background-color: #f9f9f9;
+    background-color: #eceaea;
     padding: 0.5rem 0;
   }
   .leftInfo{
@@ -94,8 +93,7 @@
   .oneLine{
     font-size: 0.3rem;
     text-indent: 0.5rem;
-    line-height: 0.6rem;
-    height: 0.6rem;
+    line-height: 0.8rem;
     color: #000;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
@@ -111,13 +109,18 @@
     background-size: auto 0.4rem;
     display: inline-block;
   }
+  .abstract{
+    background: #9a2422;
+    padding: 0.2rem;
+    margin: 0.6rem 0.2rem;
+  }
   .abstract p{
-    width: 9.5rem;
     margin: 0 auto;
-    line-height: 0.5rem;
-    font-size: 0.3rem;
-    height: 2rem;
+    line-height: 0.6rem;
+    font-size: 0.4rem;
+    height: 2.4rem;
     overflow: hidden;
+    color: #fff;
   }
   .disMore{
     height: auto !important;
@@ -127,6 +130,7 @@
     line-height: 0.8rem;
     text-align:right;
     padding-right: 0.5rem;
+    color: #fff;
   }
   .toUp{
     -webkit-transform: rotate(180deg);
@@ -139,6 +143,7 @@
     width: 10rem;
     margin: 0 auto;
     position: relative;
+    padding-bottom: 0.3rem;
   }
   .listBox:after{
     content: ' ';
@@ -185,9 +190,9 @@
   .classLogo{
     position: absolute;
     right: 0.5rem;
-    top: 0.3rem;
+    top: 0.6rem;
     width: 1.5rem;
-    height: 1.5rem;
+    height: 1.2rem;
   }
   .colorRed{
     color: red !important;
@@ -198,7 +203,8 @@
   .guanzhu{
     position: absolute;
     right: 0.5rem;
-    bottom: 0.5rem;
+    bottom: 0.2rem;
+    color: #fff;
   }
   .title3{
     text-indent: 0.5rem;
@@ -206,11 +212,14 @@
   .rank{
     color: red;
   }
-  .showMore{
+  .showMore2{
     position: absolute;
-    right: 0;
-    top: -0.8rem;
+    right: 0.5rem;
+    top: -0.6rem;
     color: #8d2a2a;
+  }
+  a{
+    text-decoration: none;
   }
 </style>
 <template>
@@ -231,6 +240,14 @@
           </div>
           <div class="guanzhu font-t3">{{school.attentioncount}}人关注</div>
         </div>
+      </div>
+      <div class="bannerBox">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(slide,index) in image">
+            <img :src="getImgUrl(slide.image)">
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
       <div class="schoolInfo">
         <div class="leftInfo">
@@ -254,15 +271,17 @@
           <div  class="oneLine">{{school.air}}</div>
         </div>
       </div>
-      <div class="title2 font-t2">学校简介</div>
+      <!--<div class="title2 font-t2">学校简介</div>-->
       <div class="abstract">
-        <p ref="abstract"></p>
-        <div class="showMore font-t2" v-tap="{methods:toIntro}">更多></div>
+        <p v-html="school.brief_jj"></p>
+        <div class="showMore font-t2" v-tap="{methods:toIntro}"><span style="color: red;font-size: 0.3rem;">▼</span>展开</div>
       </div>
-      <div class="title2 font-t2">学校院系</div>
-      <div class="listBox">
-        <div class="showMore font-t3" v-tap="{methods:toShowAll}">查看全部>></div>
-        <div class="list2 font-t3" v-for="(item,index) in faculty" v-if="index<4" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
+      <div style="background: #eceaea">
+        <div class="title2 font-t2">院系设置</div>
+        <div class="listBox">
+          <div class="showMore2 font-t3" v-tap="{methods:toShowAll}">查看全部>></div>
+          <div class="list2 font-t3" v-for="(item,index) in faculty" v-if="index<4" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
+        </div>
       </div>
       <div class="title2 font-t2">专业设置</div>
       <div class="listBox">
@@ -270,9 +289,11 @@
       </div>
       <div class="title2 font-t2">招生信息</div>
       <div class="listBox">
-        <div class="list2 font-t3" v-for="item in zsxx">{{item.name}}</div>
+        <div class="list2 font-t3" v-for="item in zsxx" v-tap="{methods:toRecult,diplomasId:item.id,name:item.name}">{{item.name}}</div>
       </div>
-      <div class="title2 font-t2">联系方式</div>
+      <div style="background: #eceaea">
+        <div class="title2 font-t2">联系方式</div>
+      </div>
       <div class="schoolInfo">
         <div class="leftInfo">
           <div class="oneLine twoLine">地址:</div>
@@ -282,7 +303,7 @@
         <div class="rightInfo">
           <div  class="oneLine twoLine" v-tap="{methods:toOtherPage,pageName:'schoolAdress'}">{{school.address}}<span class="gps"></span></div>
           <div  class="oneLine twoLine"><a :href="'tel:'+school.tel">{{school.tel}}</a></div>
-          <div  class="oneLine twoLine colorRed">{{school.url}}</div>
+          <div  class="oneLine twoLine"><a class="colorRed" :href="school.url">{{school.url}}</a></div>
         </div>
       </div>
       <div class="title2 font-t2">最新排名</div>
@@ -291,7 +312,7 @@
         <div class="la">
         </div>
         <div class="text">
-          <div class="listText font-t3" v-for="(item,index) in school.ranking.schoolRanking"><span class="lala"></span><i class="rank">{{item.year}}</i>{{item.title}}-第<i class="rank">{{item.number}}</i>名</div>
+          <div class="listText font-t3" v-for="(item,index) in school.ranking.schoolRanking"><span class="lala"></span><i class="rank">{{item.year}} </i>{{item.title}} - 第<i class="rank"> {{item.number}} </i>名</div>
         </div>
       </div>
       <div class="title3 font-t2">专业</div>
@@ -299,7 +320,7 @@
         <div class="la">
         </div>
         <div class="text">
-          <div class="listText font-t3" v-for="(item,index) in school.ranking.majorRanking"><span class="lala"></span><i class="rank">{{item.year}}</i>{{item.title}}-第<i class="rank">{{item.number}}</i>名</div>
+          <div class="listText font-t3" v-for="(item,index) in school.ranking.majorRanking"><span class="lala"></span><i class="rank">{{item.year}} </i>{{item.title}} - 第<i class="rank"> {{item.number}} </i>名</div>
         </div>
       </div>
     </div>
@@ -308,6 +329,8 @@
 
 <script>
   import URL from '../../lib/api';
+  import 'swiper/dist/css/swiper.css';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   export default {
     data() {
       return {
@@ -325,7 +348,6 @@
         image: [],
         zsxx:[],
         schoolId:0,
-        schoolInfo:{},
         degree:[],
         degreeText:'',
         nature:'',
@@ -350,6 +372,16 @@
           }
         });
       },
+      toRecult(params){
+        this.$router.push({
+          name:'recult',
+          query:{
+            schoolId:this.$route.query.schoolId,
+            diplomasId:params.diplomasId,
+            name:params.name
+          }
+        })
+      },
       toShowAll(){
         this.$router.push({
           name:'faculty',
@@ -371,8 +403,6 @@
           let response = res.data;
           if(response.meta.code == "200"){
             this.school = response.data;
-            this.schoolInfo = response.data.degree[0].school;
-            this.$refs.abstract.innerHTML = this.schoolInfo.brief;
             this.degree = response.data.degree;
             this.faculty = response.data.faculty;
             this.major = response.data.major;
@@ -451,6 +481,10 @@
           }
         })
       }
+    },
+    components:{
+      swiper,
+      swiperSlide
     }
   }
 </script>

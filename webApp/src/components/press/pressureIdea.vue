@@ -36,9 +36,18 @@
     line-height: 0.7rem;
     box-sizing: border-box;
     padding:0 0.5rem;
-    display: inline-block;
+    color:#344465
   }
   .menuList.on{
+    color: red;
+  }
+  .menuList2{
+    background: #BBB;
+    display: inline-block;
+    padding: 0.1rem 0.3rem;
+    margin: 0 0.8rem;
+  }
+  .colorRed{
     color: red;
   }
 </style>
@@ -49,10 +58,14 @@
       <div class="bannerBox">
         <swiper :options="swiperOption">
           <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
-            <img :src="getImgUrl(slide.imageUrl)" >
+            <img :src="getImgUrl(slide.imageUrl)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+      </div>
+      <div class="menuBox">
+        <div class="menuList2 colorRed font-t2">找减压方法</div>
+        <div class="menuList2 font-t2" v-tap="{methods:toPerson,id:1}">找心理专家</div>
       </div>
       <div class="menuBox">
         <div class="menuList font-t1" v-bind:class="{'on':item.checked}" v-for="(item,index) in menu" v-tap="{methods:checkPress,index:index}">{{item.name}}</div>
@@ -61,6 +74,7 @@
         <div ref="b"></div>
         <div ref="c"></div>
       </div>
+      <Review :type="7" :objId="choiceMenu[0].id"></Review>
     </div>
   </div>
 </template>
@@ -87,22 +101,27 @@
         menu:[
           {
             name:'运动减压法',
+            id:1,
             checked:true
           },
           {
             name:'食物调理减压法',
+            id:2,
             checked:false
           },
           {
             name:'倾诉感恩减压法',
+            id:3,
             checked:false
           },
           {
             name:'宣泄减压法',
+            id:4,
             checked:false
           },
           {
             name:'心理游戏减压法',
+            id:5,
             checked:false
           }
         ],
@@ -193,6 +212,19 @@
         },(err)=>{
           console.log(err);
         })
+      },
+      toPerson(params){
+        this.$router.push({
+          name:'pressurePerson',
+          query:{
+            id:params.id
+          }
+        })
+      }
+    },
+    computed:{
+      choiceMenu(){
+        return this.menu.filter(item=>item.checked)
       }
     },
     components:{

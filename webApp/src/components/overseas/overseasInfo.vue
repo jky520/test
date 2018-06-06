@@ -39,6 +39,9 @@
   .colorRed{
     color: red;
   }
+  a{
+    text-decoration: none;
+  }
 </style>
 <template>
   <div class="view">
@@ -51,7 +54,7 @@
         <p class="line font-h3">地址：{{school.address}}</p>
         <p class="line font-h3">电话：{{school.telphone}}</p>
         <p class="line font-h3">手机：<a :href="'tel:'+school.mobile">{{school.mobile}}</a></p>
-        <p class="line font-h3">官网：<span class="colorRed">{{school.url}}</span></p>
+        <p class="line font-h3">官网：<a class="colorRed" :href="school.url">{{school.url}}</a></p>
       </div>
       <Review :type="9" :objId="$route.query.id"></Review>
     </div>

@@ -19,7 +19,6 @@
     flex: 1;
   }
   .title2{
-    height: 1rem;
     line-height: 1rem;
     color: #666666;
     font-weight: bold;
@@ -35,7 +34,7 @@
     <div class="content" ref="content">
       <div class="title2 font-h3">{{pageData.title}}</div>
       <div class="title2 font-t3">{{source}} {{date}}</div>
-      <div class="bLine"></div>
+      <div class="bLine" style="margin-bottom: 0.2rem;"></div>
       <div class="context" ref="context"></div>
       <Review :type="10" :objId="$route.query.loadId"></Review>
     </div>

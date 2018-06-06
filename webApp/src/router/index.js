@@ -20,6 +20,7 @@ import classVideo from '@/components/school/classVideo';
 import majorDetail from '@/components/school/majorDetail';
 import schoolIntro from '@/components/school/schoolIntro';
 import faculty from '@/components/school/faculty';
+import recult from '@/components/school/recult';
 // major
 import major from '@/components/major/major';
 import hotR from '@/components/major/hotR';
@@ -65,6 +66,10 @@ import personDetail from '@/components/press/personDetail';
 import news from '@/components/news/news';
 import newsLoad from '@/components/news/newsLoad';
 import userInfoEdit from '@/components/userInfoEdit';
+//rank
+import rank from '@/components/rank/rank';
+import rankLoad from '@/components/rank/rankLoad';
+
 
 Vue.use(Router);
 
@@ -328,6 +333,21 @@ export default new Router({
       path: '/faculty',
       name: 'faculty',
       component: faculty
+    },
+    {
+      path: '/recult',
+      name: 'recult',
+      component: recult
+    },
+    {
+      path: '/rank',
+      name: 'rank',
+      component: rank
+    },
+    {
+      path: '/rankLoad',
+      name: 'rankLoad',
+      component: rankLoad
     }
   ]
 })

@@ -42,7 +42,7 @@
     display: flex;
     display: -webkit-flex;
     justify-content:space-between;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 2px solid #DDD;
     padding-top: 0.2rem;
   }
   .headIcon{
@@ -188,7 +188,12 @@
               console.log(err);
             })
           }
+        },
+      watch:{
+        objId(){
+          this.list();
         }
+      }
     }
 </script>
 

@@ -1,7 +1,6 @@
 let stg = {
   "school":"http://120.79.137.116:8080/eduOnline/schoolcat/list",
-  "studyload":"http://120.79.137.116:8080/eduOnline/schoolcat/152/studyload",
-  "trainLoad":"http://120.79.137.116:8080/eduOnline/schoolcat/955/train_infoload",
+  "schoolLoad":"http://120.79.137.116:8080/eduOnline/schoolcat/",
   "schoolList":"http://120.79.137.116:8080/eduOnline/school/list",
   "cityList":"http://120.79.137.116:8080/eduOnline/school/1/citylist",
   "schoolList2":"http://120.79.137.116:8080/eduOnline/school/list1",
@@ -59,7 +58,8 @@ let stg = {
   "praise":"http://120.79.137.116:8080/eduOnline/evaluatemessage/praise/",
   "majorInfo":"http://120.79.137.116:8080/eduOnline/major/",
   "base":"http://120.79.137.116:8080/eduOnline/",
-  "skillDetail2":"http://120.79.137.116:8080/eduOnline/trainInfo/getTrain_infoByCityId"
+  "skillDetail2":"http://120.79.137.116:8080/eduOnline/trainInfo/getTrain_infoByCityId",
+  "majorSearch":"http://120.24.216.26:8080/eduOnline/majorCategory/seach"
 };
 
 let prd = {

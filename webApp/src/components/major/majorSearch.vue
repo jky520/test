@@ -1,6 +1,6 @@
 <style scoped>
   .view{
-    background-color: #fff;
+    background: #EEE;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -42,7 +42,7 @@
     padding: 0 0.3rem;
   }
   .list{
-    padding: 0.1rem 0.3rem;
+    padding: 0.2rem 0.3rem;
     color:#2a669b;
   }
   select{
@@ -59,12 +59,12 @@
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
-    background-size: cover;
+    background-size: 100% 100%;
   }
   .searchBox{
     height: 1rem;
     background: #ccc;
-    padding-top: 0.5rem;
+    padding-top: 0.2rem;
   }
   .search{
     background: #b65822;
@@ -78,7 +78,7 @@
     line-height: 0.7rem;
   }
   .inputBox{
-    width: 6rem;
+    width: 7rem;
     font-size: 0.4rem;
     border: 0;
     outline: none;
@@ -92,7 +92,7 @@
     text-indent: 0.3rem;
   }
   .l{
-    width: 8rem;
+    width: 9rem;
     height: 0.7rem;
     margin: 0 auto;
     -webkit-border-radius: 0.35rem;
@@ -114,7 +114,7 @@
     </select>
     <div class="content" ref="content">
       <div class="title2 font-t2">专业目录</div>
-      <div class="listBox">
+      <div class="listBox" style="padding-bottom: 0.5rem;">
         <div class="major font-t3" v-for="(item,index) in majorList" @click="goAnchor('#anchor-'+index)">{{item.name}}</div>
       </div>
       <div class="listBox">
@@ -159,8 +159,9 @@
       }
     },
     mounted() {
-      this.getMsg();
       this.majorId = this.$route.query.majorId;
+      this.Id = this.$route.query.majorId;
+      this.getMsg();
     },
     methods: {
       changeCategory(){
@@ -168,12 +169,32 @@
         this.getMsg();
       },
       guolv(){
-
+        this.$http({
+          method: 'get',
+          url: URL.majorSearch,
+          params: {
+            level:this.Id,
+            search:this.sVal
+          },
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.userInfo.token
+          })
+        }).then((res) => {
+          let response = res.data;
+          if (response.meta.code == "200") {
+            this.majorList = response.data;
+          }else{
+            this.handleError(response)
+          }
+        }, (err) => {
+          console.log(err);
+        })
       },
       getMsg(){
         this.$http({
           method: 'get',
-          url: URL.majorCategory+this.majorId,
+          url: URL.majorCategory+this.Id,
           params: {},
           responseType: 'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{

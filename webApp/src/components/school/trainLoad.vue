@@ -69,10 +69,8 @@
       studyLoad(){
         this.$http({
           method:'get',
-          url:URL.trainLoad,
-          params:{
-            id:this.trainLoadId
-          },
+          url:URL.schoolLoad + this.$route.query.id + '/train_infoload',
+          params:{},
           responseType:'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token

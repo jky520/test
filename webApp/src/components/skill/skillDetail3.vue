@@ -64,10 +64,10 @@
     <Header :title="'技能培训'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title font-t1">{{data.title}}</div>
-      <div class="context font-t1" ref="context"></div>
       <div class="imgBox">
         <img :src="getImgUrl(data.image)">
       </div>
+      <div class="context font-t1" v-html="content"></div>
       <div class="infoBox">
         <div class="title2 font-t1">联系方式</div>
         <p class="line font-h3">地址：{{data.address}}</p>
@@ -86,7 +86,8 @@
     data() {
       return {
         data:{},
-        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
+        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{},
+        content:''
       }
     },
     mounted() {
@@ -106,7 +107,7 @@
           let response = res.data;
           if (response.meta.code == "200") {
             this.data = response.data;
-            this.$refs.context.innerHTML = this.data.content;
+            this.content = this.data.content;
           }
         }, (err) => {
           console.log(err);

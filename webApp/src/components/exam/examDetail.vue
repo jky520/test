@@ -78,8 +78,9 @@
     line-height: 1rem;
     text-indent: 0.5rem;
     color: #333;
-    background: #ddd;
+    background: #ececec;
     position: relative;
+    border-bottom: 2px solid #ddd;
   }
   .arrow{
     position: absolute;
@@ -91,6 +92,7 @@
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
+    margin-top: -0.2rem;
   }
 </style>
 <template>
@@ -106,19 +108,19 @@
         </swiper>
       </div>
       <div class="context" ref="context"></div>
-      <div class="majorIntro font-h3" v-tap="{methods:toShow,name:'show1'}">考试时间 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
+      <div class="majorIntro font-t1" v-tap="{methods:toShow,name:'show1'}">考试时间 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
       <div class="date" ref="date" v-show="show1"></div>
-      <div class="majorIntro font-h3" v-tap="{methods:toShow,name:'show2'}">考试费用 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
+      <div class="majorIntro font-t1" v-tap="{methods:toShow,name:'show2'}">考试费用 <span class="arrow" v-bind:class="{'toDown':show2}">&gt;</span></div>
       <div class="date" ref="price" v-show="show2"></div>
       <div class="date" v-show="show2">
         <p class="colorRed font-t2">{{fee_tishi}}</p>
       </div>
-      <div class="majorIntro font-h3" v-tap="{methods:toShow,name:'show3'}">考试内容 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
+      <div class="majorIntro font-t1" v-tap="{methods:toShow,name:'show3'}">考试内容 <span class="arrow" v-bind:class="{'toDown':show3}">&gt;</span></div>
       <div class="date" ref="tex" v-show="show3"></div>
       <div class="date" v-show="show3">
         <p class="colorRed font-t2">{{content_tishi}}</p>
       </div>
-      <div class="majorIntro font-h3" v-tap="{methods:toShow,name:'show4'}">考试须知 <span class="arrow" v-bind:class="{'toDown':show1}">&gt;</span></div>
+      <div class="majorIntro font-t1" v-tap="{methods:toShow,name:'show4'}">考试须知 <span class="arrow" v-bind:class="{'toDown':show4}">&gt;</span></div>
       <div class="date" ref="know" v-show="show4"></div>
       <div class="date" v-show="show4">
         <p class="colorRed font-t2">{{notice_tishi}}</p>

@@ -1,6 +1,5 @@
 <style scoped>
   .view{
-    background-color: #fff;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -14,39 +13,25 @@
     justify-content: space-between;
   }
   .content{
-    padding: 0 0.5rem;
     overflow-y: scroll;
     -webkit-box-flex: 1;
     flex: 1;
+    padding: 0.5rem;
   }
-  .bannerBox{
-    height: 5rem;
-    width: 9rem;
-  }
-  .bannerBox img{
-    width: 100%;
-    height: 100%;
-  }
-  .title3{
+  .title2{
     font-weight: bold;
+    border-left: 0.2rem solid #c13c3d;
     text-indent: 0.2rem;
-    margin: 0.2rem 0.44rem 0.25rem 0;
-    display: block;
-    height: 0.37rem;
+    margin: 0.53rem 0.44rem 0.25rem 0;
+    display: inline-block;
   }
 </style>
 <template>
   <div class="view">
-    <Header :title="'留学'" :hasBack="true" ref="top"></Header>
+    <Header :title="'招生信息'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
-      <div class="title3 font-t1">{{pageData.title}}</div>
-      <div class="bannerBox" v-tap="{methods:toBaidu}">
-        <img :src="getImgUrl(pageData.image)">
-      </div>
-      <div ref="pageContent">
-
-      </div>
-      <Review :type="9" :objId="$route.query.id"></Review>
+      <div class="title2 font-h2">{{$route.query.name}}</div>
+      <div v-html="info.html"></div>
     </div>
   </div>
 </template>
@@ -56,19 +41,22 @@
   export default {
     data() {
       return {
-        pageData:{},
-        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
+        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{},
+        info:{}
       }
     },
     mounted() {
-      this.studyLoad();
+      this.getInfo();
     },
     methods: {
-      studyLoad(){
+      getInfo(){
         this.$http({
           method:'get',
-          url:URL.schoolLoad+this.$route.query.id+'/studyload',
-          params:{},
+          url:URL.base+'school/enroll',
+          params:{
+            diplomasId:this.$route.query.diplomasId,
+            schoolId:this.$route.query.schoolId
+          },
           responseType:'json',
           headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
             token:this.userInfo.token
@@ -76,10 +64,8 @@
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
-            this.pageData = response.data;
-            this.$refs.pageContent.innerHTML = response.data.content;
-          }else{
-            this.handleError(response)
+            console.log(response.data);
+            this.info = response.data;
           }
         },(err)=>{
           console.log(err);
@@ -88,4 +74,3 @@
     }
   }
 </script>
-

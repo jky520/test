@@ -12,18 +12,20 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   .content{
     overflow-y: scroll;
     padding: 0 0.5rem;
     -webkit-box-flex: 1;
-    flex: 1
+    flex: 1;
+    word-wrap: break-word;
   }
   .title2{
     line-height: 1rem;
-    height: 1rem;
     text-align: center;
     border-bottom: 0.05rem solid #f4f4f4;
+    margin-bottom: 0.5rem;
   }
 </style>
 <template>
@@ -31,7 +33,7 @@
     <Header :title="'热点推荐'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title2 font-h3">{{title}}</div>
-      <div class="context" ref="context"></div>
+      <div class="context font-t2" v-html="info"></div>
     </div>
   </div>
 </template>
@@ -43,6 +45,7 @@
       return {
         title:'',
         hotId:0,
+        info:'',
         userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
       }
     },
@@ -64,7 +67,7 @@
           let response = res.data;
           if (response.meta.code == "200") {
             this.title = response.data.title;
-            this.$refs.context.innerHTML = response.data.info;
+            this.info = response.data.info;
           }else{
               this.handleError(response);
           }
