@@ -116,7 +116,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu,url:slide.url}" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -138,7 +138,7 @@
             <!--<div class="lxTitle font-t3-h3">{{item2.source}}</div>-->
             <div class="lxText font-t2">{{item2.title}}</div>
           </div>
-          <div class="lxImg" v-tap="{methods:toBaidu}">
+          <div class="lxImg">
             <img :src="getImgUrl(item2.themb)">
           </div>
         </div>

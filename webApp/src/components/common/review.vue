@@ -46,22 +46,28 @@
     padding-top: 0.2rem;
   }
   .headIcon{
-    width: 1.5rem;
+    width: 1.2rem;
     height: 1.5rem;
     background-image: url(../../styles/images/icon_head.png);
     background-repeat: no-repeat;
     background-position: top center;
-    -webkit-background-size: 1.2rem 1.2rem;
-    background-size: 1.2rem 1.2rem;
+    -webkit-background-size: 1.05rem 1.05rem;
+    background-size: 1.05rem 1.05rem;
   }
   .listText{
     width: 7rem;
     padding: 0 0.2rem;
   }
   .zan{
-    width:1.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    width:1.3rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background-image: url(../../styles/images/icon_zan.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+    -webkit-background-size: 0.6rem 0.6rem;
+    background-size: 0.6rem 0.6rem;
+    text-align: right;
   }
   .zan img{
     width: 0.5rem;
@@ -72,8 +78,12 @@
     padding: 0.2rem 0;
   }
   .reviewText{
+    padding-top: 0.1rem;
     word-break: break-all;
     word-wrap:break-word;
+  }
+  .zanNum{
+    padding-right: 0.7rem;
   }
 </style>
 <template>
@@ -89,12 +99,11 @@
         <div class="list" v-for="item in pList">
           <div class="headIcon"></div>
           <div class="listText">
-            <div class="reviewText font-h3">{{item.message}}</div>
+            <div class="reviewText font-t2">{{item.message}}</div>
             <div class="reviewTime font-t3">{{new Date(Number(item.date)).format('MM-dd hh:mm')}}</div>
           </div>
           <div class="zan" v-tap="{methods:zan,id:item.id}">
-            <span class="font-h3">{{item.praise}}</span>
-            <img src="../../styles/images/icon_zan.png">
+            <span class="zanNum font-t2">{{item.praise}}</span>
           </div>
         </div>
       </div>

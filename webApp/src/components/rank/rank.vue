@@ -148,7 +148,7 @@
       </div>
       <div class="newsBox" v-for="item in relatedInfo">
         <div class="newsTime font-t3">{{item.name}}</div>
-        <div class="lxBanner" v-tap="{methods:toBaidu}">
+        <div class="lxBanner">
           <img :src="getImgUrl(item.img_url)">
         </div>
         <div class="lxBox" v-if="item.getStudyingAbroadRelatedInfo" v-tap="{methods:toLoad,id:lx.id}" v-for="lx in item.getStudyingAbroadRelatedInfo">

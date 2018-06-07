@@ -66,3 +66,9 @@ body {
   height: 1px;
   width: 10rem;
 }
+.para{
+  text-indent: 0 !important;
+}
+p{
+  text-indent: 0 !important;
+}

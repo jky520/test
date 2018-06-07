@@ -1,7 +1,7 @@
 <style scoped>
   .topBox {
     height: 1.46rem;
-    background-color: #191e29;
+    background-color: #102749;
     position: relative;
   }
 

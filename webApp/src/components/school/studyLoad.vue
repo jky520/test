@@ -40,7 +40,7 @@
     <Header :title="'留学'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title3 font-t1">{{pageData.title}}</div>
-      <div class="bannerBox" v-tap="{methods:toBaidu}">
+      <div class="bannerBox">
         <img :src="getImgUrl(pageData.image)">
       </div>
       <div ref="pageContent">

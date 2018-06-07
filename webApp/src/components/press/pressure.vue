@@ -116,7 +116,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -128,7 +128,7 @@
       </div>
       <div class="getIdea">
         <div class="ideaList font-t1" v-tap="{methods:toIdea}">找减压方法</div>
-        <div class="ideaList font-t1" v-tap="{methods:toPerson,id:1}">找心理专家</div>
+        <div class="ideaList font-t1" v-tap="{methods:toPerson,id:0}">找心理专家</div>
       </div>
       <div class="title2 font-t2">相关资讯</div>
       <div class="newsBox" v-for="item in news">
@@ -257,7 +257,7 @@
         this.$router.push({
           name:'pressurePerson',
           query:{
-            id:params.id
+            categoryId:params.id
           }
         })
       }

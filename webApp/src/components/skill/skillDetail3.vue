@@ -45,7 +45,7 @@
     color: #953734;
   }
   .line{
-    line-height: 1rem;
+    line-height: 0.8rem;
   }
   .colorRed{
     color: red;
@@ -70,10 +70,10 @@
       <div class="context font-t1" v-html="content"></div>
       <div class="infoBox">
         <div class="title2 font-t1">联系方式</div>
-        <p class="line font-h3">地址：{{data.address}}</p>
-        <p class="line font-h3">电话：{{data.telphone}}</p>
-        <p class="line font-h3">手机：<a :href="'tel:'+data.mobile">{{data.mobile}}</a></p>
-        <p class="line font-h3">官网：<span class="colorRed">{{data.url}}</span></p>
+        <p class="line font-t1">地址：{{data.address}}</p>
+        <p class="line font-t1">电话：{{data.telphone}}</p>
+        <p class="line font-t1">手机：<a :href="'tel:'+data.mobile">{{data.mobile}}</a></p>
+        <p class="line font-t1">官网：<span class="colorRed">{{data.url}}</span></p>
       </div>
       <Review :type="10" :objId="$route.query.id"></Review>
     </div>

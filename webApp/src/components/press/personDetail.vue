@@ -40,7 +40,7 @@
     color: #953734;
   }
   .line{
-    line-height: 1rem;
+    line-height: 0.8rem;
   }
   .bigBox{
     background: #c8c8c8;

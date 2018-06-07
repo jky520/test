@@ -34,7 +34,7 @@
     color: #953734;
   }
   .line{
-    line-height: 1rem;
+    line-height: 0.8rem;
   }
   .colorRed{
     color: red;
@@ -51,10 +51,10 @@
       <div class="context" ref="context"></div>
       <div class="infoBox">
         <div class="title2 font-t1">联系方式</div>
-        <p class="line font-h3">地址：{{school.address}}</p>
-        <p class="line font-h3">电话：{{school.telphone}}</p>
-        <p class="line font-h3">手机：<a :href="'tel:'+school.mobile">{{school.mobile}}</a></p>
-        <p class="line font-h3">官网：<a class="colorRed" :href="school.url">{{school.url}}</a></p>
+        <p class="line font-t1">地址：{{school.address}}</p>
+        <p class="line font-t1">电话：{{school.telphone}}</p>
+        <p class="line font-t1">手机：<a :href="'tel:'+school.mobile">{{school.mobile}}</a></p>
+        <p class="line font-t1">官网：<a class="colorRed" :href="school.url">{{school.url}}</a></p>
       </div>
       <Review :type="9" :objId="$route.query.id"></Review>
     </div>

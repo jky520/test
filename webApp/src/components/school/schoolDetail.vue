@@ -121,6 +121,7 @@
     height: 2.4rem;
     overflow: hidden;
     color: #fff;
+    text-indent: 2em !important;
   }
   .disMore{
     height: auto !important;
@@ -228,7 +229,7 @@
     <div class="content" ref="content">
       <div class="logo-box">
         <div class="kjjg">
-          <div class="logo" v-tap="{methods:toBaidu}">
+          <div class="logo">
             <img :src="getImgUrl(school.logo)">
           </div>
           <div class="classLogo" v-tap="{methods:toClassVideo}">
@@ -243,7 +244,7 @@
       </div>
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in image">
+          <swiper-slide v-for="(slide,index) in image" :key="index">
             <img :src="getImgUrl(slide.image)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -276,13 +277,12 @@
         <p v-html="school.brief_jj"></p>
         <div class="showMore font-t2" v-tap="{methods:toIntro}"><span style="color: red;font-size: 0.3rem;">▼</span>展开</div>
       </div>
-      <div style="background: #eceaea">
+      <div style="background: #fff">
         <div class="title2 font-t2">院系设置</div>
         <div class="listBox">
           <div class="showMore2 font-t3" v-tap="{methods:toShowAll}">查看全部>></div>
           <div class="list2 font-t3" v-for="(item,index) in faculty" v-if="index<4" v-tap="{methods:toDepartment,id:item.id,schoolId:item.schoolId}">{{item.name}}</div>
         </div>
-      </div>
       <div class="title2 font-t2">专业设置</div>
       <div class="listBox">
         <div class="list2 font-t3" v-for="item in major" v-tap="{methods:toMajorDetail,diplomasId:item.id}">{{item.name}}</div>
@@ -291,10 +291,8 @@
       <div class="listBox">
         <div class="list2 font-t3" v-for="item in zsxx" v-tap="{methods:toRecult,diplomasId:item.id,name:item.name}">{{item.name}}</div>
       </div>
-      <div style="background: #eceaea">
-        <div class="title2 font-t2">联系方式</div>
-      </div>
-      <div class="schoolInfo">
+      <div class="title2 font-t2">联系方式</div>
+      <div class="schoolInfo" style="background: #fff;">
         <div class="leftInfo">
           <div class="oneLine twoLine">地址:</div>
           <div  class="oneLine twoLine">电话:</div>
@@ -322,6 +320,7 @@
         <div class="text">
           <div class="listText font-t3" v-for="(item,index) in school.ranking.majorRanking"><span class="lala"></span><i class="rank">{{item.year}} </i>{{item.title}} - 第<i class="rank"> {{item.number}} </i>名</div>
         </div>
+      </div>
       </div>
     </div>
   </div>

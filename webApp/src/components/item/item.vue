@@ -94,7 +94,7 @@
     <Header :title="'试题库'" :hasBack="true" ref="top"></Header>
     <div class="banner" ref="ban">
       <swiper :options="swiperOption">
-        <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu}" :key="slide.id">
+        <swiper-slide v-for="slide in swiperSlides" v-tap="{methods:toBaidu,url:slide.url}" :key="slide.id">
           <img :src="getImgUrl(slide.imageUrl)" >
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>

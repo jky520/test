@@ -10,6 +10,7 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   .contentBox{
     overflow-y: scroll;
@@ -27,6 +28,10 @@
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     background-size: cover;
+  }
+  .banner img{
+    width: 100%;
+    height: 100%;
   }
   .title{
     font-weight: bold;
@@ -163,7 +168,7 @@
   }
   .topBox {
     height: 1.46rem;
-    background-color: #191e29;
+    background-color: #102749;
     position: relative;
   }
   .topLogo {
@@ -222,9 +227,16 @@
       <div class="toptitle">&nbsp;</div>
     </div>
     <div class="contentBox" ref="mid">
-      <div class="banner" v-tap="{methods:toBaidu}"></div>
+      <div class="banner">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu,url:slide.url}" :key="index">
+            <img :src="getImgUrl(slide.imageUrl)" >
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </div>
       <div class="content">
-        <div class="title font-t2"><p>精准高效教育信息 · 数据 · 服务</p><p class="colorGray">School·College·University</p></div>
+        <div class="title font-t2"><p style="text-indent: 0.2rem !important;">精准高效教育大信息·大数据·大服务</p><p class="colorGray" style="text-indent: 0.2rem !important;">School·College·University</p></div>
         <div class="line"></div>
         <div class="flexBox">
           <div class="typeBox" v-tap="{methods:toOtherPage,pageName:'school'}">
@@ -290,7 +302,7 @@
             <div class="lxIntro">
               <div class="lxText font-t2">{{item.title}}</div>
             </div>
-            <div class="lxImg" v-tap="{methods:toBaidu}">
+            <div class="lxImg">
               <img :src="getImgUrl(item.themb)">
             </div>
           </div>
@@ -320,15 +332,30 @@
 
 <script>
   import URL from '../lib/api';
+  import 'swiper/dist/css/swiper.css';
+  import { swiper, swiperSlide } from 'vue-awesome-swiper';
   export default {
     data() {
       return {
         news:"",
-        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
+        userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{},
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination',
+          },
+          autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: false,
+          },
+          apeed:500
+        },
+        swiperSlides: []
       }
     },
     mounted() {
       this.getNews();
+      this.getImg();
     },
     methods: {
       toOtherPage(params){
@@ -381,6 +408,26 @@
           console.log(err);
         })
       },
+      getImg(){
+        this.$http({
+          method: 'get',
+          url: URL.base + '/schoolcat/list',
+          params: {},
+          responseType: 'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.userInfo.token
+          }),
+        }).then((res) => {
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.swiperSlides = response.data.image;
+          }else{
+            this.handleError(response);
+          }
+        }, (err) => {
+          console.log(err);
+        })
+      },
       toLoad(params){
         this.$router.push({
           name:'rankLoad',
@@ -389,6 +436,10 @@
           }
         })
       }
+    },
+    components:{
+      swiper,
+      swiperSlide
     }
   }
 </script>

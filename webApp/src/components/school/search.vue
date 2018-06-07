@@ -110,7 +110,7 @@
         <option v-for="(item,index) in majorType" :value="item.id">{{item.name}}</option>
       </select>
       <div class="searchResult">
-        <div class="result" v-for="(item,index) in result" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
+        <div class="result" v-for="(item,index) in results" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
           <span class="font-t4 suoyin">{{toNumber(index+1,5)}}</span>
           <span class="schoolName font-t1">{{item.name}}</span>
           <span class="font-t1 colorRed">进入</span>
@@ -129,7 +129,6 @@
         majorType:[],
         searchData:{},
         results:[],
-        result:[],
         schoolType:'',
         cityId:0,
         Id:0,
@@ -194,7 +193,6 @@
           let response = res.data;
           if(response.meta.code == "200"){
             this.results = response.data;
-            this.result = response.data;
           }
         },(err)=>{
           console.log(err);
@@ -238,7 +236,6 @@
           let response = res.data;
           if(response.meta.code == "200"){
             this.results = response.data;
-            this.result = response.data;
           }else{
             this.handleError(response)
           }
@@ -256,15 +253,30 @@
         })
       },
       guolv(){
-        this.result = this.searchResult;
+        this.$http({
+          method:'get',
+          url:URL.base + 'school/search',
+          params:{
+            name:this.sVal
+          },
+          responseType:'json',
+          headers: Object.assign({'X-Requested-With': 'XMLHttpRequest'},{
+            token:this.userInfo.token
+          }),
+        }).then((res)=>{
+          let response = res.data;
+          if(response.meta.code == "200"){
+            this.results = response.data;
+          }else{
+            this.handleError(response)
+          }
+        },(err)=>{
+          console.log(err);
+        })
       }
     },
     computed:{
-      searchResult(){
-        return this.results.filter((item)=>{
-          return item.name.indexOf(this.sVal)>-1;
-        })
-      }
+
     }
   }
 </script>

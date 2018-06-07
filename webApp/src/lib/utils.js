@@ -14,8 +14,8 @@ export default{
         location.href = "/index.html#login";
       }
     };
-    Vue.prototype.toBaidu = function(){
-      location.href = "http://www.baidu.com";
+    Vue.prototype.toBaidu = function(params){
+      location.href = params.url;
     };
     Vue.prototype.toNumber = function(num,n) {
       let len = num.toString().length;

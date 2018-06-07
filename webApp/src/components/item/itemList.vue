@@ -24,8 +24,8 @@
     display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 0.8rem;
-    line-height: 0.8rem;
+    height: 1rem;
+    line-height: 1rem;
     padding:0 0.5rem;
     margin: 0 auto;
     background-color: #fff;

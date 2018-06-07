@@ -19,10 +19,18 @@
     flex: 1
   }
   .title2{
-    line-height: 1rem;
-    color: #666666;
+    line-height: 0.6rem;
+    color: #000;
     font-weight: bold;
+    padding: 0.5rem;
+    padding-bottom: 0;
+    background: #ccc;
+  }
+  .title3{
+    line-height: 1rem;
+    color: white;
     text-indent: 0.5rem;
+    background: #ccc;
   }
   .context{
     padding: 0 0.5rem;
@@ -33,7 +41,7 @@
     <Header :title="'资讯'" :hasBack="true" ref="top"></Header>
     <div class="content" ref="content">
       <div class="title2 font-h3">{{pageData.title}}</div>
-      <div class="title2 font-t3">{{source}} {{date}}</div>
+      <div class="title3 font-t3">{{source}} {{date}}</div>
       <div class="bLine"></div>
       <div class="context" ref="context"></div>
       <Review :type="8" :objId="$route.query.id"></Review>

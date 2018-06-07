@@ -10,6 +10,7 @@
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   p{
     text-align: center;
@@ -45,7 +46,7 @@
   }
   .topBox {
     height: 1.46rem;
-    background-color: #191e29;
+    background-color: #102749;
     position: relative;
   }
   .topLogo {

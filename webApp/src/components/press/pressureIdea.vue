@@ -57,7 +57,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu,url:slide.url}" :key="index">
             <img :src="getImgUrl(slide.imageUrl)">
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -65,7 +65,7 @@
       </div>
       <div class="menuBox">
         <div class="menuList2 colorRed font-t2">找减压方法</div>
-        <div class="menuList2 font-t2" v-tap="{methods:toPerson,id:1}">找心理专家</div>
+        <div class="menuList2 font-t2" v-tap="{methods:toPerson,id:0}">找心理专家</div>
       </div>
       <div class="menuBox">
         <div class="menuList font-t1" v-bind:class="{'on':item.checked}" v-for="(item,index) in menu" v-tap="{methods:checkPress,index:index}">{{item.name}}</div>
@@ -97,7 +97,7 @@
           },
           apeed:500
         },
-        swiperSlides: [1, 2, 3],
+        swiperSlides: [],
         menu:[
           {
             name:'运动减压法',

@@ -102,7 +102,7 @@
     <div class="content" ref="content">
       <div class="bannerBox">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu}" :key="index">
+          <swiper-slide v-for="(slide,index) in swiperSlides" :key="index">
             <img :src="getImgUrl(slide.imageUrl)" >
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -120,7 +120,7 @@
         <div class="context">
           <p class="font-t2">{{item.name}}</p>
           <p class="font-t2">{{item.title}}</p>
-          <p class="font-t2" v-html="item.brief"></p>
+          <p class="font-t2" style="text-indent: 0;" v-html="item.brief"></p>
         </div>
         <div class="fw font-t4">访问:{{item.readCount}}</div>
       </div>
@@ -223,7 +223,7 @@
           name:'pressurePerson2',
           query:{
             cityId:params.id,
-            categoryId:this.$route.query.id
+            categoryId:this.$route.query.categoryId
           }
         })
       },
