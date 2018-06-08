@@ -6,11 +6,13 @@
     right: 0;
     bottom: 0;
     background-color: #fff;
+    width: 10rem;
+    margin: 0 auto;
+    overflow: hidden;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
   }
   .contentBox{
     overflow-y: scroll;
@@ -40,6 +42,7 @@
     height: 0.37rem;
     margin: 0.53rem 0.44rem 0.25rem 0.44rem;
     display: inline-block;
+    margin-bottom: 0.5rem;
   }
   .more{
     display: inline-block;
@@ -175,8 +178,8 @@
     height: 1.46rem;
     position: absolute;
     top: 0;
-    left: 0.2rem;
-    background-image: url(../styles/images/logo01.jpg);
+    left: 0;
+    background-image: url(../styles/images/logo.jpg);
     background-repeat: no-repeat;
     width: 10rem;
     -webkit-background-size: auto 1.46rem;
@@ -222,11 +225,11 @@
 
 <template>
   <div class="view">
-    <div class="topBox">
+    <div class="topBox" ref="top">
       <div class="topLogo"></div>
       <div class="toptitle">&nbsp;</div>
     </div>
-    <div class="contentBox" ref="mid">
+    <div class="contentBox" ref="content">
       <div class="banner">
         <swiper :options="swiperOption">
           <swiper-slide v-for="(slide,index) in swiperSlides" v-tap="{methods:toBaidu,url:slide.url}" :key="index">
@@ -309,20 +312,20 @@
         </div>
       </div>
     </div>
-    <div class="footer" ref="foot">
+    <div class="footer" ref="footer">
       <div class="menuBox">
         <div class="menuIcon"></div>
         <div class="menuTitle font-t3">首页</div>
       </div>
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+      <div class="menuBox" v-tap="{methods:toIndexPage,pageName:'develop'}">
         <div class="menuIcon school_w"></div>
         <div class="menuTitle font-t3">智能择校</div>
       </div>
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'develop'}">
+      <div class="menuBox" v-tap="{methods:toIndexPage,pageName:'develop'}">
         <div class="menuIcon news_w"></div>
         <div class="menuTitle font-t3">同学汇</div>
       </div>
-      <div class="menuBox" v-tap="{methods:toOtherPage,pageName:'mine'}">
+      <div class="menuBox" v-tap="{methods:toIndexPage,pageName:'mine'}">
         <div class="menuIcon mine_w"></div>
         <div class="menuTitle font-t3">我的</div>
       </div>
@@ -356,12 +359,18 @@
     mounted() {
       this.getNews();
       this.getImg();
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.clientHeight - this.$refs.footer.clientHeight + 'px';
     },
     methods: {
-      toOtherPage(params){
+      toIndexPage(params){
         this.$router.push({
           name:params.pageName
         });
+      },
+      toOtherPage(params){
+        let url = '/index.html#' + params.pageName;
+        let w = window.plus.webview.create( url );
+        w.show('pop-in',200);
       },
       getIndex(){
           // POST用data GET用params
@@ -429,12 +438,10 @@
         })
       },
       toLoad(params){
-        this.$router.push({
-          name:'rankLoad',
-          query: {
-            id: params.id
-          }
-        })
+        let data = {
+          id: params.id
+        };
+        let url = this.pageUrl('rankLoad',data);
       }
     },
     components:{

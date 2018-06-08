@@ -110,12 +110,15 @@
         })
       },
       toVideo(params){
-        this.$router.push({
-          name:'classVideo',
-          query:{
-            videoId:params.id
-          }
+        this.pageUrl('classVideo',{
+          videoId:params.id
         });
+        // this.$router.push({
+        //   name:'classVideo',
+        //   query:{
+        //     videoId:params.id
+        //   }
+        // });
       }
     }
   }

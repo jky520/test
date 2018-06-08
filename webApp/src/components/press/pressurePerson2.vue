@@ -203,12 +203,15 @@
         })
       },
       toDetail(params){
-        this.$router.push({
-          name:'personDetail',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('personDetail',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'personDetail',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

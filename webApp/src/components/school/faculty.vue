@@ -119,13 +119,17 @@
         })
       },
       toDepartment(params){
-        this.$router.push({
-          name:'schoolDepartment',
-          query:{
-            id:params.id,
-            schoolId:params.schoolId
-          }
-        })
+        this.pageUrl('schoolDepartment',{
+          id:params.id,
+          schoolId:params.schoolId
+        });
+        // this.$router.push({
+        //   name:'schoolDepartment',
+        //   query:{
+        //     id:params.id,
+        //     schoolId:params.schoolId
+        //   }
+        // })
       }
     },
     components:{

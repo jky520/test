@@ -53,8 +53,8 @@
     height: 1.46rem;
     position: absolute;
     top: 0;
-    left: 0.2rem;
-    background-image: url(../styles/images/logo01.jpg);
+    left: 0;
+    background-image: url(../styles/images/logo.jpg);
     background-repeat: no-repeat;
     width: 10rem;
     -webkit-background-size: auto 1.46rem;

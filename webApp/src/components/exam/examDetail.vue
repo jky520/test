@@ -183,22 +183,22 @@
         }).then((res)=>{
           let response = res.data;
           if(response.meta.code == "200"){
-            let adverts = response.data[0].adverts;
-            this.swiperSlides.push(adverts);
-            let brief = response.data[0].brief;
+            let adverts = response.data.adverts;
+            this.swiperSlides = adverts;
+            let brief = response.data.brief;
             this.$refs.context.innerHTML = brief;
-            let dates = response.data[0].dates;
+            let dates = response.data.dates;
             this.$refs.date.innerHTML = dates;
-            let fee = response.data[0].fee;
+            let fee = response.data.fee;
             this.$refs.price.innerHTML = fee;
-            this.fee_tishi = response.data[0].fee_tishi;
-            let content = response.data[0].content;
+            this.fee_tishi = response.data.fee_tishi;
+            let content = response.data.content;
             this.$refs.tex.innerHTML = content;
-            let notice = response.data[0].notice;
+            let notice = response.data.notice;
             this.$refs.know.innerHTML = notice;
-            this.notice_tishi = response.data[0].notice_tishi;
-            this.content_tishi = response.data[0].content_tishi;
-            this.news = response.data[0].adjunts;
+            this.notice_tishi = response.data.notice_tishi;
+            this.content_tishi = response.data.content_tishi;
+            this.news = response.data.adjunts;
           }else{
             this.handleError(response)
           }

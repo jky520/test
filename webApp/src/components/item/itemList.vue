@@ -77,6 +77,7 @@
         pId2:this.$route.query.pId2,
       };
       this.getItemList();
+
     },
     methods: {
       getItemList(){
@@ -107,12 +108,15 @@
           location.href= "http://139.129.130.136:8081" + params.url;
       },
       showOnline(params){
-          this.$router.push({
-            name:'showOnline',
-            query:{
-              path:params.url
-            }
-          })
+        this.pageUrl('showOnline',{
+          path:params.url
+        });
+          // this.$router.push({
+          //   name:'showOnline',
+          //   query:{
+          //     path:params.url
+          //   }
+          // })
       }
     }
   }

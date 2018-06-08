@@ -179,12 +179,15 @@
         })
       },
       toDetail3(params){
-        this.$router.push({
-          name:'skillDetail3',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('skillDetail3',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'skillDetail3',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

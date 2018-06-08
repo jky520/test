@@ -72,8 +72,8 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 1.6rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -83,8 +83,8 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.5rem;
-    width: 6.7rem;
+    height: 1.8rem;
+    width: 6.6rem;
     vertical-align: top;
     margin: 0.2rem;
     text-align: left;
@@ -241,25 +241,33 @@
         })
       },
       toIdea(){
-        this.$router.push({
-          name:'pressureIdea'
-        })
+        this.pageUrl('pressureIdea',{
+        });
+        // this.$router.push({
+        //   name:'pressureIdea'
+        // })
       },
       toLoad(params){
-        this.$router.push({
-          name:'pressLoad',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('pressLoad',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'pressLoad',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       },
       toPerson(params){
-        this.$router.push({
-          name:'pressurePerson',
-          query:{
-            categoryId:params.id
-          }
-        })
+        this.pageUrl('pressurePerson',{
+          categoryId:params.id
+        });
+        // this.$router.push({
+        //   name:'pressurePerson',
+        //   query:{
+        //     categoryId:params.id
+        //   }
+        // })
       }
     },
     components:{

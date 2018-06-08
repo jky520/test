@@ -219,21 +219,28 @@
         })
       },
       findPeople(params){
-        this.$router.push({
-          name:'pressurePerson2',
-          query:{
-            cityId:params.id,
-            categoryId:this.$route.query.categoryId
-          }
-        })
+        this.pageUrl('pressurePerson2',{
+          cityId:params.id,
+          categoryId:this.$route.query.categoryId
+        });
+        // this.$router.push({
+        //   name:'pressurePerson2',
+        //   query:{
+        //     cityId:params.id,
+        //     categoryId:this.$route.query.categoryId
+        //   }
+        // })
       },
       toDetail(params){
-        this.$router.push({
-          name:'personDetail',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('personDetail',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'personDetail',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

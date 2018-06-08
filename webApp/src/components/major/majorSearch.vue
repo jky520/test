@@ -104,14 +104,14 @@
 <template>
   <div class="view">
     <Header :title="'找专业'" :hasBack="true"></Header>
-    <div class="searchBox" ref="searchBox">
-      <div class="l">
-        <input class="inputBox" type="text" v-model="sVal" placeholder="专业名称"><span class="search font-t1" v-tap="{methods:guolv}">搜索</span>
-      </div>
-    </div>
     <select name="major" @change="changeCategory" v-model="Id">
       <option v-for="(item,index) in marjorArr" :value="item.id">{{item.name}}</option>
     </select>
+    <div class="searchBox" ref="searchBox">
+      <div class="l">
+        <input class="inputBox" type="text" v-model="sVal" placeholder="专业名称"><span class="search font-t1" v-tap="{methods:search}">搜索</span>
+      </div>
+    </div>
     <div class="content" ref="content">
       <div class="title2 font-t2">专业目录</div>
       <div class="listBox" style="padding-bottom: 0.5rem;">
@@ -122,8 +122,8 @@
           <div class="title2 font-t2">{{item.name}}</div>
           <div class="feileiBox" v-for="item2 in item.subs" v-if="item.subs.length>0">
             <div class="title3 font-t2">{{item2.name}}</div>
-            <div class="listBox" v-if="item2.subs.length>0">
-              <div class="list font-t3" v-for="item3 in item2.subs" v-tap="{methods:toDetail,name:item3.name,id:item3.id}">{{item3.name}}</div>
+            <div class="listBox" v-if="item2.majors.length>0">
+              <div class="list font-t3" v-for="item3 in item2.majors" v-tap="{methods:toDetail,name:item3.name,id:item3.id}">{{item3.name}}</div>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@
         this.majorId = this.Id;
         this.getMsg();
       },
-      guolv(){
+      search(){
         this.$http({
           method: 'get',
           url: URL.majorSearch,
@@ -221,13 +221,17 @@
         this.$refs.content.scrollTop = 0;
       },
       toDetail(params){
-        this.$router.push({
-          name:'majorInfo',
-          query:{
-            name:params.name,
-            id:params.id
-          }
-        })
+        this.pageUrl('majorInfo',{
+          name:params.name,
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'majorInfo',
+        //   query:{
+        //     name:params.name,
+        //     id:params.id
+        //   }
+        // })
       }
     }
   }

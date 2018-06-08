@@ -39,11 +39,10 @@
     data() {
       return {
         userInfo:localStorage.getItem("userInfo")?JSON.parse(localStorage.getItem("userInfo")):{}
-
       }
     },
     mounted() {
-
+      this.$refs.content.style.height = document.documentElement.clientHeight - this.$refs.top.$el.clientHeight + 'px';
     },
     methods: {
 

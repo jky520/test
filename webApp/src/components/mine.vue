@@ -104,8 +104,8 @@
     height: 1.46rem;
     position: absolute;
     top: 0;
-    left: 0.2rem;
-    background-image: url(../styles/images/logo01.jpg);
+    left: 0;
+    background-image: url(../styles/images/logo.jpg);
     background-repeat: no-repeat;
     width: 10rem;
     -webkit-background-size: auto 1.46rem;
@@ -124,7 +124,7 @@
         <div class="userHead">
           <img src="../styles/images/icon_userhead.png">
         </div>
-        <div class="edit font-h3" v-tap="{methods:toOtherPage,pageName:'edit'}">{{isLogin?'资料编辑':'去登录'}}&nbsp;&gt;</div>
+        <div class="edit font-h3" v-tap="{methods:toEdit,pageName:'edit'}">{{isLogin?'资料编辑':'去登录'}}&nbsp;&gt;</div>
       </div>
       <div class="infoBox" v-show="isLogin">
         <div class="infoList">
@@ -194,6 +194,11 @@
           name:params.pageName
         });
       },
+      toEdit(params){
+        let url = '/index.html#' + params.pageName;
+        let w = window.plus.webview.create( url );
+        w.show('pop-in',200);
+      }
     }
   }
 </script>

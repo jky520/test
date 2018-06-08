@@ -52,7 +52,7 @@
   }
   .imgBox{
     width: 10rem;
-    height: 8rem;
+    height: 5rem;
   }
   .imgBox img{
     width: 100%;

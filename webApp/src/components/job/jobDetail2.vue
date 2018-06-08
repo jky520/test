@@ -160,12 +160,15 @@
         })
       },
       toCompany(params){
-        this.$router.push({
-          name:"jobCompany",
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('jobCompany',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:"jobCompany",
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

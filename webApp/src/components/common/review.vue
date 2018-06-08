@@ -85,6 +85,9 @@
   .zanNum{
     padding-right: 0.7rem;
   }
+  .plList{
+    margin: 0 0.2rem;
+  }
 </style>
 <template>
     <div class="review">

@@ -31,6 +31,7 @@
   }
   .menuBox{
     background-color: #eee;
+    padding-bottom: 0.2rem;
   }
   .menuList{
     line-height: 0.7rem;
@@ -50,6 +51,14 @@
   .colorRed{
     color: red;
   }
+  .blackBlock{
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: middle;
+    background: #222;
+    display: inline-block;
+    margin-right: 0.3rem;
+  }
 </style>
 <template>
   <div class="view">
@@ -68,7 +77,7 @@
         <div class="menuList2 font-t2" v-tap="{methods:toPerson,id:0}">找心理专家</div>
       </div>
       <div class="menuBox">
-        <div class="menuList font-t1" v-bind:class="{'on':item.checked}" v-for="(item,index) in menu" v-tap="{methods:checkPress,index:index}">{{item.name}}</div>
+        <div class="menuList font-t1" v-bind:class="{'on':item.checked}" v-for="(item,index) in menu" v-tap="{methods:checkPress,index:index}"><span class="blackBlock"></span>{{item.name}}</div>
       </div>
       <div class="contBox">
         <div ref="b"></div>
@@ -214,12 +223,15 @@
         })
       },
       toPerson(params){
-        this.$router.push({
-          name:'pressurePerson',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('pressurePerson',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'pressurePerson',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     computed:{

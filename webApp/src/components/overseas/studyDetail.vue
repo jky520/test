@@ -35,8 +35,8 @@
     height: 0.37rem;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 1.8rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -46,8 +46,8 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.5rem;
-    width: 6.7rem;
+    height: 1.8rem;
+    width: 6.6rem;
     vertical-align: top;
     margin: 0.2rem;
     text-align: left;
@@ -56,6 +56,9 @@
     margin-top: 0.2rem;
     line-height: 0.6rem;
     color: #555;
+  }
+  .lxTitle{
+    color: #8d2a2a;
   }
 </style>
 <template>
@@ -73,7 +76,7 @@
       <div class="title2 font-t2">{{cityName}}</div>
       <div class="lxBox" v-for="item in studyNewInfo" v-tap="{methods:toInfo,id:item.id}">
         <div class="lxIntro">
-          <!--<div class="lxTitle font-h3">{{item.title}}</div>-->
+          <div class="lxTitle font-h3">{{item.title}}</div>
           <div class="lxText font-t2">{{item.brief}}</div>
         </div>
         <div class="lxImg">
@@ -138,12 +141,15 @@
         })
       },
       toInfo(params){
-        this.$router.push({
-          name:"overseasInfo",
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('overseasInfo',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:"overseasInfo",
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

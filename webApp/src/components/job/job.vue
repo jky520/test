@@ -72,8 +72,8 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 1.6rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -83,8 +83,8 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.2rem;
-    width: 6.7rem;
+    height: 1.8rem;
+    width: 6.6rem;
     vertical-align: top;
     margin: 0.2rem;
     text-align: left;
@@ -191,21 +191,28 @@
         })
       },
       toLoad(params){
-        this.$router.push({
-          name:"jobLoad",
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('jobLoad',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:"jobLoad",
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       },
       toDetail(params){
-        this.$router.push({
-          name:'jobDetail',
-          query:{
-            cityId:params.id,
-            name:params.name
-          }
-        })
+        this.pageUrl('jobDetail',{
+          cityId:params.id,
+          name:params.name
+        });
+        // this.$router.push({
+        //   name:'jobDetail',
+        //   query:{
+        //     cityId:params.id,
+        //     name:params.name
+        //   }
+        // })
       }
     },
     components:{

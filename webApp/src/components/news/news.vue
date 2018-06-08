@@ -184,12 +184,15 @@
         })
       },
       toLoad(params){
-        this.$router.push({
-          name:'newsLoad',
-          query: {
-            id: params.id
-          }
-        })
+        this.pageUrl('newsLoad',{
+          id: params.id
+        });
+        // this.$router.push({
+        //   name:'newsLoad',
+        //   query: {
+        //     id: params.id
+        //   }
+        // })
       }
     },
     components:{

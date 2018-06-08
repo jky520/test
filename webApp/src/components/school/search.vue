@@ -96,12 +96,7 @@
 <template>
   <div class="view">
     <Header :title="'学校搜索'" :hasBack="true" ref="top"></Header>
-    <div class="searchBox" ref="searchBox">
-      <div class="l">
-        <input class="inputBox" type="text" v-model="sVal" placeholder="学校名称"><span class="search font-t1" v-tap="{methods:guolv}">搜索</span>
-      </div>
-    </div>
-    <div class="content" ref="content">
+    <div>
       <select name="major" @change="changeCategory" v-model="Id">
         <option v-for="(item,index) in schoolType" :value="item.id" v-if="item.category == $route.query.category">{{item.name}}</option>
       </select>
@@ -109,6 +104,13 @@
         <option value="0">学校所在地</option>
         <option v-for="(item,index) in majorType" :value="item.id">{{item.name}}</option>
       </select>
+    </div>
+    <div class="searchBox" ref="searchBox">
+      <div class="l">
+        <input class="inputBox" type="text" v-model="sVal" placeholder="学校名称"><span class="search font-t1" v-tap="{methods:guolv}">搜索</span>
+      </div>
+    </div>
+    <div class="content" ref="content">
       <div class="searchResult">
         <div class="result" v-for="(item,index) in results" v-tap="{methods:schoolDetail,id:item.id,name:item.name}">
           <span class="font-t4 suoyin">{{toNumber(index+1,5)}}</span>
@@ -244,13 +246,17 @@
         })
       },
       schoolDetail(params){
-        this.$router.push({
-          name:'schoolDetail',
-          query:{
-            schoolId:params.id,
-            name:params.name
-          }
-        })
+        this.pageUrl('schoolDetail',{
+          schoolId:params.id,
+          name:params.name
+        });
+        // this.$router.push({
+        //   name:'schoolDetail',
+        //   query:{
+        //     schoolId:params.id,
+        //     name:params.name
+        //   }
+        // })
       },
       guolv(){
         this.$http({

@@ -72,8 +72,8 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 1.6rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -83,8 +83,8 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.2rem;
-    width: 6.7rem;
+    height: 1.8rem;
+    width: 6.4rem;
     vertical-align: top;
     margin: 0.2rem;
     text-align: left;
@@ -103,6 +103,7 @@
     width: 100%;
     height: 100%;
   }
+
 </style>
 <template>
   <div class="view">
@@ -227,20 +228,26 @@
         })
       },
       toDetail(params){
-        this.$router.push({
-          name:'studyDetail',
-          query:{
-            studyCityId:params.id
-          }
+        this.pageUrl('studyDetail',{
+          studyCityId:params.id
         });
+        // this.$router.push({
+        //   name:'studyDetail',
+        //   query:{
+        //     studyCityId:params.id
+        //   }
+        // });
       },
       toLoad(params){
-        this.$router.push({
-          name:'overseasLoad',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('overseasLoad',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'overseasLoad',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{

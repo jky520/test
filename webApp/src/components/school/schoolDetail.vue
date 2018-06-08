@@ -364,30 +364,41 @@
     },
     methods: {
       toOtherPage(params){
-        this.$router.push({
-          name:params.pageName,
-          query:{
-            name:this.$route.query.name
-          }
+        this.pageUrl(params.pageName,{
+          name:this.$route.query.name
         });
+        // this.$router.push({
+        //   name:params.pageName,
+        //   query:{
+        //     name:this.$route.query.name
+        //   }
+        // });
       },
       toRecult(params){
-        this.$router.push({
-          name:'recult',
-          query:{
-            schoolId:this.$route.query.schoolId,
-            diplomasId:params.diplomasId,
-            name:params.name
-          }
-        })
+        this.pageUrl('recult',{
+          schoolId:this.$route.query.schoolId,
+          diplomasId:params.diplomasId,
+          name:params.name
+        });
+        // this.$router.push({
+        //   name:'recult',
+        //   query:{
+        //     schoolId:this.$route.query.schoolId,
+        //     diplomasId:params.diplomasId,
+        //     name:params.name
+        //   }
+        // })
       },
       toShowAll(){
-        this.$router.push({
-          name:'faculty',
-          query:{
-            schoolId:this.$route.query.schoolId
-          }
-        })
+        this.pageUrl('faculty',{
+          schoolId:this.$route.query.schoolId
+        });
+        // this.$router.push({
+        //   name:'faculty',
+        //   query:{
+        //     schoolId:this.$route.query.schoolId
+        //   }
+        // })
       },
       getSchoolDetail(){
         this.$http({
@@ -446,39 +457,55 @@
         })
       },
       toDepartment(params){
-        this.$router.push({
-          name:'schoolDepartment',
-          query:{
-            id:params.id,
-            schoolId:params.schoolId
-          }
-        })
+        this.pageUrl('schoolDepartment',{
+          id:params.id,
+          schoolId:params.schoolId
+        });
+        // this.$router.push({
+        //   name:'schoolDepartment',
+        //   query:{
+        //     id:params.id,
+        //     schoolId:params.schoolId
+        //   }
+        // })
       },
       toMajorDetail(params){
-        this.$router.push({
-          name:'majorDetail',
-          query:{
-            diplomasId:params.diplomasId,
-            schoolId:this.$route.query.schoolId
-          }
+        this.pageUrl('majorDetail',{
+          diplomasId:params.diplomasId,
+          schoolId:this.$route.query.schoolId
         });
+        // this.$router.push({
+        //   name:'majorDetail',
+        //   query:{
+        //     diplomasId:params.diplomasId,
+        //     schoolId:this.$route.query.schoolId
+        //   }
+        // });
       },
       toClassVideo(){
-        this.$router.push({
-          name:'schoolClass',
-          query:{
-            schoolId:this.$route.query.schoolId
-          }
-        })
+        this.pageUrl('schoolClass',{
+          diplomasId:params.diplomasId,
+          schoolId:this.$route.query.schoolId
+        });
+        // this.$router.push({
+        //   name:'schoolClass',
+        //   query:{
+        //     schoolId:this.$route.query.schoolId
+        //   }
+        // })
       },
       toIntro(){
-        this.$router.push({
-          name:'schoolIntro',
-          query:{
-            schoolId:this.$route.query.schoolId,
-            objId:this.school.id
-          }
-        })
+        this.pageUrl('schoolIntro',{
+          schoolId:this.$route.query.schoolId,
+          objId:this.school.id
+        });
+        // this.$router.push({
+        //   name:'schoolIntro',
+        //   query:{
+        //     schoolId:this.$route.query.schoolId,
+        //     objId:this.school.id
+        //   }
+        // })
       }
     },
     components:{

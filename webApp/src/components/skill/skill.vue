@@ -72,8 +72,8 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 1.6rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -83,7 +83,7 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.2rem;
+    height: 1.8rem;
     width: 6.7rem;
     vertical-align: top;
     margin: 0.2rem;
@@ -227,20 +227,26 @@
         })
       },
       toLoad(params){
-        this.$router.push({
-          name:"skillLoad",
-          query:{
-            loadId:params.id
-          }
-        })
+        this.pageUrl('skillLoad',{
+          loadId:params.id
+        });
+        // this.$router.push({
+        //   name:"skillLoad",
+        //   query:{
+        //     loadId:params.id
+        //   }
+        // })
       },
       toDetail(params){
-        this.$router.push({
-          name:'skillDetail',
-          query:{
-            skillCityId:params.id
-          }
-        })
+        this.pageUrl('skillDetail',{
+          skillCityId:params.id
+        });
+        // this.$router.push({
+        //   name:'skillDetail',
+        //   query:{
+        //     skillCityId:params.id
+        //   }
+        // })
       }
     },
     components:{

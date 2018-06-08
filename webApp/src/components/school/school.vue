@@ -213,29 +213,39 @@
             })
           },
           studyLoad(params){
-            this.$router.push({
-              name:'studyLoad',
-              query: {
-                id: params.id
-              }
+            this.pageUrl('studyLoad',{
+              id: params.id
             });
+            // this.$router.push({
+            //   name:'studyLoad',
+            //   query: {
+            //     id: params.id
+            //   }
+            // });
           },
           trainLoad(params){
-            this.$router.push({
-              name:'trainLoad',
-              query:{
-                id:params.id
-              }
+            this.pageUrl('trainLoad',{
+              id:params.id
             });
+            // this.$router.push({
+            //   name:'trainLoad',
+            //   query:{
+            //     id:params.id
+            //   }
+            // });
           },
           searchSchool(params){
-            this.$router.push({
-              name:'search',
-              query:{
-                id:params.id,
-                category:params.category
-              }
+            this.pageUrl('search',{
+              id:params.id,
+              category:params.category
             });
+            // this.$router.push({
+            //   name:'search',
+            //   query:{
+            //     id:params.id,
+            //     category:params.category
+            //   }
+            // });
           }
         },
       components:{

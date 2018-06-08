@@ -12,9 +12,10 @@
     <script>
       document.addEventListener("plusready", function() {
         // 注册返回按键事件
+        window.plus = plus;
         plus.key.addEventListener('backbutton', function() {
           // 事件处理
-          window.history.back();
+          plus.webview.close(plus.webview.currentWebview());
         }, false);
       });
     </script>

@@ -182,13 +182,17 @@
         this.bookList = this.menuArr[params.index].subs;
       },
       toItemList(params){
-        this.$router.push({
-          name:'itemList',
-          query:{
-            pId1:params.pId1,
-            pId2:params.pId2
-          }
-        })
+        this.pageUrl('itemList',{
+          pId1:params.pId1,
+          pId2:params.pId2
+        });
+        // this.$router.push({
+        //   name:'itemList',
+        //   query:{
+        //     pId1:params.pId1,
+        //     pId2:params.pId2
+        //   }
+        // })
       }
     },
     computed:{

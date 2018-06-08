@@ -218,12 +218,15 @@
         })
       },
       toLoad(params){
-        this.$router.push({
-          name:'rankLoad',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('rankLoad',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'rankLoad',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       },
       toShowMore(){
         this.showMore = false;

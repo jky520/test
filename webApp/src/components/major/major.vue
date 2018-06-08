@@ -163,20 +163,26 @@
             })
           },
           toHotPage(params){
-            this.$router.push({
-              name:'hotR',
-              query:{
-                hotId:params.id
-              }
+            this.pageUrl('hotR',{
+              hotId:params.id
             });
+            // this.$router.push({
+            //   name:'hotR',
+            //   query:{
+            //     hotId:params.id
+            //   }
+            // });
           },
           toDetail(params){
-            this.$router.push({
-              name:'majorSearch',
-              query:{
-                majorId:params.id
-              }
-            })
+            this.pageUrl('majorSearch',{
+              majorId:params.id
+            });
+            // this.$router.push({
+            //   name:'majorSearch',
+            //   query:{
+            //     majorId:params.id
+            //   }
+            // })
           }
         },
         components:{

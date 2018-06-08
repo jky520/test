@@ -72,8 +72,8 @@
     display: inline-block;
   }
   .lxImg{
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 1.6rem;
     display: inline-block;
     margin: 0.2rem 0 0.2rem 0.2rem;
   }
@@ -83,7 +83,7 @@
   }
   .lxIntro{
     display: inline-block;
-    height: 2.5rem;
+    height: 1.8rem;
     width: 6.7rem;
     vertical-align: top;
     margin: 0.2rem;
@@ -263,20 +263,26 @@
         this.toURL(params.url);
       },
       toDetail(params){
-        this.$router.push({
-          name:'examDetail',
-          query:{
-            examId:params.id
-          }
+        this.pageUrl('examDetail',{
+          examId:params.id
         });
+        // this.$router.push({
+        //   name:'examDetail',
+        //   query:{
+        //     examId:params.id
+        //   }
+        // });
       },
       toLoad(params){
-        this.$router.push({
-          name:'examLoad',
-          query:{
-            examLoadId:params.id
-          }
-        })
+        this.pageUrl('examLoad',{
+          examLoadId:params.id
+        });
+        // this.$router.push({
+        //   name:'examLoad',
+        //   query:{
+        //     examLoadId:params.id
+        //   }
+        // })
       }
     },
     components:{

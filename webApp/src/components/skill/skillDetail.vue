@@ -221,21 +221,28 @@
         })
       },
       toDetail(params){
-        this.$router.push({
-          name:'skillDetail2',
-          query:{
-            cityId:this.$route.query.skillCityId,
-            categoryId:params.id
-          }
-        })
+        this.pageUrl('skillDetail2',{
+          cityId:this.$route.query.skillCityId,
+          categoryId:params.id
+        });
+        // this.$router.push({
+        //   name:'skillDetail2',
+        //   query:{
+        //     cityId:this.$route.query.skillCityId,
+        //     categoryId:params.id
+        //   }
+        // })
       },
       toLoad(params){
-        this.$router.push({
-          name:'skillInfo',
-          query:{
-            id:params.id
-          }
-        })
+        this.pageUrl('skillInfo',{
+          id:params.id
+        });
+        // this.$router.push({
+        //   name:'skillInfo',
+        //   query:{
+        //     id:params.id
+        //   }
+        // })
       }
     },
     components:{
