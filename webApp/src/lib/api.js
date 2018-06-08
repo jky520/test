@@ -59,7 +59,7 @@ let stg = {
   "majorInfo":"http://120.79.137.116:8080/eduOnline/major/",
   "base":"http://120.79.137.116:8080/eduOnline/",
   "skillDetail2":"http://120.79.137.116:8080/eduOnline/trainInfo/getTrain_infoByCityId",
-  "majorSearch":"http://120.24.216.26:8080/eduOnline/majorCategory/seach"
+  "majorSearch":"http://120.79.137.116:8080/eduOnline/majorCategory/seach"
 };
 
 let prd = {
